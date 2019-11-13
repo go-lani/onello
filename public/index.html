@@ -98,8 +98,9 @@
 			<section id="co-work-container">
 				<h2 class="a11y-hidden">협업 할일 목록</h2>
 				<div class="main-work-contents clear-fix">
-					<ul class="main-work">
-						<li>
+					<ul id="main-work" class="main-work">
+						<li draggable="true" ondragstart="dragStart_(event)"
+						ondrag="drag_(event)">
 							<div class="title-box">
 								<div class="title">대제목</div>
 								<input type="text" class="modify-input">
