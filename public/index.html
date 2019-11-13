@@ -12,9 +12,409 @@
 	<meta property="og:image" content="공유이미지 800x400">
 	<title>Onello</title>
 	<!-- <link rel="shortcut icon" type="image/x-icon" href=""> -->
-	<link rel="stylesheet" href="../assets/css/style.css">
-	<script src="../assets/js/jquery-3.2.1.min.js"></script>
+	<link rel="stylesheet" href="./assets/css/style.css">
+	<link rel="stylesheet" href="./assets/css/jquery.mCustomScrollbar.css">
+	<script src="./assets/js/jquery-1.11.0.min.js"></script>
+	<script src="./assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 </head>
 <body>
+	<style>
+		#wrap {
+			overflow: hidden;
+			position: relative;
+			width: 100%;
+			height: 100vh;
+		}
+		.info-banner {
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			width: 300px;
+			background: lightpink;
+		}
+		#main {
+			width: calc(100vw - 300px);
+			height: 100%;
+			margin: 0 0 0 300px;
+			padding: 10px;
+		}
+
+		.main-work > li {
+			display: inline-block;
+		}
+		#co-work-container {
+			height: 100%;
+			/* padding: 0 10px; */
+		}
+
+		.main-work {
+			float: left;
+		}
+
+		.create-btn-box {
+			float: left;
+		}
+		.detail-work-box {
+			max-height: 80vh;
+		}
+		.detail-work {
+			background: skyblue;
+		}
+	</style>
+	<div id="wrap">
+		<aside class="info-banner">
+			<h1 class="logo">Onello</h1>
+			<h2 class="group-name"><span class="a11y-hidden">그룹 이름</span>JAVASCRIPT</h2>
+			<div class="my-info">
+				<img src="./assets/images/sample/friends_272x272_01.gif" alt="">
+				<p class="my-name">이철환</p>
+				<div>publizm@gmail.com</div>
+				<!-- <a href="#">설정</a> -->
+			</div>
+			<div class="co-worker">
+				<div>Co-worker</div>
+				<ul class="co-worker-list">
+					<li>
+						<img src="./assets/images/sample/friends_272x272_01.gif" alt="">
+						<p class="worker-name">김재헌</p>
+						<div>abc@abc.com</div>
+					</li>
+					<li>
+						<img src="./assets/images/sample/friends_272x272_01.gif" alt="">
+						<p class="worker-name">정수지</p>
+						<div>abc@abc.com</div>
+					</li>
+				</ul>
+				<a href="#self" class="btn40 c2">초대하기</a>
+			</div>
+			<button type="button" class="close">열기</button>
+		</aside>
+		<main id="main" role="main">
+			<article>
+				<h2 class="a11y-hidden">현재시간</h2>
+				<div class="digital-clock">00:00:00</div>
+			</article>
+			<section id="co-work-container">
+				<h2 class="a11y-hidden">협업 할일 목록</h2>
+				<div class="main-work-contents clear-fix">
+					<ul id="main-work" class="main-work">
+						<li draggable="true" ondragstart="dragStart_(event)"
+						ondrag="drag_(event)">
+							<div class="title-box">
+								<div class="title">대제목</div>
+								<input type="text" class="modify-input">
+							</div>
+							<div class="detail-work-box">
+								<ul class="detail-work">
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="create-detail-work">
+								<button type="button" class="create-main-work">소주제 추가</button>
+								<input type="text">
+							</div>
+							<button type="button" class="delete-main-work">삭제</button>
+						</li>
+					</ul>
+					<div class="create-btn-box">
+						<button type="button" class="create-main-work">대주제 추가</button>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+	<script>
+		$('#co-work-container').mCustomScrollbar({
+			axis: 'x',
+			theme: 'light-3',
+			autoExpandScrollbar: true,
+			advanced: {autoExpandHorizontalScroll: true}
+		});
+
+		$('.detail-work-box').mCustomScrollbar({
+			axis: 'y',
+			theme: 'light-3',
+			autoExpandScrollbar: true,
+		});
+	</script>
 </body>
 </html>
