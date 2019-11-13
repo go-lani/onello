@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+/* common style */
+html.fixed {position: fixed; left: 0; width: 100%; height: 100%;}
+
+label.rdo {display: inline-block; position: relative; padding: 0 0 0 24px;}
+label.rdo input {position: absolute; top: 5px; left: 0; width: 1px; height: 1px; opacity: 0; cursor: pointer;}
+label.rdo span {display: block;}
+label.rdo span:before {display: block; content: ''; position: absolute; top: 50%; left: 0; width: 16px; height: 16px; margin: -8px 0 0; background: url(../images/common/rdo.png) 0 0 no-repeat;}
+label.rdo input:checked + span:before {background-position: 0 -16px;}
+label.rdo input:focus + span:before {outline: 1px dotted #000000;}
+
+label.chk {display: inline-block; position: relative; padding: 0 0 0 24px;}
+label.chk input {position: absolute; top: 5px; left: 0; width: 1px; height: 1px; opacity: 0; cursor: pointer;}
+label.chk span {display: block;}
+label.chk span:before {display: block; content: ''; position: absolute; top: 50%; left: 0; width: 16px; height: 16px; margin: -8px 0 0; background: url(../images/common/chk.png) 0 0 no-repeat;}
+label.chk input:checked + span:before {background-position: 0 -16px;}
+label.chk input:focus + span:before {outline: 1px dotted #000000;}
+
+.btn_wrap {overflow: hidden; width: 100%; text-align: center;}
+.btn_wrap a {float: left; margin: 0 0 0 10px;}
+.btn_wrap a:first-child {margin: 0;}
+.btn_wrap input {float: left; margin: 0 0 0 10px;}
+.btn_wrap input:first-child {margin: 0;}
+.btn_wrap button {float: left; margin: 0 0 0 10px;}
+.btn_wrap button:first-child {margin: 0;}
+
+.btn40 {display: inline-block; box-sizing: border-box; height: 40px; border: none; border-radius: 0; font-weight: 700; font-size: 14px; line-height: 38px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none;}
+.btn40.c1 {border: 1px solid #000000; background: #000000; color: #ffffff;} /* 검은바탕 흰색글씨 */
+.btn40.c2 {border: 1px solid #333333; background: #333333; color: #ffffff;} /* 진한회색 흰색글씨 */
+
+/* main layer popup */
+.main_popup {position: relative; z-index: 1000; background: #ffffff;}
+.main_popup .main_popup_body {position: relative;}
+.main_popup .main_popup_body a {display: inline-block;}
+.main_popup.sizeFixed .main_popup_body a {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
+.main_popup.sizeFixed .main_popup_body img {position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100% !important; height: 100% !important;}
+.main_popup .main_popup_foot {overflow: hidden; padding: 5px 10px; background: #000000;}
+.main_popup .main_popup_foot .chk {float: left;}
+.main_popup .main_popup_foot .chk span {color: #ffffff;}
+.main_popup .main_popup_foot .close {float: right; color: #ffffff;}
+
+.layer-wrap {}
+.layer-wrap .layer-back {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1000; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7);}
+.layer-wrap .layer-outer {position: absolute; z-index: 1000; opacity: 0; transform: translateY(50px); transition: opacity 500ms;}
+.layer-wrap .layer-outer .layer-inner {background: #ffffff;}
+.layer-wrap .layer-outer .layer-inner .layer-head {position: relative; padding: 0 0 0 20px; background: #333333;}
+.layer-wrap .layer-outer .layer-inner .layer-head .layer-title {font-weight: 700; font-size: 16px; line-height: 50px; color: #ffffff;}
+.layer-wrap .layer-outer .layer-inner .layer-head .layer-close {display: block; position: absolute; top: 15px; right: 15px; width: 21px; height: 21px; background: url(../images/common/layer_close.png) 0 0 no-repeat; text-indent: -9999em;}
+.layer-wrap .layer-outer .layer-inner .layer-body {overflow: hidden;}
+.layer-wrap .layer-outer .layer-inner .layer-body .only-scroll-body {overflow-x: hidden; overflow-y: auto; margin: 0 -17px 0 0; padding: 0 17px 0 0;}
+
+.layer-wrap.open .layer-outer {opacity: 1; transform: translateY(0);}
+
+/* load motion */
+.n-motion {opacity: 0; transition-property: all; transition-duration: 0.6s;}
+
+.n-delay1 {transition-delay: 0.1s;}
+.n-delay2 {transition-delay: 0.2s;}
+.n-delay3 {transition-delay: 0.3s;}
+.n-delay4 {transition-delay: 0.4s;}
+.n-delay5 {transition-delay: 0.5s;}
+.n-delay6 {transition-delay: 0.6s;}
+.n-delay7 {transition-delay: 0.7s;}
+.n-delay8 {transition-delay: 0.8s;}
+.n-delay9 {transition-delay: 0.9s;}
+
+.n-motion.n-left   {transform: translateX(-50px);}
+.n-motion.n-right  {transform: translateX(50px);}
+.n-motion.n-top    {transform: translateY(-50px);}
+.n-motion.n-bottom {transform: translateY(50px);}
+.n-motion.n-spin   {transform: rotate(180deg);}
+
+.n-motion.n-active {opacity: 1;}
+
+.n-motion.n-left.n-active   {transform: translateX(0);}
+.n-motion.n-right.n-active  {transform: translateX(0);}
+.n-motion.n-top.n-active    {transform: translateY(0);}
+.n-motion.n-bottom.n-active {transform: translateY(0);}
+.n-motion.n-spin.n-active   {transform: rotate(0deg);}
+
+/* lazy load */
+.lazy-hidden {opacity: 0;}
+.lazy-loaded {transition: all 0.3s; opacity: 1;}
+
+/* customSelect */
+.custom-select {position: relative;}
+.custom-select .custom-input {display: block; box-sizing: border-box; background: url(../../assets/images/common/slt.png) right 20px center no-repeat; font-size: 26px; cursor: default; transition: border 0.3s !important;}
+.custom-select .custom-input:focus {padding-left: 10px; border: 1px solid #0167db; cursor: default; background: url(../../assets/images/common/slt_on.png) right 20px center no-repeat;}
+.custom-select .custom-input-box {display: inline-block; box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px 0 10px; border: 2px solid #d9d9d9; background: #ffffff url(../../assets/images/common/slt.png) right 10px center no-repeat; font-weight: 400; font-size: 26px; color: #555555; cursor: default;}
+.custom-select .custom-input-box:focus {padding-left: 10px; border: 1px solid #0167db; cursor: default;}
+.custom-select .custom-scroll-outer {overflow-x: hidden; overflow-y: auto; position: absolute; top: 0; right: 0; left: 0; z-index: 10; height: 0; background: #ffffff; opacity: 0;} /* 스크롤은 인라인 max-height로 제어*/
+.custom-select .custom-scroll {position: relative; box-sizing: border-box; width: 100%; padding: 0 17px 0 0; border: solid #0167db; border-width: 0 1px 1px; background: #ffffff;}
+.custom-select .custom-scroll ul {position: absolute; top: 0; left: 0; right: 0; width: 100% !important;}
+.custom-select .custom-scroll ul li {display: block; padding: 0 0 0 10px; background: #ffffff;}
+.custom-select .custom-scroll ul li button {display: block; width: 100%; font-size: 26px; line-height: 40px; color: #555555; cursor: pointer; text-align: left;}
+.custom-select .custom-scroll ul li:hover {background: #f0f0f0;}
