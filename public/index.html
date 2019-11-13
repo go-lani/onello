@@ -14,8 +14,10 @@
 	<!-- <link rel="shortcut icon" type="image/x-icon" href=""> -->
 	<link rel="stylesheet" href="./assets/css/style.css">
 	<link rel="stylesheet" href="./assets/css/jquery.mCustomScrollbar.css">
-	<script src="./assets/js/jquery-1.11.0.min.js"></script>
-	<script src="./assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script defer src="./assets/js/jquery-1.11.0.min.js"></script>
+	<script defer src="./assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script defer src="./assets/js/scroll.js"></script>
+	<!-- <script defer src="./assets/js/dragdrop.js"></script> -->
 </head>
 <body>
 	<style>
@@ -49,11 +51,12 @@
 		}
 
 		.main-work {
-			float: left;
+			display: inline-block;
+			width: 100%;
 		}
 
 		.create-btn-box {
-			float: left;
+			display: inline-block;
 		}
 		.detail-work-box {
 			max-height: 80vh;
@@ -98,9 +101,9 @@
 			<section id="co-work-container">
 				<h2 class="a11y-hidden">협업 할일 목록</h2>
 				<div class="main-work-contents clear-fix">
-					<ul id="main-work" class="main-work">
-						<li draggable="true" ondragstart="dragStart_(event)"
-						ondrag="drag_(event)">
+					<ul id="main-work" droppable="true" class="main-work">
+						<li draggable="true" ondragstart="dragStart(event)"
+						ondrag="drag(event)">
 							<div class="title-box">
 								<div class="title">대제목</div>
 								<input type="text" class="modify-input">
@@ -402,19 +405,5 @@
 			</section>
 		</main>
 	</div>
-	<script>
-		$('#co-work-container').mCustomScrollbar({
-			axis: 'x',
-			theme: 'light-3',
-			autoExpandScrollbar: true,
-			advanced: {autoExpandHorizontalScroll: true}
-		});
-
-		$('.detail-work-box').mCustomScrollbar({
-			axis: 'y',
-			theme: 'light-3',
-			autoExpandScrollbar: true,
-		});
-	</script>
 </body>
 </html>
