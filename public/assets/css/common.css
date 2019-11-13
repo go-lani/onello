@@ -82,16 +82,3 @@ label.chk input:focus + span:before {outline: 1px dotted #000000;}
 /* lazy load */
 .lazy-hidden {opacity: 0;}
 .lazy-loaded {transition: all 0.3s; opacity: 1;}
-
-/* customSelect */
-.custom-select {position: relative;}
-.custom-select .custom-input {display: block; box-sizing: border-box; background: url(../../assets/images/common/slt.png) right 20px center no-repeat; font-size: 26px; cursor: default; transition: border 0.3s !important;}
-.custom-select .custom-input:focus {padding-left: 10px; border: 1px solid #0167db; cursor: default; background: url(../../assets/images/common/slt_on.png) right 20px center no-repeat;}
-.custom-select .custom-input-box {display: inline-block; box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px 0 10px; border: 2px solid #d9d9d9; background: #ffffff url(../../assets/images/common/slt.png) right 10px center no-repeat; font-weight: 400; font-size: 26px; color: #555555; cursor: default;}
-.custom-select .custom-input-box:focus {padding-left: 10px; border: 1px solid #0167db; cursor: default;}
-.custom-select .custom-scroll-outer {overflow-x: hidden; overflow-y: auto; position: absolute; top: 0; right: 0; left: 0; z-index: 10; height: 0; background: #ffffff; opacity: 0;} /* 스크롤은 인라인 max-height로 제어*/
-.custom-select .custom-scroll {position: relative; box-sizing: border-box; width: 100%; padding: 0 17px 0 0; border: solid #0167db; border-width: 0 1px 1px; background: #ffffff;}
-.custom-select .custom-scroll ul {position: absolute; top: 0; left: 0; right: 0; width: 100% !important;}
-.custom-select .custom-scroll ul li {display: block; padding: 0 0 0 10px; background: #ffffff;}
-.custom-select .custom-scroll ul li button {display: block; width: 100%; font-size: 26px; line-height: 40px; color: #555555; cursor: pointer; text-align: left;}
-.custom-select .custom-scroll ul li:hover {background: #f0f0f0;}

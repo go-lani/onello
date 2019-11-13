@@ -55,7 +55,7 @@ a:focus		{text-decoration: none; color: inherit;}
 
 
 .hide	{visibility: hidden; overflow: hidden; position: absolute; left: -9999em; top: -9999em; width: 0px; height: 0px; border: none; background: none; font-size: 0px; line-height: 0px; opacity: 0;}
-	
+
 .fl_l {float: left !important;}
 .fl_c {display: inline-block; float: none !important;}
 .fl_r {float: right !important;}
@@ -118,3 +118,22 @@ a:focus		{text-decoration: none; color: inherit;}
 .mt90  {margin-top: 90px !important;}	.mr90  {margin-right: 90px !important;}  	.mb90  {margin-bottom: 90px !important;}  	.ml90  {margin-left: 90px !important;}
 .mt95  {margin-top: 95px !important;}	.mr95  {margin-right: 95px !important;}  	.mb95  {margin-bottom: 95px !important;}  	.ml95  {margin-left: 95px !important;}
 .mt100 {margin-top: 100px !important;}	.mr100 {margin-right: 100px !important;}	.mb100 {margin-bottom: 100px !important;}	.ml100 {margin-left: 100px !important;}
+
+/* 숨김 텍스트 */
+.a11y-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  background-color: transparent;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* float를 해제하기위한 Clear 선언 */
+.clear-fix::after {
+  display: block;
+  content: '';
+  clear: both;
+}
