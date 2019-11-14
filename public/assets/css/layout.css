@@ -36,7 +36,7 @@ body {}
 
 .group-name {
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 3.4rem;
   color: #536be2;
 }
@@ -45,7 +45,6 @@ body {}
   overflow: hidden;
   position: relative;
   min-height: 120px;
-  margin: 35px 0 0;
   padding: 80px 0 80px 140px;
 }
 
@@ -121,9 +120,6 @@ body {}
   color: #fff;
 }
 
-.btn40 {
-}
-
 .menu-close {
   position: absolute;
   top: 0;
@@ -134,6 +130,30 @@ body {}
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background: #242939;
+}
+
+.menu-close:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 4px;
+  margin: -7px 0 0 -10px;
+  background: #fff;
+  transform: rotate(-45deg);
+}
+
+.menu-close:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 4px;
+  margin: 5px 0 0 -10px;
+  transform: rotate(-130deg);
+  background: #fff;
 }
 
 /* 수지 : main - coworker 시작 */
