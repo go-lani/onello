@@ -17,28 +17,34 @@ body {}
   left: 0;
   bottom: 0;
   width: 350px;
-  padding: 15px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  padding: 50px 25px 10px;
   background: #242939;
 }
 
 .logo,
 .group-name {
-  display: inline-block;
+  position: absolute;
 }
 
 .logo {
-  margin: 0 10px 0 0;
-  font-size: 3.2rem;
+  top: 10px;
+  left: 25px;
+  font-family: Cabin;
   font-weight: 700;
+  font-size: 3.2rem;
   line-height: 3.4rem;
   color: #fff;
 }
 
+.logo a {
+  display: block;
+}
+
 .group-name {
+  top: 10px;
+  right: 25px;
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 3.4rem;
   color: #536be2;
 }
@@ -46,13 +52,11 @@ body {}
 .my-info {
   overflow: hidden;
   position: relative;
-  margin: 35px 0 0;
-  padding: 50px 0 50px 130px;
   min-height: 120px;
-
+  padding: 80px 0 80px 140px;
 }
 
-.my-info>img {
+.my-info > img {
   position: absolute;
   top: 50%;
   left: 0;
@@ -76,76 +80,88 @@ body {}
 }
 
 .co-worker {
-  /* margin-top: 10px; */
+  padding: 30px 0 0;
   border-top: 1px dotted #fff;
 }
 
-.co-worker>div {
-  /* border-top: 1px solid #000; */
+.co-worker .title {
+  font-weight: 700;
   font-size: 1.6rem;
-  text-indent: 15px;
-  font-weight: 500;
-  color: #fff;
-  margin: 20px 0;
+  color: #687393;
 }
 
-.co-worker {}
+.co-worker-list {
+  margin: 20px 0 0;
+}
 
 .co-worker-list li {
   overflow: hidden;
   position: relative;
-  min-height:80px;
-  /* margin: 10px 0; */
-  padding: 25px 0 25px 90px;
+  min-height: 80px;
+  margin: 10px 0 0;
+  padding: 25px 0 25px 100px;
 }
 
-.co-worker-list>li>img {
+.co-worker-list li:first-child {
+  margin: 0;
+}
+
+.co-worker-list > li > img {
   position: absolute;
+  top: 50%;
   left: 0;
-  top: 0;
   border-radius: 50%;
   width: 80px;
   height: 80px;
-
+  margin: -40px 0 0;
 }
 
 .worker-name {
   font-weight: 700;
-  /* margin: 10px 0; */
-  font-size: 1rem;
-  /* background: green; */
+  font-size: 1.5rem;
   color: #fff;
-
-  /* width: 150px; */
-  /* float: right; */
-  /* width: 70%; */
-  /* padding: 0 0 0 90px; */
 }
 
-.co-worker-list>li>div {
-  /* margin-top: 5px; */
-  /* background: skyblue; */
+.worker-mail {
+  margin: 5px 0 0;
+  font-size: 1.5rem;
   color: #fff;
-  margin:10px 0 0 0;
-  /* width: 70%; */
-  /* float: right; */
-  /* padding: 0 0 0 90px; */
 }
 
-.btn40 {
-  background: grey;
-  float: right;
-  font-size: 1rem;
-}
-
-.close {
-  background: blueviolet;
+.menu-close {
   position: absolute;
-  top: 10px;
-  right: -40px;
-  width: 40px;
-  height: 50px;
+  top: 0;
+  right: -70px;
+  width: 70px;
+  height: 70px;
   z-index: 1;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background: #242939;
+}
+
+.menu-close:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 4px;
+  margin: -7px 0 0 -10px;
+  background: #fff;
+  transform: rotate(-45deg);
+}
+
+.menu-close:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 4px;
+  margin: 5px 0 0 -10px;
+  transform: rotate(-130deg);
+  background: #fff;
 }
 
 /* 수지 : main - coworker 시작 */
