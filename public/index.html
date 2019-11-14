@@ -18,38 +18,6 @@
 </head>
 <body>
 	<style>
-		#wrap {
-			overflow: hidden;
-			position: relative;
-			width: 100%;
-			height: 100vh;
-		}
-		#main {
-			width: calc(100vw - 350px);
-			height: 100%;
-			margin: 0 0 0 350px;
-			padding: 10px;
-		}
-
-		.main-work {
-			display: inline-block;
-		}
-
-		.main-work > li {
-			display: inline-block;
-		}
-		#co-work-container {
-			height: 100%;
-			/* padding: 0 10px; */
-		}
-
-
-		.create-btn-box {
-			display: inline-block;
-		}
-		.detail-work-box {
-			max-height: 80vh;
-		}
 	</style>
 	<div id="wrap">
 		<aside class="info-banner">
@@ -84,7 +52,7 @@
 			<button type="button" class="menu-close"><span class="a11y-hidden">열기</span></button>
 		</aside>
 		<main id="main" role="main">
-			<article>
+			<article class="time-area">
 				<h2 class="a11y-hidden">현재시간</h2>
 				<div class="digital-clock">00:00:00</div>
 			</article>
@@ -92,11 +60,11 @@
 				<h2 class="a11y-hidden">협업 할일 목록</h2>
 				<div class="main-work-contents clear-fix">
 					<ul id="main-work" droppable="true" class="main-work">
-						<li draggable="true" ondragstart="dragStart(event)"
+						<li id="main-work-1" draggable="true" ondragstart="dragStart(event)"
 						ondrag="drag(event)">
 							<div class="title-box">
-								<div class="title">대제목</div>
-								<input type="text" class="modify-input" placeholder="대주제명을를 입력하세요">
+								<div class="title">오늘 해야할 일</div>
+								<input type="text" class="modify-input" placeholder="주제를 입력해주세요">
 							</div>
 							<div class="detail-work-box">
 								<ul class="detail-work">
@@ -382,8 +350,51 @@
 								</ul>
 							</div>
 							<div class="create-detail-work">
-								<button type="button" class="create-main-work">소주제 추가</button>
-								<input type="text" placeholder="추가할 소주제를 입력하세요">
+								<button type="button" class="btn40 c3 create-detail-btn">소주제 추가</button>
+								<input type="text" placeholder="추가할 목록을 입력하세요">
+							</div>
+							<button type="button" class="delete-main-work">삭제</button>
+						</li>
+						<li id="main-work-2" draggable="true" ondragstart="dragStart(event)"
+						ondrag="drag(event)">
+							<div class="title-box">
+								<div class="title">이번주 목표</div>
+								<input type="text" class="modify-input" placeholder="대주제명을를 입력하세요">
+							</div>
+							<div class="detail-work-box">
+								<ul class="detail-work">
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>높음</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+									<li>
+										<a href="#self">
+											<div class="importance">
+												<span>중간</span>
+											</div>
+											<div class="title">소제목</div>
+											<div class="date">2019/01/01</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="create-detail-work">
+								<button type="button" class="btn40 c3 create-detail-btn">소주제 추가</button>
+								<input type="text" placeholder="추가할 목록을 입력하세요">
 							</div>
 							<button type="button" class="delete-main-work">삭제</button>
 						</li>

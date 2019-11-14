@@ -9,6 +9,6 @@
   $('.detail-work-box').mCustomScrollbar({
     axis: 'y',
     theme: 'light-3',
-    autoExpandScrollbar: true,
+    autoExpandScrollbar: true
   });
 }());
