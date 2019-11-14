@@ -1,8 +1,7 @@
 @charset "utf-8";
 
 /* 배너 시작 */
-body {
-}
+body {}
 
 #wrap {
   overflow: hidden;
@@ -53,7 +52,7 @@ body {
 
 }
 
-.my-info > img {
+.my-info>img {
   position: absolute;
   top: 50%;
   left: 0;
@@ -81,25 +80,29 @@ body {
   border-top: 1px dotted #fff;
 }
 
-.co-worker > div {
-  border-top: 1px solid #000;
+.co-worker>div {
+  /* border-top: 1px solid #000; */
   font-size: 1.6rem;
   text-indent: 15px;
   font-weight: 500;
   color: #fff;
+  margin: 20px 0;
 }
 
-.co-worker {
-
-}
+.co-worker {}
 
 .co-worker-list li {
   overflow: hidden;
+  position: relative;
+  min-height:80px;
+  /* margin: 10px 0; */
+  padding: 25px 0 25px 90px;
 }
 
 .co-worker-list>li>img {
-   position: absolute;
-   left: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
   border-radius: 50%;
   width: 80px;
   height: 80px;
@@ -107,50 +110,55 @@ body {
 }
 
 .worker-name {
-  font-weight: 500;
-  margin-top: 30px;
+  font-weight: 700;
+  /* margin: 10px 0; */
   font-size: 1rem;
-  background: green;
-  width: 150px;
-  float: right;
-  width: 70%;
-  padding:0 0 0 90px;
+  /* background: green; */
+  color: #fff;
+
+  /* width: 150px; */
+  /* float: right; */
+  /* width: 70%; */
+  /* padding: 0 0 0 90px; */
 }
 
 .co-worker-list>li>div {
-  margin-top: 5px;
-  background: skyblue;
-  width: 70%;
-  float:right;
-  padding:0 0 0 10px;
+  /* margin-top: 5px; */
+  /* background: skyblue; */
+  color: #fff;
+  margin:10px 0 0 0;
+  /* width: 70%; */
+  /* float: right; */
+  /* padding: 0 0 0 90px; */
 }
 
 .btn40 {
   background: grey;
   float: right;
-  font-size:1rem;
+  font-size: 1rem;
 }
 
 .close {
   background: blueviolet;
   position: absolute;
-  top: 0;
-  right: -50px;
-  width: 50px;
-  height: 40px;
+  top: 10px;
+  right: -40px;
+  width: 40px;
+  height: 50px;
   z-index: 1;
 }
+
 /* 수지 : main - coworker 시작 */
 
 /* digital-clock 영역 */
-#main article{
+#main article {
   background: yellow;
   height: 50px;
   line-height: 50px;
   margin-bottom: 10px;
 }
 
-#main article .digital-clock{
+#main article .digital-clock {
   background: pink;
   float: right;
   font-size: 18px;
@@ -160,16 +168,16 @@ body {
 
 /* 큰 카테고리 영역 */
 
-.main-work li{
+.main-work li {
   background: #fff;
   position: relative;
   width: 280px;
   border-radius: 5px;
-  padding:10px;
+  padding: 10px;
   height: 100%;
-  }
+}
 
-.main-work li .title-box{
+.main-work li .title-box {
   background: pink;
   position: relative;
   margin-bottom: 40px;
@@ -189,7 +197,7 @@ body {
   cursor: pointer;
 }
 
-.title-box .modify-input{
+.title-box .modify-input {
   display: none;
   height: 30px;
   width: 200px;
@@ -242,7 +250,7 @@ body {
 
 .create-main-work:hover {
   background: #aaa;
-  color:white;
+  color: white;
 }
 
 .create-detail-work input {
@@ -252,7 +260,7 @@ body {
 }
 
 /* 대제목 삭제 버튼 */
-.delete-main-work{
+.delete-main-work {
   /* background: orange; */
   width: 30px;
   height: 20px;
@@ -262,14 +270,14 @@ body {
 }
 
 /* 대제목 추가 버튼 */
-.create-btn-box .create-main-work{
+.create-btn-box .create-main-work {
   margin: 0 10px;
   height: 35px;
   background: #aaa;
-  color:white;
+  color: white;
 }
 
-.create-btn-box .create-main-work:hover{
+.create-btn-box .create-main-work:hover {
   background: #f0f0f0;
   color: #000;
 }
