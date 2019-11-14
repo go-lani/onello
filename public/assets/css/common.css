@@ -17,15 +17,15 @@ label.chk span:before {display: block; content: ''; position: absolute; top: 50%
 label.chk input:checked + span:before {background-position: 0 -16px;}
 label.chk input:focus + span:before {outline: 1px dotted #000000;}
 
-.btn_wrap {overflow: hidden; width: 100%; text-align: center;}
-.btn_wrap a {float: left; margin: 0 0 0 10px;}
-.btn_wrap a:first-child {margin: 0;}
-.btn_wrap input {float: left; margin: 0 0 0 10px;}
-.btn_wrap input:first-child {margin: 0;}
-.btn_wrap button {float: left; margin: 0 0 0 10px;}
-.btn_wrap button:first-child {margin: 0;}
+.btn-box {overflow: hidden; width: 100%; text-align: center;}
+.btn-box a {float: left; margin: 0 0 0 10px;}
+.btn-box a:first-child {margin: 0;}
+.btn-box input {float: left; margin: 0 0 0 10px;}
+.btn-box input:first-child {margin: 0;}
+.btn-box button {float: left; margin: 0 0 0 10px;}
+.btn-box button:first-child {margin: 0;}
 
-.btn40 {display: inline-block; box-sizing: border-box; height: 40px; border: none; border-radius: 0; font-weight: 700; font-size: 14px; line-height: 38px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none;}
+.btn40 {display: inline-block; box-sizing: border-box; height: 40px; border: none; border-radius: 0; font-weight: 700; font-size: 1.4rem; line-height: 38px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none;}
 .btn40.c1 {border: 1px solid #000000; background: #000000; color: #ffffff;} /* 검은바탕 흰색글씨 */
 .btn40.c2 {border: 1px solid #333333; background: #333333; color: #ffffff;} /* 진한회색 흰색글씨 */
 
