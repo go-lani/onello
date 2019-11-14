@@ -159,4 +159,147 @@ body {
   width: 50px;
   height: 40px;
   z-index: 1;
+/* 수지 : main - coworker 시작 */
+
+/* digital-clock 영역 */
+
+#main article{
+  background: yellow;
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 10px;
+}
+
+#main article .digital-clock{
+  background: pink;
+  float: right;
+  font-size: 18px;
+}
+
+/* co-work-container 영역*/
+
+/* 큰 카테고리 영역 */
+
+.main-work li{
+  background: #f0f0f0;
+  position: relative;
+  width: 280px;
+  border-radius: 5px;
+  padding:10px;
+  height: 100%;
+  }
+
+.main-work li .title-box{
+  background: pink;
+  position: relative;
+  margin-bottom: 40px;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: bold;
+}
+
+.main-work .title-box .title,
+.main-work .title-box .modify-input{
+  /* background: yellow; */
+  position: absolute;
+  top: 0;
+  padding-left: 5px;
+}
+
+.title-box .title{
+  /* background: white; */
+  cursor: pointer;
+}
+
+.title-box .modify-input{
+  display: none;
+  height: 30px;
+  width: 200px;
+  font-size: 18px;
+}
+
+/* 작은 카테고리 영역 */
+
+.detail-work{
+  /* 추후 합칠 때 지우기 */
+  background: #f0f0f0;
+}
+
+.detail-work li{
+  background: #cccccc;
+  width: 100%;
+  margin-bottom: 5px;
+  border-radius: 10 px;
+  overflow: auto;
+}
+
+.detail-work li .importance{
+  background: blue;
+  margin-bottom: 3px;
+  width: 50px;
+  height: 8px;
+  border-radius: 5px;
+  color: transparent;
+}
+
+.detail-work li .title{
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.detail-work li .date{
+  /* background: white; */
+  float: right;
+}
+
+.create-detail-work{
+  /* background: #000; */
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+}
+
+/* (공통) 소주제 추가 버튼, 대주제 추가 버튼 */
+.create-main-work{
+  /* background: pink; */
+  width: 260px;
+  font-size: 13px;
+  padding-left: 10px;
+  position: absolute;
+  border-radius: 5px;
+}
+
+.create-main-work:hover{
+  background: #aaa;
+  color:white;
+}
+
+.create-detail-work input{
+  display: none;
+  position: absolute;
+  height: 30px;
+}
+
+/* 대제목 삭제 버튼 */
+.delete-main-work{
+  /* background: orange; */
+  width: 30px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* 대제목 추가 버튼 */
+.create-btn-box .create-main-work{
+  margin: 0 10px;
+  height: 35px;
+  background: #aaa;
+  color:white;
+}
+
+.create-btn-box .create-main-work:hover{
+  background: #f0f0f0;
+  color: #000;
 }
