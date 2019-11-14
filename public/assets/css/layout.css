@@ -36,11 +36,12 @@ body {
 }
 
 .logo {
+  text-align: initial;
   line-height: 1.5;
   font-size: 2rem;
   font-weight: 700;
   margin: 0;
-  /* padding: 0 15px; */
+  padding: 0 10px 0 0;
 }
 
 .logo,
@@ -76,8 +77,9 @@ body {
 .my-name {
   /* display:block; */
   background: purple;
+  padding:0 0 0 10px;
   font-size: 1.2rem;
-  font-weight: 400;
+  font-weight: 500;
   float: right;
   width: 50%;
   margin-top: 50px;
@@ -86,23 +88,28 @@ body {
 }
 
 .my-info>div {
+  padding:0 0 0 10px;
   background: yellow;
   float: right;
   width: 50%;
+  margin-top: 5px;
 }
 
 .co-worker {
   /* margin-top: 10px; */
   background: red;
-
-
+  
+  
 }
 
 .co-worker>div {
+  border-top: 1px solid #0000;
+  padding: 20px 0 10px 0;
   font-size: 1rem;
   background: blue;
   margin: 15px 0 0 0;
   text-indent: 15px;
+  font-weight: 500;
 }
 
 /* .co-worker-list li{
@@ -120,24 +127,28 @@ body {
 }
 
 .worker-name {
-  margin-top: 20px;
+  font-weight: 500;
+  margin-top: 30px;
   font-size: 1rem;
   background: green;
   width: 150px;
   float: right;
   width: 70%;
+  padding:0 0 0 10px;
 }
 
 .co-worker-list>li>div {
+  margin-top: 5px;
   background: skyblue;
   width: 70%;
   float:right;
-
+  padding:0 0 0 10px;
 }
 
 .btn40 {
   background: grey;
   float: right;
+  font-size:1rem;
 }
 
 .close {
