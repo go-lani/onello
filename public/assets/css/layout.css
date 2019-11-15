@@ -191,20 +191,31 @@
   float: left;
 }
 
-.create-btn-box .main-create-box {
+.create-main-work {
+  display: block;
 }
 
-.create-btn-box .main-create-box .main-create-input {
-  display: inline-block;
+.create-main-work + .main-create-input {
+  display: none;
   height: 50px;
   border-width: 0 0 2px;
   border-color: #5d78ff;
   background: none;
+  font-size: 1.6rem;
+  color: #5d78ff;
 }
 
-/* .create-btn-box .main-create-box .add-btn {
-  display: inline-block;
-} */
+.create-main-work + .main-create-input::placeholder {
+  color: #5d78ff;
+}
+
+.create-main-work.on {
+  display: none;
+}
+
+.create-main-work.on + .main-create-input {
+  display: block;
+}
 
 /* co-work-container 영역*/
 
