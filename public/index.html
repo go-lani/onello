@@ -14,11 +14,10 @@
 	<script defer src="./assets/js/jquery-1.11.0.min.js"></script>
 	<script defer src="./assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script defer src="./assets/js/scroll.js"></script>
+	<script defer src="./assets/js/popup.js"></script>
 	<!-- <script defer src="./assets/js/dragdrop.js"></script> -->
 </head>
 <body>
-	<style>
-	</style>
 	<div id="wrap">
 		<aside class="info-banner">
 			<h1 class="logo">
@@ -370,20 +369,4 @@
 		</main>
 	</div>
 </body>
-<script>
-	window.onload = () => {
-		const xhr = new XMLHttpRequest();
-
-		xhr.open('GET', './register-popup.html');
-		xhr.send();
-
-		xhr.onreadystatechange = (req, res) => {
-			if (xhr.readyState !== XMLHttpRequest.DONE) return;
-
-			if (xhr.status === 200) {
-				console.log(JSON.parse(xhr.response))
-			}
-		};
-	}
-</script>
 </html>
