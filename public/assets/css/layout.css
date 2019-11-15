@@ -4,12 +4,12 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: #f2f3f8;
 }
 
 #main {
-  width: calc(100vw - 350px);
+  width: calc(100% - 350px);
   height: 100%;
   margin: 0 0 0 350px;
   padding: 10px 30px;
@@ -17,15 +17,6 @@
 
 #co-work-container {
   height: 100%;
-  /* padding: 0 10px; */
-}
-
-.create-btn-box {
-  display: inline-block;
-}
-
-.detail-work-box {
-  max-height: 60vh;
 }
 
 .info-banner {
@@ -183,15 +174,47 @@
 
 /* 수지 : main - coworker 시작 */
 /* digital-clock 영역 */
-#main article {
+.utils-area {
   overflow: hidden;
+  padding: 0 0 0 50px;
   margin-bottom: 20px;
 }
 
-#main article .digital-clock {
+.utils-area .digital-clock {
   float: right;
   font-size: 3rem;
   line-height: 5rem;
+}
+
+/* 대제목 추가 버튼 */
+.create-btn-box {
+  float: left;
+}
+
+.create-main-work {
+  display: block;
+}
+
+.create-main-work + .main-create-input {
+  display: none;
+  height: 50px;
+  border-width: 0 0 2px;
+  border-color: #5d78ff;
+  background: none;
+  font-size: 1.6rem;
+  color: #5d78ff;
+}
+
+.create-main-work + .main-create-input::placeholder {
+  color: #5d78ff;
+}
+
+.create-main-work.on {
+  display: none;
+}
+
+.create-main-work.on + .main-create-input {
+  display: block;
 }
 
 /* co-work-container 영역*/
@@ -206,7 +229,7 @@
   display: inline-block;
   position: relative;
   width: 350px;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 15px;
   padding: 20px;
   border-radius: 10px;
   word-break: break-all;
@@ -246,39 +269,94 @@
 }
 
 /* 작은 카테고리 영역 */
+.detail-work-box {
+  max-height: 600px;
+}
 
 .detail-work li {
+  overflow: hidden;
   width: 100%;
-  margin: 10px 0 0;
   border-radius: 10px;
   background: #f7f8fa;
+  font-size: 18px;
+}
+
+.detail-work li {
+  position: relative;
+  margin: 10px 0 0;
 }
 
 .detail-work li:first-child {
   margin: 0;
 }
 
+.detail-work li a {
+  display: block;
+  padding: 10px 38px 10px 10px;
+  transition: all .3s;
+}
+
+.detail-work li:hover a {
+  background: #f0f3ff;
+}
+
+.detail-work li .delete-detail-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 16px;
+  height: 18px;
+  z-index: 2;
+  opacity: 0;
+  transition: all .3s;
+}
+
+.detail-work li:hover .delete-detail-btn {
+  opacity: 1;
+}
+
+.detail-work .delete-detail-btn img {
+  width: 100%;
+}
+
 .detail-work li .importance {
+  font-size: 0;
+}
+
+.detail-work li .importance span {
   display: inline-block;
-  margin-bottom: 3px;
   width: 50px;
   height: 8px;
+  margin: 0 0 0 5px;
   border-radius: 5px;
+  background: blue;
   color: transparent;
 }
 
-.detail-work li a {
-  display: block;
+.detail-work li .importance span:first-child {
+  margin: 0;
+}
+
+.detail-work li .importance span.high {
+  background: #eb5a46;
+}
+
+.detail-work li .importance span.medium {
+  background: #ff9f1a;
+}
+
+.detail-work li .importance span.low {
+  background: #f2d600;
 }
 
 .detail-work li .title {
-  font-size: 15px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  padding: 15px 0;
+  color: #222;
 }
 
 .detail-work li .date {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
 }
 
 /* (공통) 소주제 추가 버튼, 대주제 추가 버튼 */
@@ -347,17 +425,4 @@
 
 .delete-main-work:hover:before, .delete-main-work:hover:after {
   background: #fff;
-}
-
-/* 대제목 추가 버튼 */
-.create-btn-box .create-main-work {
-  margin: 0 10px;
-  height: 35px;
-  background: #aaa;
-  color: white;
-}
-
-.create-btn-box .create-main-work:hover {
-  background: #f0f0f0;
-  color: #000;
 }
