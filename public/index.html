@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1">
+	<meta name="viewport" content="width=1100, user-scalable=yes">
 	<meta name="description" content="사이트설명">
 	<meta name="keywords" content="사이트검색키워드">
 	<meta name="author" content="내일로">
@@ -370,4 +370,20 @@
 		</main>
 	</div>
 </body>
+<script>
+	window.onload = () => {
+		const xhr = new XMLHttpRequest();
+
+		xhr.open('GET', './register-popup.html');
+		xhr.send();
+
+		xhr.onreadystatechange = (req, res) => {
+			if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+			if (xhr.status === 200) {
+				console.log(JSON.parse(xhr.response))
+			}
+		};
+	}
+</script>
 </html>
