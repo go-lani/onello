@@ -179,15 +179,32 @@
 /* digital-clock 영역 */
 .utils-area {
   overflow: hidden;
-  padding: 0 0 0 50px;
+  padding: 0 50px;
   margin-bottom: 20px;
 }
 
-.utils-area .digital-clock {
+.digital-clock {
   float: right;
-  font-size: 3rem;
-  line-height: 5rem;
+  font-size: 0;
 }
+
+.digital-clock .title {
+  display: inline-block;
+  margin: 0 10px 0 0;
+  font-size: 2rem;
+  line-height: 5rem;
+  color: #5d77fe;
+}
+.digital-time {
+  display: inline-block;
+  width: 120px;
+  font-family: NewsCycle;
+  font-size: 3rem;
+  line-height: 4rem;
+  text-align: center;
+  color: #5d77fe;
+}
+
 
 /* 대제목 추가 버튼 */
 .create-btn-box {

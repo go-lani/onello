@@ -16,6 +16,7 @@
 	<script defer src="./assets/js/scroll.js"></script>
 	<script defer src="./assets/js/popup.js"></script>
 	<script defer src="./assets/js/dragdrop.js"></script>
+	<script defer src="./assets/js/time.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -50,10 +51,13 @@
 			</div>
 			<button type="button" class="menu-close"><span class="a11y-hidden">열기</span></button>
 		</aside>
-		<main id="main" role="main">
+		<div id="main" role="main">
 			<section class="utils-area">
-				<h2 class="a11y-hidden">현재시간</h2>
-				<div class="digital-clock">00:00:00</div>
+				<h2 class="a11y-hidden">카테고리 추가 영역</h2>
+				<div class="digital-clock">
+					<span class="title">현재시간</span>
+					<span class="digital-time">00:00:00</span>
+				</div>
 				<div class="create-btn-box">
 					<button type="button" class="btn50 c4 create-main-work" style="width: 200px;">카테고리 추가</button>
 					<input type="text" class="main-create-input" style="width: 200px;" placeholder="카테고리명을 입력해주세요">
@@ -232,7 +236,7 @@
 					</ul>
 				</div>
 			</section>
-		</main>
+		</div>
 	</div>
 </body>
 </html>
