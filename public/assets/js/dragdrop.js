@@ -10,7 +10,6 @@ function drag(e) {
 }
 
 function drop(e) {
-  console.warn('drop');
   const targetId = e.dataTransfer.getData('targetId');
   e.preventDefault();
   e.target.appendChild(document.getElementById(targetId));
@@ -18,8 +17,6 @@ function drop(e) {
 
 function onDrop(event) {
   const id = event.dataTransfer.getData('text');
-
-  console.log(id);
 
   const draggableElement = document.getElementById(id);
 

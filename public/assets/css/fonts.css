@@ -32,3 +32,10 @@
 	font-weight: 700;
 	src: url('../fonts/Cabin-700.woff') format('woff');
 }
+
+@font-face {
+	font-family: NewsCycle;
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/NewsCycle-400.woff') format('woff');
+}
