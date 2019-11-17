@@ -6,7 +6,7 @@
   top: 50%;
   left: 50%;
   width: 760px;
-  height: 600px;
+  /* height: 600px; */
   margin: -300px 0 0 -380px;
   z-index: 100;
 }
@@ -24,71 +24,107 @@
 .register-popup {
   position: relative;
   width: 760px;
-  /* height: 600px; */
   z-index: 1;
   background: #eee;
-  padding: 20px;
+  padding: 30px 20px 20px;
   border-radius: 10px;
 }
 
 /* header 영역 시작 */
 
-.popup-header{
-  margin: 10px 0 20px 20px;
+.popup-header {
+  margin: 0 0 20px 20px;
   color: #48465b;
 }
 
-.popup-header div{
+.popup-header div {
   margin: 0 0 10px 0;
 }
 
-.popup-title{
+.popup-title {
   font-size: 24px;
   font-weight: 400;
   color: #48465b;
 }
 
-.popup-subtitle{
+.popup-subtitle {
   font-size: 16px;
   color: #666666;
 }
 
-.popup-subtitle a{
+.popup-subtitle a {
   text-decoration: underline;
 }
 
-.popup-create-time{
+.popup-create-time {
   font-size: 18px;
   color: #666666;
 }
 
 /* close button */
-.btn-close-popup{
+.btn-close-popup {
   position: absolute;
   top: 15px;
   right: 15px;
-  width: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
+  background: #f0f3ff;
+  transition: all .3s;
+}
+
+.btn-close-popup:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  margin: -1px 0 0 -7px;
+  background: #93a2dd;
+  transform: rotate(-45deg);
+  transition: all .3s;
+}
+
+.btn-close-popup:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  margin: -1px 0 0 -7px;
+  background: #93a2dd;
+  transform: rotate(45deg);
+  transition: all .3s;
+}
+
+.btn-close-popup:hover {
+  background: #5d78ff;
+}
+
+.btn-close-popup:hover:before, .btn-close-popup:hover:after {
+  background: #fff;
 }
 
 /* main-content 시작 */
 
-.popup-main-content{
+.popup-main-content {
   margin: 0 0 0 20px;
   width: 65%;
 }
 
-.description-area{
+.description-area {
   margin: 10px 0 30px 0;
 }
 
-.area-title{
+.area-title {
   font-size: 20px;
   margin: 0 0 10px 0;
   color: #48465b;
 }
 
-.description-area .area-title::before{
+.description-area .area-title::before {
   display: inline-block;
   content: '';
   background: url(../images/common/list.png);
@@ -98,25 +134,33 @@
   margin: 0 2px 0 -20px;
 }
 
-.description-content{
+.description-content {
   border: none;
   min-height: 100px;
   border-radius: 10px;
   font-size: 18px;
 }
 
-.btn-save{
+.btn-save {
   margin: 10px 0 0 0;
   width: 100px;
   font-size: 16px;
+  background: #1dc9b7;
+  color: #E2F6F3;
+  transition: 0.5s;
 }
 
-.checklist-area{
+.btn-save:hover {
+  background: #18A899;
+  color: #ffffff;
+}
+
+.checklist-area {
   position: relative;
   line-height: 30px;
 }
 
-.checklist-area .area-title::before{
+.checklist-area .area-title::before {
   display: inline-block;
   content: '';
   background: url(../images/common/checkbox.png);
@@ -126,25 +170,28 @@
   margin: 0 2px 0 -20px;
 }
 
-.progress-contents{
-  /* margin: 10px 0; */
+/* progress */
+
+.progress-contents {
+  height: 30px;
+  line-height: 30px;
 }
 
-.complete-percent{
-  font-size: 12px;
-  margin: 0 0 0 -27px;
+.complete-percent {
+  font-size: 14px;
+  margin: 0 0 0 -30px;
 }
 
-.progress-bar{
+.progress-bar {
   position: relative;
   width: 100%;
   height: 10px;
-  top: -10px;
+  top: -18px;
   background: #EFF1FE;
   border-radius: 10px;
 }
 
-.success-bar{
+.success-bar {
   position: absolute;
   width: 80%;
   height: 10px;
@@ -152,17 +199,27 @@
   border-radius: 10px;
 }
 
-.checkbox li{
+.checkbox li {
   height: 20px;
   line-height: 20px;
-}
-
-.btn-check-add{
-  width: 100px;
+  margin: 10px 10px 10px -20px;
   font-size: 16px;
 }
 
-.btn-delete{
+.btn-check-add {
+  width: 120px;
+  font-size: 16px;
+  background: #D3DAE6;
+  color: #646672;
+  transition: 0.5s;
+}
+
+.btn-check-add:hover {
+  background: #BBC5D8;
+  color: #21255C;
+}
+
+.btn-delete {
   position: absolute;
   top: 0;
   right: 0;
@@ -171,23 +228,23 @@
 }
 
 /* add-ons 시작 */
-.popup-add-ons{
+.popup-add-ons {
   width: 30%;
   margin: 20px 0 0 0; 
 }
 
-.popup-add-ons .title{
+.popup-add-ons .title {
   font-size: 16px;
   margin: 0 0 10px 0;
   padding: 0 0 0 10px;
 }
 
-.members-info, .labels, .check{
+.members-info, .labels, .check {
   margin: 0 0 20px 0;
 }
 
 /* 동그라미 공통 */
-.members-list li, .colors-list li{
+.members-list li, .colors-list li {
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -195,23 +252,23 @@
   margin: 0 5px 0 5px;
 }
 
-.members-list li{
-  background: #F5F7FB;
+.members-list li {
+  background: #ffffff;
   color: #5f7aff;
   font-size: 18px;
   line-height: 40px;
   text-align: center;
 }
 
-.colors-list li{
+.colors-list li {
   cursor: pointer;
 }
 
-.colors-list .click{
+.colors-list .click {
   position: relative;
 }
 
-.colors-list .click::after{
+.colors-list .click::after {
   position: absolute;
   content: '';
   background-image: url(../images/common/color-check.png);
@@ -222,22 +279,22 @@
   left: 10px;
 }
 
-.colors-list .blue{
+.colors-list .blue {
   background: #5578EB;
 }
 
-.colors-list .yellow{
+.colors-list .yellow {
   background: #f2d600;
 }
 
-.colors-list .red{
+.colors-list .red {
   background: #eb5a46;
 }
-.colors-list .orange{
+.colors-list .orange {
   background: #ff9f1a;
 }
 
-.btn-checklist{
+.btn-checklist {
   font-size: 16px;
   width: 100%;
   padding: 0 0 0 10px;
