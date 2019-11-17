@@ -8,14 +8,12 @@ label.rdo input {position: absolute; top: 5px; left: 0; width: 1px; height: 1px;
 label.rdo span {display: block;}
 label.rdo span:before {display: block; content: ''; position: absolute; top: 50%; left: 0; width: 16px; height: 16px; margin: -8px 0 0; background: url(../images/common/rdo.png) 0 0 no-repeat;}
 label.rdo input:checked + span:before {background-position: 0 -16px;}
-label.rdo input:focus + span:before {outline: 1px dotted #000000;}
 
 label.chk {display: inline-block; position: relative; padding: 0 0 0 24px;}
 label.chk input {position: absolute; top: 5px; left: 0; width: 1px; height: 1px; opacity: 0; cursor: pointer;}
 label.chk span {display: block;}
 label.chk span:before {display: block; content: ''; position: absolute; top: 50%; left: 0; width: 16px; height: 16px; margin: -8px 0 0; background: url(../images/common/chk.png) 0 0 no-repeat;}
 label.chk input:checked + span:before {background-position: 0 -16px;}
-label.chk input:focus + span:before {outline: 1px dotted #000000;}
 
 .btn-box {overflow: hidden; width: 100%; text-align: center;}
 .btn-box a {float: left; margin: 0 0 0 10px;}
@@ -25,25 +23,38 @@ label.chk input:focus + span:before {outline: 1px dotted #000000;}
 .btn-box button {float: left; margin: 0 0 0 10px;}
 .btn-box button:first-child {margin: 0;}
 
-.btn30 {display: inline-block; box-sizing: border-box; height: 30px; border: none; border-radius: 6px; font-size: 1.4rem; line-height: 30px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none;}
+.btn30 {display: inline-block; box-sizing: border-box; height: 30px; border: none; border-radius: 6px; font-size: 1.4rem; line-height: 28px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none; transition: all .3s;}
+.btn30.c1 {border: 1px solid #000000; background: #000000; color: #ffffff;} /* 검은바탕 흰색글씨 */
+.btn30.c2 {border: 1px solid #333333; background: #333333; color: #ffffff;} /* 진한회색 흰색글씨 */
 .btn30.c3 {border: 1px solid #5f72d0; background: #5f72d0; color: #ffffff;} /* 연하늘색 파란글씨 */
-.btn30.c3:hover {border: 1px solid #eef1ff; background: #eef1ff; color: #5f7aff; transition: all .3s;} /* 연하늘색 파란글씨 */
+.btn30.c3:hover {border: 1px solid #eef1ff; background: #eef1ff; color: #5f7aff;} /* 연하늘색 파란글씨 */
+.btn30.c4 {border: 1px solid #5d78ff; background: #5d78ff; color: #ffffff;} /* 하늘색 흰색글씨 */
+.btn30.c4:hover {border: 1px solid #3758ff; background: #3758ff;} /* 하늘색 흰색글씨 */
+.btn30.c5 {border: 1px solid #1dc9B7; background: #1dc9B7; color: #e2f6f3;} /* 청포도색 흰색글씨 */
+.btn30.c5:hover {border: 1px solid #18a899; background: #18a899; color: #fff;} /* 청포도색 흰색글씨 */
+.btn30.c6 {border: 1px solid #517fa4; background: #517fa4; color: #fff;}
 
-.btn40 {display: inline-block; box-sizing: border-box; height: 40px; border: none; border-radius: 6px; font-size: 1.4rem; line-height: 38px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none;}
+.btn40 {display: inline-block; box-sizing: border-box; height: 40px; border: none; border-radius: 6px; font-size: 1.4rem; line-height: 38px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none; transition: all .3s;}
 .btn40.c1 {border: 1px solid #000000; background: #000000; color: #ffffff;} /* 검은바탕 흰색글씨 */
 .btn40.c2 {border: 1px solid #333333; background: #333333; color: #ffffff;} /* 진한회색 흰색글씨 */
 .btn40.c3 {border: 1px solid #eef1ff; background: #eef1ff; color: #5f7aff;} /* 연하늘색 파란글씨 */
-.btn40.c3:hover {border: 1px solid #5f72d0; background: #5f72d0; color: #ffffff; transition: all .3s;} /* 연하늘색 파란글씨 */
+.btn40.c3:hover {border: 1px solid #5f72d0; background: #5f72d0; color: #ffffff;} /* 연하늘색 파란글씨 */
 .btn40.c4 {border: 1px solid #5d78ff; background: #5d78ff; color: #ffffff;} /* 하늘색 흰색글씨 */
-.btn40.c4:hover {border: 1px solid #3758ff; background: #3758ff; transition: all .3s;} /* 하늘색 흰색글씨 */
+.btn40.c4:hover {border: 1px solid #3758ff; background: #3758ff;} /* 하늘색 흰색글씨 */
+.btn40.c5 {border: 1px solid #1dc9B7; background: #1dc9B7; color: #e2f6f3;} /* 청포도색 흰색글씨 */
+.btn40.c5:hover {border: 1px solid #18a899; background: #18a899; color: #fff;} /* 청포도색 흰색글씨 */
+.btn40.c6 {border: 1px solid #517fa4; background: #517fa4; color: #fff;}
 
-.btn50 {display: inline-block; box-sizing: border-box; height: 50px; border: none; border-radius: 6px; font-size: 1.6rem; line-height: 48px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none;}
+.btn50 {display: inline-block; box-sizing: border-box; height: 50px; border: none; border-radius: 6px; font-size: 1.6rem; line-height: 48px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none; transition: all .3s;}
 .btn50.c1 {border: 1px solid #000000; background: #000000; color: #ffffff;} /* 검은바탕 흰색글씨 */
 .btn50.c2 {border: 1px solid #333333; background: #333333; color: #ffffff;} /* 진한회색 흰색글씨 */
 .btn50.c3 {border: 1px solid #eef1ff; background: #eef1ff; color: #5f7aff;} /* 연하늘색 파란글씨 */
-.btn50.c3:hover {border: 1px solid #5f72d0; background: #5f72d0; color: #ffffff; transition: all .3s;} /* 연하늘색 파란글씨 */
+.btn50.c3:hover {border: 1px solid #5f72d0; background: #5f72d0; color: #ffffff;} /* 연하늘색 파란글씨 */
 .btn50.c4 {border: 1px solid #5d78ff; background: #5d78ff; color: #ffffff;} /* 하늘색 흰색글씨 */
-.btn50.c4:hover {border: 1px solid #3758ff; background: #3758ff; transition: all .3s;} /* 하늘색 흰색글씨 */
+.btn50.c4:hover {border: 1px solid #3758ff; background: #3758ff;} /* 하늘색 흰색글씨 */
+.btn50.c5 {border: 1px solid #1dc9B7; background: #1dc9B7; color: #e2f6f3;} /* 청포도색 흰색글씨 */
+.btn50.c5:hover {border: 1px solid #18a899; background: #18a899; color: #fff;} /* 청포도색 흰색글씨 */
+.btn50.c6 {border: 1px solid #517fa4; background: #517fa4; color: #fff;}
 
 /* main layer popup */
 .main_popup {position: relative; z-index: 1000; background: #ffffff;}

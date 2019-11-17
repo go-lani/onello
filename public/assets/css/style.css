@@ -4,4 +4,8 @@
 @import "reset.css";
 @import "common.css";
 @import "layout.css";
+<<<<<<< HEAD
 @import "__contents.css";
+=======
+@import "contents.css";
+>>>>>>> 89e9493f344a4bc0e6738c9915095e20327d33da
