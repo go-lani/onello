@@ -1,24 +1,17 @@
-<link rel="stylesheet" href="./assets/css/reset.css">
-<style>
-.register-popup {
-  width: 760px;
-  margin: 0 auto;
-}
-</style>
-<div class="register-popup">
-  <header class="popup-header">
+<div class="register-popup clear-fix">
+  <div class="popup-header">
     <div class="popup-title"><span class="a11y-hidden">팝업타이틀:</span>11/08 프로젝트 주제 회의</div>
-    <div class="popup-subtitle">in list<a href="#self">회의 내용</a></div>
+    <div class="popup-subtitle">in list <a href="#self">회의 내용</a></div>
     <div class="popup-create-time">19/01/01 12:12:12</div>
-  </header>
+  </div>
 
-  <button type="button" class="btn-close-popup">X</button>
+  <button type="button" class="btn-close-popup layer-close"></button>
 
-  <main class="popup-main-content">
+  <div class="popup-main-content fl_l">
     <div class="description-area">
       <div class="area-title">Description</div>
       <textarea class="description-content" placeholder="Add a more detailed Description.."></textarea>
-      <button type="button" class="btn-save">Save</button>
+      <button type="button" class="btn-save btn40">Save</button>
     </div>
 
     <div class="checklist-area">
@@ -29,36 +22,36 @@
           <span class="success-bar"></span>
         </div>
       </div>
-      <ul>
-        <li><label for="check1"><input id="check1" type="checkbox"><span>ddasda</span></label></li>
-        <li><label for="check2"><input id="check2" type="checkbox"><span>ddasda</span></label></li>
+      <ul class="checkbox">
+        <li><label class="chk" for="check1" ><input id="check1" type="checkbox"><span>ddasda</span></label></li>
+        <li><label class="chk" for="check2"><input id="check2" type="checkbox"><span>ddasda</span></label></li>
       </ul>
-      <button type="button" class="btn-check-add">add an item</button>
-      <button type="button" class="btn-delete">delete</button>
+      <button type="button" class="btn-check-add btn40">add an item</button>
+      <button type="button" class="btn-delete btn30 c3">delete</button>
     </div>
-  </main>
+  </div>
 
-  <aside class="popup-add-ons">
+  <div class="popup-add-ons fl_r">
     <div class="members-info">
       <div class="title">MEMBERS</div>
       <ul class="members-list">
-        <l1>P</l1>
-        <l1>정</l1>
-        <l1>김</l1>
-        <l1>+</l1>
+        <li>P</li>
+        <li>정</li>
+        <li>김</li>
+        <li>+</li>
       </ul>
     </div>
     <div class="labels">
       <div class="title">LABELS</div>
       <ul class="colors-list">
-        <li class="none"><span class="a11y-hidden">none</span></li>
-        <li class="green"><span class="a11y-hidden">green</span></li>
+        <li class="blue click"><span class="a11y-hidden">blue</span></li>
+        <li class="yellow"><span class="a11y-hidden">green</span></li>
         <li class="red"><span class="a11y-hidden">red</span></li>
-        <li class="blue"><span class="a11y-hidden">blue</span></li>
+        <li class="orange"><span class="a11y-hidden">orange</span></li>
       </ul>
     </div>
     <div class="check">
-      <button type="button" class="btn-checklist">CHECKLIST</button>
+      <button type="button" class="btn-checklist btn40 c4">CHECKLIST</button>
     </div>
-  </aside>
+  </div>
 </div>

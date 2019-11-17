@@ -1,3 +1,28 @@
 @charset "utf-8";
 
 /* 섹션별 컨텐츠 스타일 */
+.popup-wrap {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 760px;
+  height: 400px;
+  margin: -200px 0 0 -380px;
+  z-index: 100;
+}
+
+.popup-wrap:before {
+  content: '';
+  position: absolute;
+  top: -9999px;
+  right: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  background: rgba(0, 0, 0, .4);
+}
+
+.register-popup {
+  position: relative;
+  z-index: 1;
+  background: #eee;
+}
