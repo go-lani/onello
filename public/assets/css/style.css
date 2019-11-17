@@ -4,5 +4,4 @@
 @import "reset.css";
 @import "common.css";
 @import "layout.css";
-@import "__contents.css";
-@import "_contents.css";
+@import "contents.css";
