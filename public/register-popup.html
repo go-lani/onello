@@ -5,15 +5,14 @@
     <div class="popup-create-time">19/01/01 12:12:12</div>
   </div>
 
-  <button type="button" class="btn-close-popup">X</button>
+  <button type="button" class="btn-close-popup delete-main-work">X</button>
 
   <div class="popup-main-content">
     <div class="description-area">
       <div class="area-title">Description</div>
-      <textarea class="description-content" placeholder="Add a more detailed Description.."></textarea>
-      <button type="button" class="btn-save">Save</button>
+      <textarea class="description-content" placeholder="Add a more detailed Description.." autofocus></textarea>
+      <button type="button" class="btn-save btn40 c1" style="width: 100px" >Save</button>
     </div>
-
     <div class="checklist-area">
       <div class="area-title">checklist</div>
       <div class="progress-contents">
@@ -22,25 +21,26 @@
           <span class="success-bar"></span>
         </div>
       </div>
-      <ul>
-        <li><label for="check1"><input id="check1" type="checkbox"><span>ddasda</span></label></li>
-        <li><label for="check2"><input id="check2" type="checkbox"><span>ddasda</span></label></li>
+      <ul class="checkbox">
+        <li><label class="chk" for="check1"><input id="check1" type="checkbox"><span>ddasda</span></label></li>
+        <li><label class="chk" for="check2"><input id="check2" type="checkbox"><span>ddasda</span></label></li>
       </ul>
-      <button type="button" class="btn-check-add">add an item</button>
-      <button type="button" class="btn-delete">delete</button>
+      <button type="button" class="btn-check-add btn40 c1">add an item</button>
+      <button type="button" class="btn-delete btn40 c1" style="width:90px;">delete</button>
     </div>
   </div>
 
   <div class="popup-add-ons">
     <div class="members-info">
-      <div class="title">MEMBERS</div>
+        <i class="fas fa-list"></i><div class="title">MEMBERS</div>
       <ul class="members-list">
-        <l1>P</l1>
-        <l1>정</l1>
-        <l1>김</l1>
-        <l1>+</l1>
+        <li>P</li>
+        <li>정</li>
+        <li>김</li>
+        <li>+</li>
       </ul>
     </div>
+
     <div class="labels">
       <div class="title">LABELS</div>
       <ul class="colors-list">
@@ -51,7 +51,7 @@
       </ul>
     </div>
     <div class="check">
-      <button type="button" class="btn-checklist">CHECKLIST</button>
+      <button type="button" class="btn-checklist ">CHECKLIST</button>
     </div>
   </div>
 </div>
