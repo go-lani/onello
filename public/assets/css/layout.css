@@ -293,6 +293,10 @@
   max-height: 410px;
 }
 
+.detail-work {
+  /* min-height: 50px; */
+}
+
 .detail-work li {
   overflow: hidden;
   width: 100%;
@@ -394,6 +398,7 @@
 
 .create-detail-btn + input {
   display: none;
+  border: none;
 }
 
 .create-detail-btn.on + input {
