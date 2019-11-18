@@ -10257,104 +10257,61 @@ try {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  (function () {
-    var $addCategory = document.querySelector('.create-main-work');
-    var $mainCreateInput = document.querySelector('.main-create-input');
-    var $addDetail = document.querySelector('.create-detail-btn');
-    var $detailCreateInput = document.querySelector('.detail-create-input');
+  var $mainWork = document.querySelector('.main-work');
+  var $addCategory = document.querySelector('.create-main-work');
+  var $mainCreateInput = document.querySelector('.main-create-input');
 
-    var toggle = function toggle(target) {
-      target.classList.toggle('on', !target.classList.contains('on'));
-      target.nextElementSibling.focus();
-    };
+  var toggle = function toggle(target) {
+    target.classList.toggle('on', !target.classList.contains('on'));
+    target.nextElementSibling.focus();
+  };
 
-    var add = function add(target, keyCode) {
-      var value = target.value.trim();
-      if (keyCode !== 13 || value === '') return;
-      target.previousElementSibling.classList.remove('on');
-      console.log(value);
-      target.value = '';
-    }; // Events
+  var add = function add(target, keyCode) {
+    var value = target.value.trim();
+    if (keyCode !== 13 || value === '') return;
+    target.previousElementSibling.classList.remove('on');
+    target.value = '';
+  }; // Events
 
 
-    $addCategory.onclick = function (_ref) {
-      var target = _ref.target;
-      toggle(target);
-    };
+  $addCategory.onclick = function (_ref) {
+    var target = _ref.target;
+    toggle(target);
+  };
 
-    $mainCreateInput.onkeyup = function (_ref2) {
-      var target = _ref2.target,
-          keyCode = _ref2.keyCode;
-      add(target, keyCode);
-    };
+  $mainWork.onfocusout = function (_ref2) {
+    var target = _ref2.target;
+    console.log(target);
+  };
 
-    $mainCreateInput.onblur = function (_ref3) {
-      var target = _ref3.target;
-      var value = target.value.trim();
-      if (value !== '') return;
-      target.previousElementSibling.classList.remove('on');
-    };
+  $mainCreateInput.onkeyup = function (_ref3) {
+    var target = _ref3.target,
+        keyCode = _ref3.keyCode;
+    add(target, keyCode);
+  };
 
-    $addDetail.onclick = function (_ref4) {
-      var target = _ref4.target;
-      toggle(target);
-    };
+  $mainCreateInput.onblur = function (_ref4) {
+    var target = _ref4.target;
+    var value = target.value.trim();
+    if (value !== '') return;
+    target.previousElementSibling.classList.remove('on');
+  };
 
-    $detailCreateInput.onkeyup = function (_ref5) {
-      var target = _ref5.target,
-          keyCode = _ref5.keyCode;
-      add(target, keyCode);
-    };
+  $mainWork.onclick = function (_ref5) {
+    var target = _ref5.target;
+    if (target.classList.contains('create-detail-btn') || target.classList.contains('title')) toggle(target);
+  };
 
-    $detailCreateInput.onblur = function (_ref6) {
-      var target = _ref6.target;
-      var value = target.value.trim();
-      if (value !== '') return;
-      target.previousElementSibling.classList.remove('on');
-    };
-  })();
+  $mainWork.onkeyup = function (_ref6) {
+    var target = _ref6.target,
+        keyCode = _ref6.keyCode;
+    console.log(target.value);
+    add(target, keyCode);
+  };
 });
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./src/assets/js/popup.js":
-/*!********************************!*\
-  !*** ./src/assets/js/popup.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// DOMs
-var $wrap = document.querySelector('#wrap');
-var $mainwork = document.querySelector('#main-work');
-
-var render = function render() {
-  var $node = document.createElement('div');
-  $node.classList.add('popup-wrap');
-  $node.innerHTML += "\n    <div class=\"register-popup\">\n      <div class=\"popup-header\">\n        <div class=\"popup-title\"><span class=\"a11y-hidden\">\uC8FC\uC81C:</span>11/08 \uD504\uB85C\uC81D\uD2B8 \uC8FC\uC81C \uD68C\uC758</div>\n        <div class=\"popup-subtitle\">in list <a href=\"#self\">\uD68C\uC758 \uB0B4\uC6A9</a></div>\n        <div class=\"popup-created-time\">19/01/01 12:12:12</div>\n      </div>\n\n      <button type=\"button\" class=\"btn-close-popup layer-close\">X</button>\n\n      <div class=\"popup-main-content clear-fix\">\n        <div class=\"content-area\">\n          <div class=\"description-area\">\n            <div class=\"area-title\">Description</div>\n            <textarea class=\"description-content\" placeholder=\"Add a more detailed Description..\"></textarea>\n            <button type=\"button\" class=\"btn-save btn40 c5 mt10\" style=\"width: 80px;\">Save</button>\n          </div>\n\n          <div class=\"checklist-area\">\n            <div class=\"area-title\">checklist</div>\n            <div class=\"progress-contents\">\n              <span class=\"complete-percent\">98%</span>\n              <div class=\"progress-bar\">\n                <span class=\"success-bar\" style=\"width: 50%\"></span>\n              </div>\n            </div>\n            <ul class=\"check-list\">\n              <li><label class=\"chk\" for=\"check1\"><input id=\"check1\" type=\"checkbox\"><span>ddasda</span></label></li>\n              <li><label class=\"chk\" for=\"check2\"><input id=\"check2\" type=\"checkbox\"><span>ddasda</span></label></li>\n            </ul>\n            <button type=\"button\" class=\"btn-check-add btn40 c5 mt20\" style=\"width: 120px;\">add an item</button>\n            <button type=\"button\" class=\"btn-delete btn30 c6\" style=\"width: 100px;\">delete</button>\n          </div>\n        </div>\n\n        <div class=\"popup-add-ons\">\n          <div class=\"labels\">\n            <div class=\"title\">LABELS</div>\n            <ul class=\"colors-list\">\n              <li class=\"yellow\">\n                <label><input type=\"checkbox\" class=\"state-check\"><span>\uB178\uB791\uC0C9</span></span></label>\n              </li>\n              <li class=\"orange\">\n                <label><input type=\"checkbox\" class=\"state-check\"><span>\uC8FC\uD669\uC0C9</span></span></label>\n              </li>\n              <li class=\"red\">\n                <label><input type=\"checkbox\" class=\"state-check\"><span>\uBE68\uAC15\uC0C9</span></span></label>\n              </li>\n              <li class=\"blue\">\n                <label><input type=\"checkbox\" class=\"state-check\"><span>\uD30C\uB791\uC0C9</span></span></label>\n              </li>\n            </ul>\n          </div>\n          <div class=\"add-check\">\n            <button type=\"button\" class=\"btn-checklist btn40 c2\" style=\"width: 100%;\">CHECKLIST</button>\n          </div>\n        </div>\n      </div>";
-  $wrap.appendChild($node);
-};
-
-var ajax = function () {
-  var req = function req(method, url, payload) {
-    return new Promise(function (resolve, reject) {
-      var xhr = new XMLHttpRequest();
-      xhr.open(method, url);
-      xhr.setRequestHeader('content-type', 'application/json');
-      xhr.send(JSON.stringify(payload));
-
-      xhr.onload = function () {
-        if (xhr.status === 200 || xhr.status === 201) {
-          resolve(xhr.response);
-        }
-      };
-
-      xhr.onerror = function () {
-        reject(new Error(xhr.status));
-      };
-    });
-=======
 /***/ "./src/assets/js/dragdrop.js":
 /*!***********************************!*\
   !*** ./src/assets/js/dragdrop.js ***!
@@ -10393,7 +10350,6 @@ __webpack_require__.r(__webpack_exports__);
 
   $mainWork.ondragstart = function (e) {
     onDragStart(e);
->>>>>>> 96f425b96764355e187abb386ef8ec0f8bf031a7
   };
 
   $mainWork.ondragover = function (e) {
@@ -10424,10 +10380,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-Object(_add__WEBPACK_IMPORTED_MODULE_0__["default"])();
 Object(_popup__WEBPACK_IMPORTED_MODULE_1__["default"])();
-Object(_works__WEBPACK_IMPORTED_MODULE_3__["default"])();
 Object(_dragdrop__WEBPACK_IMPORTED_MODULE_2__["default"])();
+Object(_add__WEBPACK_IMPORTED_MODULE_0__["default"])();
+Object(_works__WEBPACK_IMPORTED_MODULE_3__["default"])();
 
 (function () {
   var $timer = document.querySelector('.digital-time');
@@ -10467,8 +10423,6 @@ Object(_dragdrop__WEBPACK_IMPORTED_MODULE_2__["default"])();
 
 /***/ }),
 
-<<<<<<< HEAD
-=======
 /***/ "./src/assets/js/popup.js":
 /*!********************************!*\
   !*** ./src/assets/js/popup.js ***!
@@ -10541,99 +10495,113 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
->>>>>>> 96f425b96764355e187abb386ef8ec0f8bf031a7
 /***/ "./src/assets/js/works.js":
 /*!********************************!*\
   !*** ./src/assets/js/works.js ***!
   \********************************/
-<<<<<<< HEAD
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-=======
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var works = []; // const init = () => {
-  //   let html = '';
-  //   works.forEach(({ id, title, list }) => {
-  //     html += `
-  //     <li id="main-work-${id}">
-  //       <div class="title-box">
-  //         <div class="title">${title}</div>
-  //         <input type="text" class="modify-input" placeholder="주제를 입력해주세요">
-  //       </div>
-  //       <div class="detail-work-box">
-  //         <ul class="detail-work" droppable="true" ondragover='onDragOver(event);'
-  //         ondrop='onDrop(event);'>
-  //         </ul>
-  //       </div>
-  //       <div class="create-detail-work">
-  //         <button type="button" class="btn40 c3 create-detail-btn">해야할일 추가</button>
-  //         <input type="text" class="detail-create-input" placeholder="추가할 목록을 입력하세요">
-  //       </div>
-  //       <button type="button" class="delete-main-work">삭제</button>
-  //     </li>`;
-  //   });
-  // };
-  // const ajax = (() => {
-  //   const req = (method, url, payload) => {
-  //     return new Promise((resolve, reject) => {
-  //       const xhr = new XMLHttpRequest();
-  //       xhr.open(url, payload);
-  //       xhr.setRequestHeader('content-type', 'application/json');
-  //       xhr.send(JSON.stringify(payload));
-  //       xhr.onload = () => {
-  //         if (xhr.status === 200 || xhr.status === 201) {
-  //           resolve(JSON.parse(xhr.response));
-  //         } else {
-  //           reject(new Error('Error', xhr.status));
-  //         }
-  //       };
-  //     });
-  //   };
-  //   return {
-  //     get(url) {
-  //       return req('GET', url);
-  //     }
-  //   };
-  // })();
-  // const getWorks = () => {
-  //   ajax.get('http://localhost:5000/works')
-  //     .then(console.log);
-  // };
-  // getWorks();
+  var works = [];
+  var $mainWork = document.querySelector('.main-work');
+  var $mainWorkinput = document.querySelector('.main-create-input');
+
+  var render = function render() {
+    var html = '';
+    works.forEach(function (_ref) {
+      var id = _ref.id,
+          title = _ref.title;
+      html += "\n      <li id=\"".concat(id, "\">\n        <div class=\"title-box\">\n          <div class=\"title\">").concat(title, "</div>\n          <input type=\"text\" class=\"modify-input\" placeholder=\"\uC8FC\uC81C\uB97C \uC785\uB825\uD574\uC8FC\uC138\uC694\">\n        </div>\n      <div class=\"detail-work-box\">\n        <ul class=\"detail-work\" droppable=\"true\" ondragover='onDragOver(event);'\n        ondrop='onDrop(event);'>\n        </ul>\n      </div>\n      <div class=\"create-detail-work\">\n        <button type=\"button\" class=\"btn40 c3 create-detail-btn\">\uD574\uC57C\uD560\uC77C \uCD94\uAC00</button>\n        <input type=\"text\" class=\"detail-create-input\" placeholder=\"\uCD94\uAC00\uD560 \uBAA9\uB85D\uC744 \uC785\uB825\uD558\uC138\uC694\">\n      </div>\n      <button type=\"button\" class=\"delete-main-work\">\uC0AD\uC81C</button>\n    </li>");
+    });
+    $mainWork.innerHTML = html;
+  };
+
+  var getTodo = function getTodo() {
+    works = [{
+      "id": 1,
+      "title": "대주제",
+      "list": [{
+        "id": 1,
+        "title": "소주제",
+        "date": "19/01/01 12:12:12",
+        "Description": "content",
+        "labels": {
+          "yellow": {
+            "completed": false
+          },
+          "orange": {
+            "completed": false
+          },
+          "red": {
+            "completed": false
+          },
+          "blue": {
+            "completed": false
+          }
+        },
+        "checklist": [{
+          "id": 1,
+          "content": "check1",
+          "completed": false
+        }, {
+          "id": 2,
+          "content": "check2",
+          "completed": false
+        }]
+      }]
+    }];
+  };
+
+  window.onload = function () {
+    getTodo();
+    render();
+  };
+
+  var ajax = function () {
+    var req = function req(method, url, payload) {
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.setRequestHeader('content-type', 'application/json');
+        xhr.send(JSON.stringify(payload));
+
+        xhr.onload = function () {
+          if (xhr.status === 200 || xhr.status === 201) {
+            resolve(xhr.response);
+          }
+        };
+
+        xhr.onerror = function () {
+          reject(new Error(xhr.status));
+        };
+      });
+    };
+
+    return {
+      get: function get(url) {
+        return req('GET', url);
+      },
+      post: function post(url, payload) {
+        return req('POST', url, payload);
+      }
+    };
+  }();
 });
->>>>>>> 96f425b96764355e187abb386ef8ec0f8bf031a7
 
 /***/ }),
 
 /***/ 0:
-<<<<<<< HEAD
-/*!******************************************************************************************************************************!*\
-  !*** multi @babel/polyfill ./src/assets/js/add.js ./src/assets/js/popup.js ./src/assets/js/time.js ./src/assets/js/works.js ***!
-  \******************************************************************************************************************************/
-=======
 /*!*****************************************************!*\
   !*** multi @babel/polyfill ./src/assets/js/main.js ***!
   \*****************************************************/
->>>>>>> 96f425b96764355e187abb386ef8ec0f8bf031a7
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! @babel/polyfill */"./node_modules/@babel/polyfill/lib/index.js");
-<<<<<<< HEAD
-__webpack_require__(/*! ./src/assets/js/add.js */"./src/assets/js/add.js");
-__webpack_require__(/*! ./src/assets/js/popup.js */"./src/assets/js/popup.js");
-__webpack_require__(/*! ./src/assets/js/time.js */"./src/assets/js/time.js");
-module.exports = __webpack_require__(/*! ./src/assets/js/works.js */"./src/assets/js/works.js");
-=======
 module.exports = __webpack_require__(/*! ./src/assets/js/main.js */"./src/assets/js/main.js");
->>>>>>> 96f425b96764355e187abb386ef8ec0f8bf031a7
 
 
 /***/ })
