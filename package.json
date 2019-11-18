@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "build": "webpack -w"
+    "start": "nodemon server.js -w",
+    "build": "webpack"
   },
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
