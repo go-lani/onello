@@ -7,7 +7,8 @@
     "build": "webpack -w"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.7.0"
+    "@babel/polyfill": "^7.7.0",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",
