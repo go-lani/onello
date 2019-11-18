@@ -43,15 +43,6 @@ const render = () => {
         </div>
 
         <div class="popup-add-ons">
-          <div class="members-info">
-            <div class="title">MEMBERS</div>
-            <ul class="members-list">
-              <li>P</li>
-              <li>정</li>
-              <li>김</li>
-              <li>+</li>
-            </ul>
-          </div>
           <div class="labels">
             <div class="title">LABELS</div>
             <ul class="colors-list">
@@ -120,10 +111,8 @@ const openPopup = () => {
 };
 
 // Events
-// $mainwork.addEventListener('click', (e) => {
-//   if (!e.target.parentNode.classList.contains('detail-inner')) return;
+$mainwork.addEventListener('click', (e) => {
+  if (!e.target.parentNode.classList.contains('detail-inner')) return;
 
-//   openPopup();
-// });
-
-window.onload = openPopup;
+  openPopup();
+});
