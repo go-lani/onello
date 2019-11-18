@@ -10313,48 +10313,6 @@ try {
 
 /***/ }),
 
-/***/ "./src/assets/js/dragdrop.js":
-/*!***********************************!*\
-  !*** ./src/assets/js/dragdrop.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function onDragStart(event) {
-  var id = event.target.parentNode.id;
-  event.dataTransfer.setDragImage(event.target.parentNode, 145, 47);
-  event.dataTransfer.setData('text/plain', id);
-}
-
-function drag(e) {
-  console.log('drag');
-}
-
-function drop(e) {
-  var targetId = e.dataTransfer.getData('targetId');
-  e.preventDefault();
-  e.target.appendChild(document.getElementById(targetId));
-}
-
-function onDrop(event) {
-  var id = event.dataTransfer.getData('text');
-  var draggableElement = document.getElementById(id);
-  var dropzone = event.target.parentNode.parentNode.parentNode;
-
-  if (dropzone.classList.contains('detail-work')) {
-    dropzone.appendChild(draggableElement);
-    event.dataTransfer.clearData();
-  }
-
-  ;
-}
-
-function onDragOver(event) {
-  event.preventDefault();
-}
-
-/***/ }),
-
 /***/ "./src/assets/js/popup.js":
 /*!********************************!*\
   !*** ./src/assets/js/popup.js ***!
@@ -10469,15 +10427,14 @@ $mainwork.addEventListener('click', function (e) {
 /***/ }),
 
 /***/ 0:
-/*!*********************************************************************************************************************************!*\
-  !*** multi @babel/polyfill ./src/assets/js/add.js ./src/assets/js/dragdrop.js ./src/assets/js/popup.js ./src/assets/js/time.js ***!
-  \*********************************************************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** multi @babel/polyfill ./src/assets/js/add.js ./src/assets/js/popup.js ./src/assets/js/time.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! @babel/polyfill */"./node_modules/@babel/polyfill/lib/index.js");
 __webpack_require__(/*! ./src/assets/js/add.js */"./src/assets/js/add.js");
-__webpack_require__(/*! ./src/assets/js/dragdrop.js */"./src/assets/js/dragdrop.js");
 __webpack_require__(/*! ./src/assets/js/popup.js */"./src/assets/js/popup.js");
 module.exports = __webpack_require__(/*! ./src/assets/js/time.js */"./src/assets/js/time.js");
 
