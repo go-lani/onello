@@ -10381,11 +10381,7 @@ __webpack_require__.r(__webpack_exports__);
 
 Object(_popup__WEBPACK_IMPORTED_MODULE_1__["default"])();
 Object(_dragdrop__WEBPACK_IMPORTED_MODULE_2__["default"])();
-<<<<<<< HEAD
-Object(_add__WEBPACK_IMPORTED_MODULE_0__["default"])();
-=======
 Object(_add__WEBPACK_IMPORTED_MODULE_0__["default"])(); // works();
->>>>>>> b8b7c5cde5c736ac3b65077a1159eeb38be771c7
 
 (function () {
   var $timer = document.querySelector('.digital-time');
