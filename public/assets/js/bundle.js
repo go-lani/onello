@@ -10317,6 +10317,44 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+<<<<<<< HEAD
+/***/ "./src/assets/js/popup.js":
+/*!********************************!*\
+  !*** ./src/assets/js/popup.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// DOMs
+var $wrap = document.querySelector('#wrap');
+var $mainwork = document.querySelector('#main-work');
+
+var render = function render() {
+  var $node = document.createElement('div');
+  $node.classList.add('popup-wrap');
+  $node.innerHTML += "\n    <div class=\"register-popup\">\n      <div class=\"popup-header\">\n        <div class=\"popup-title\"><span class=\"a11y-hidden\">\uC8FC\uC81C:</span>11/08 \uD504\uB85C\uC81D\uD2B8 \uC8FC\uC81C \uD68C\uC758</div>\n        <div class=\"popup-subtitle\">in list <a href=\"#self\">\uD68C\uC758 \uB0B4\uC6A9</a></div>\n        <div class=\"popup-created-time\">19/01/01 12:12:12</div>\n      </div>\n\n      <button type=\"button\" class=\"btn-close-popup layer-close\">X</button>\n\n      <div class=\"popup-main-content clear-fix\">\n        <div class=\"content-area\">\n          <div class=\"description-area\">\n            <div class=\"area-title\">Description</div>\n            <textarea class=\"description-content\" placeholder=\"Add a more detailed Description..\"></textarea>\n            <button type=\"button\" class=\"btn-save btn40 c5 mt10\" style=\"width: 80px;\">Save</button>\n          </div>\n\n          <div class=\"checklist-area\">\n            <div class=\"area-title\">checklist</div>\n            <div class=\"progress-contents\">\n              <span class=\"complete-percent\">98%</span>\n              <div class=\"progress-bar\">\n                <span class=\"success-bar\" style=\"width: 50%\"></span>\n              </div>\n            </div>\n            <ul class=\"check-list\">\n              <li><label class=\"chk\" for=\"check1\"><input id=\"check1\" type=\"checkbox\"><span>ddasda</span></label></li>\n              <li><label class=\"chk\" for=\"check2\"><input id=\"check2\" type=\"checkbox\"><span>ddasda</span></label></li>\n            </ul>\n            <button type=\"button\" class=\"btn-check-add btn40 c5 mt20\" style=\"width: 120px;\">add an item</button>\n            <button type=\"button\" class=\"btn-delete btn30 c6\" style=\"width: 100px;\">delete</button>\n          </div>\n        </div>\n\n        <div class=\"popup-add-ons\">\n          <div class=\"labels\">\n            <div class=\"title\">LABELS</div>\n            <ul class=\"colors-list\">\n              <li class=\"yellow\">\n                <label><input type=\"checkbox\" class=\"state-check\"><span>\uB178\uB791\uC0C9</span></span></label>\n              </li>\n              <li class=\"orange\">\n                <label><input type=\"checkbox\" class=\"state-check\"><span>\uC8FC\uD669\uC0C9</span></span></label>\n              </li>\n              <li class=\"red\">\n                <label><input type=\"checkbox\" class=\"state-check\"><span>\uBE68\uAC15\uC0C9</span></span></label>\n              </li>\n              <li class=\"blue\">\n                <label><input type=\"checkbox\" class=\"state-check\"><span>\uD30C\uB791\uC0C9</span></span></label>\n              </li>\n            </ul>\n          </div>\n          <div class=\"add-check\">\n            <button type=\"button\" class=\"btn-checklist btn40 c2\" style=\"width: 100%;\">CHECKLIST</button>\n          </div>\n        </div>\n      </div>";
+  $wrap.appendChild($node);
+};
+
+var ajax = function () {
+  var req = function req(method, url, payload) {
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open(method, url);
+      xhr.setRequestHeader('content-type', 'application/json');
+      xhr.send(JSON.stringify(payload));
+
+      xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+          resolve(xhr.response);
+        }
+      };
+
+      xhr.onerror = function () {
+        reject(new Error(xhr.status));
+      };
+    });
+=======
 /***/ "./src/assets/js/dragdrop.js":
 /*!***********************************!*\
   !*** ./src/assets/js/dragdrop.js ***!
@@ -10355,6 +10393,7 @@ __webpack_require__.r(__webpack_exports__);
 
   $mainWork.ondragstart = function (e) {
     onDragStart(e);
+>>>>>>> 96f425b96764355e187abb386ef8ec0f8bf031a7
   };
 
   $mainWork.ondragover = function (e) {
@@ -10428,6 +10467,8 @@ Object(_dragdrop__WEBPACK_IMPORTED_MODULE_2__["default"])();
 
 /***/ }),
 
+<<<<<<< HEAD
+=======
 /***/ "./src/assets/js/popup.js":
 /*!********************************!*\
   !*** ./src/assets/js/popup.js ***!
@@ -10500,10 +10541,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+>>>>>>> 96f425b96764355e187abb386ef8ec0f8bf031a7
 /***/ "./src/assets/js/works.js":
 /*!********************************!*\
   !*** ./src/assets/js/works.js ***!
   \********************************/
+<<<<<<< HEAD
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+=======
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10560,18 +10608,32 @@ __webpack_require__.r(__webpack_exports__);
   // };
   // getWorks();
 });
+>>>>>>> 96f425b96764355e187abb386ef8ec0f8bf031a7
 
 /***/ }),
 
 /***/ 0:
+<<<<<<< HEAD
+/*!******************************************************************************************************************************!*\
+  !*** multi @babel/polyfill ./src/assets/js/add.js ./src/assets/js/popup.js ./src/assets/js/time.js ./src/assets/js/works.js ***!
+  \******************************************************************************************************************************/
+=======
 /*!*****************************************************!*\
   !*** multi @babel/polyfill ./src/assets/js/main.js ***!
   \*****************************************************/
+>>>>>>> 96f425b96764355e187abb386ef8ec0f8bf031a7
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! @babel/polyfill */"./node_modules/@babel/polyfill/lib/index.js");
+<<<<<<< HEAD
+__webpack_require__(/*! ./src/assets/js/add.js */"./src/assets/js/add.js");
+__webpack_require__(/*! ./src/assets/js/popup.js */"./src/assets/js/popup.js");
+__webpack_require__(/*! ./src/assets/js/time.js */"./src/assets/js/time.js");
+module.exports = __webpack_require__(/*! ./src/assets/js/works.js */"./src/assets/js/works.js");
+=======
 module.exports = __webpack_require__(/*! ./src/assets/js/main.js */"./src/assets/js/main.js");
+>>>>>>> 96f425b96764355e187abb386ef8ec0f8bf031a7
 
 
 /***/ })
