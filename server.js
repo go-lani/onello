@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/layerpopup', (req, res) => {
-  res.sendFile(path.join(__dirname+'/public/register-popup.html'));
+  // res.sendFile(path.join(__dirname+'/public/register-popup.html'));
 });
 
 app.use('/', router);
