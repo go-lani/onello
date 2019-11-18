@@ -10375,15 +10375,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add */ "./src/assets/js/add.js");
 /* harmony import */ var _popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./popup */ "./src/assets/js/popup.js");
 /* harmony import */ var _dragdrop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dragdrop */ "./src/assets/js/dragdrop.js");
-/* harmony import */ var _works__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./works */ "./src/assets/js/works.js");
 
 
-
+ // import works from './works';
 
 Object(_popup__WEBPACK_IMPORTED_MODULE_1__["default"])();
 Object(_dragdrop__WEBPACK_IMPORTED_MODULE_2__["default"])();
-Object(_add__WEBPACK_IMPORTED_MODULE_0__["default"])();
-Object(_works__WEBPACK_IMPORTED_MODULE_3__["default"])();
+Object(_add__WEBPACK_IMPORTED_MODULE_0__["default"])(); // works();
 
 (function () {
   var $timer = document.querySelector('.digital-time');
@@ -10491,104 +10489,6 @@ __webpack_require__.r(__webpack_exports__);
     if (!e.target.parentNode.classList.contains('detail-inner')) return;
     openPopup();
   });
-});
-
-/***/ }),
-
-/***/ "./src/assets/js/works.js":
-/*!********************************!*\
-  !*** ./src/assets/js/works.js ***!
-  \********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var works = [];
-  var $mainWork = document.querySelector('.main-work');
-  var $mainWorkinput = document.querySelector('.main-create-input');
-
-  var render = function render() {
-    var html = '';
-    works.forEach(function (_ref) {
-      var id = _ref.id,
-          title = _ref.title;
-      html += "\n      <li id=\"".concat(id, "\">\n        <div class=\"title-box\">\n          <div class=\"title\">").concat(title, "</div>\n          <input type=\"text\" class=\"modify-input\" placeholder=\"\uC8FC\uC81C\uB97C \uC785\uB825\uD574\uC8FC\uC138\uC694\">\n        </div>\n      <div class=\"detail-work-box\">\n        <ul class=\"detail-work\" droppable=\"true\" ondragover='onDragOver(event);'\n        ondrop='onDrop(event);'>\n        </ul>\n      </div>\n      <div class=\"create-detail-work\">\n        <button type=\"button\" class=\"btn40 c3 create-detail-btn\">\uD574\uC57C\uD560\uC77C \uCD94\uAC00</button>\n        <input type=\"text\" class=\"detail-create-input\" placeholder=\"\uCD94\uAC00\uD560 \uBAA9\uB85D\uC744 \uC785\uB825\uD558\uC138\uC694\">\n      </div>\n      <button type=\"button\" class=\"delete-main-work\">\uC0AD\uC81C</button>\n    </li>");
-    });
-    $mainWork.innerHTML = html;
-  };
-
-  var getTodo = function getTodo() {
-    works = [{
-      "id": 1,
-      "title": "대주제",
-      "list": [{
-        "id": 1,
-        "title": "소주제",
-        "date": "19/01/01 12:12:12",
-        "Description": "content",
-        "labels": {
-          "yellow": {
-            "completed": false
-          },
-          "orange": {
-            "completed": false
-          },
-          "red": {
-            "completed": false
-          },
-          "blue": {
-            "completed": false
-          }
-        },
-        "checklist": [{
-          "id": 1,
-          "content": "check1",
-          "completed": false
-        }, {
-          "id": 2,
-          "content": "check2",
-          "completed": false
-        }]
-      }]
-    }];
-  };
-
-  window.onload = function () {
-    getTodo();
-    render();
-  };
-
-  var ajax = function () {
-    var req = function req(method, url, payload) {
-      return new Promise(function (resolve, reject) {
-        var xhr = new XMLHttpRequest();
-        xhr.open(method, url);
-        xhr.setRequestHeader('content-type', 'application/json');
-        xhr.send(JSON.stringify(payload));
-
-        xhr.onload = function () {
-          if (xhr.status === 200 || xhr.status === 201) {
-            resolve(xhr.response);
-          }
-        };
-
-        xhr.onerror = function () {
-          reject(new Error(xhr.status));
-        };
-      });
-    };
-
-    return {
-      get: function get(url) {
-        return req('GET', url);
-      },
-      post: function post(url, payload) {
-        return req('POST', url, payload);
-      }
-    };
-  }();
 });
 
 /***/ }),

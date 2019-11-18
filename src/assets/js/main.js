@@ -1,12 +1,12 @@
 import add from './add';
 import popup from './popup';
 import dragdrop from './dragdrop';
-import works from './works';
+// import works from './works';
 
 popup();
 dragdrop();
 add();
-works();
+// works();
 
 (function () {
   const $timer = document.querySelector('.digital-time');
