@@ -1,10 +1,18 @@
 import add from './add';
 import popup from './popup';
 import dragdrop from './dragdrop';
+<<<<<<< HEAD
+=======
+// import works from './works';
+>>>>>>> b8b7c5cde5c736ac3b65077a1159eeb38be771c7
 
 popup();
 dragdrop();
 add();
+<<<<<<< HEAD
+=======
+// works();
+>>>>>>> b8b7c5cde5c736ac3b65077a1159eeb38be771c7
 
 (function () {
   const $timer = document.querySelector('.digital-time');

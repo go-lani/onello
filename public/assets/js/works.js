@@ -3,66 +3,51 @@ let works = [];
 const $mainWork = document.querySelector('.main-work');
 const $mainWorkinput = document.querySelector('.main-create-input');
 
-const subwork = (workId, sublist) => {
+const subworkRender = (workId, subWork) => {
   let html = '';
 
-  sublist.forEach((subwork) => {
+  subWork.forEach(({ id, title, date }) => {
     html += `
-      <li id="${workId}-${subwork.id}" class="work-item" draggable="true">
+      <li id="${workId}-${id}" class="work-item" draggable="true">
         <a href="#self" class="detail-inner">
           <div class="importance">
             <span class="high">높음</span>
           </div>
-          <div class="title">${subwork.title}</div>
-          <div class="date">${subwork.date}</div>
+          <div class="title">${title}</div>
+          <div class="date">${date}</div>
         </a>
         <button type="button" class="delete-detail-btn"><img src="./assets/images/common/delete-btn.png" alt=""></button>
-      </li>
-    `;
+      </li>`;
   });
   return html;
 };
 
-const render = (works) => {
-  let html = '';
-
+const render = works => {
   works = works;
 
-  works.forEach((todo) => {
-    html +=
-      `
-    <li id="${todo.id}">
+  let html = '';
+
+  works.forEach(work => {
+    html += `
+    <li id="${work.id}">
       <div class="title-box">
-        <div class="title">${todo.title}</div>
-        <input type="text" class="modify-input" placeholder="주제를 입력해주세요">
+          <div class="title">${work.title}</div>
+          <input type="text" class="modify-input" placeholder="주제를 입력해주세요">
       </div>
-    <div class="detail-work-box">
-      <ul class="detail-work" droppable="true">
-        ${subwork(todo.id, todo.list)}
-      </ul>
-    </div>
-    <div class="create-detail-work">
-      <button type="button" class="btn40 c3 create-detail-btn">해야할일 추가</button>
-      <input type="text" class="detail-create-input" placeholder="추가할 목록을 입력하세요">
-    </div>
-    <button type="button" class="delete-main-work">삭제</button>
-  </li>`;
+      <div class="detail-work-box">
+        <ul class="detail-work" droppable="true">
+          ${subworkRender(work.id, work.list)}
+        </ul>
+      </div>
+      <div class="create-detail-work">
+        <button type="button" class="btn40 c3 create-detail-btn">해야할일 추가</button>
+        <input type="text" class="detail-create-input" placeholder="추가할 목록을 입력하세요">
+      </div>
+      <button type="button" class="delete-main-work">삭제</button>
+    </li>`;
   });
+
   $mainWork.innerHTML = html;
-};
-
-const getTodo = () => {
-  ajax.get('http://localhost:3000/works/')
-    .then(res => JSON.parse(res))
-    .then(render);
-};
-
-const addTodo = () => {
-
-};
-
-window.onload = () => {
-  getTodo();
 };
 
 const ajax = (() => {
@@ -93,3 +78,13 @@ const ajax = (() => {
     }
   };
 })();
+
+const getTodo = () => {
+  ajax.get('http://localhost:5000/works/')
+    .then(res => JSON.parse(res))
+    .then(render)
+};
+
+window.onload = () => {
+  getTodo();
+};
