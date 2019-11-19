@@ -152,11 +152,17 @@ const createSubwork = (workId, value) => {
     .then(res => {
       ajax.get(`http://localhost:3000/works/${workId}`)
         .then(res => JSON.parse(res))
-        .then(work => [...work.list, {id: res, title: value, date: currentTime() }])
-        .then(res => ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: res}))
+        .then(work => [...work.list, { id: res, title: value, date: currentTime() }])
+        .then(res => ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: res }))
         .then(getWork);
     });
 };
+const workTitle = (workId, value) => {
+  ajax.get(`http://localhost:3000/works/${workId}`)
+    .then(res => JSON.parse(res).title)
+    .then(ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, title: value }))
+    .then(getWork);
+}
 
 const add = (target, keyCode) => {
   let value = target.value.trim();
@@ -172,6 +178,10 @@ const add = (target, keyCode) => {
     const workId = target.parentNode.parentNode.id;
     createSubwork(workId, value);
   }
+  if (target.classList.contains('modify-input')) {
+    const workId = target.parentNode.parentNode.id;
+    workTitle(workId, value);
+  }
 
   target.value = '';
 };
@@ -183,9 +193,14 @@ const deletework = (titleId, subTitleId) => {
     .then(res => JSON.parse(res).list)
     .then(subTitle => subTitle.filter(item => item.id !== +subTitleId))
     .then(res => data = res)
-    .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, { id : titleId, list : res }))
+    .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, { id: titleId, list: res }))
     .then(getWork);
 };
+const deleteMain = (id) => {
+  ajax.delete(`http://localhost:3000/works/${id}`)
+    .then(res => JSON.parse(res))
+    .then(getWork);
+}
 
 // Events
 window.onload = () => {
@@ -213,6 +228,13 @@ $mainCreateInput.onblur = ({ target }) => {
 
 $mainWork.onclick = ({ target }) => {
   if (target.classList.contains('create-detail-btn') || target.classList.contains('title')) toggle(target);
+
+  if (target.classList.contains('delete-main-work')) {
+    const id = target.parentNode.id;
+    deleteMain(id);
+
+  }
+
 
   if (target.classList.contains('delete-btn-img')) {
     const { id } = target.parentNode.parentNode;
