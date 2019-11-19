@@ -10247,71 +10247,6 @@ try {
 
 /***/ }),
 
-/***/ "./src/assets/js/add.js":
-/*!******************************!*\
-  !*** ./src/assets/js/add.js ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var $mainWork = document.querySelector('.main-work');
-  var $addCategory = document.querySelector('.create-main-work');
-  var $mainCreateInput = document.querySelector('.main-create-input');
-
-  var toggle = function toggle(target) {
-    target.classList.toggle('on', !target.classList.contains('on'));
-    target.nextElementSibling.focus();
-  };
-
-  var add = function add(target, keyCode) {
-    var value = target.value.trim();
-    if (keyCode !== 13 || value === '') return;
-    target.previousElementSibling.classList.remove('on');
-    target.value = '';
-  }; // Events
-
-
-  $addCategory.onclick = function (_ref) {
-    var target = _ref.target;
-    toggle(target);
-  };
-
-  $mainWork.onfocusout = function (_ref2) {
-    var target = _ref2.target;
-    console.log(target);
-  };
-
-  $mainCreateInput.onkeyup = function (_ref3) {
-    var target = _ref3.target,
-        keyCode = _ref3.keyCode;
-    add(target, keyCode);
-  };
-
-  $mainCreateInput.onblur = function (_ref4) {
-    var target = _ref4.target;
-    var value = target.value.trim();
-    if (value !== '') return;
-    target.previousElementSibling.classList.remove('on');
-  };
-
-  $mainWork.onclick = function (_ref5) {
-    var target = _ref5.target;
-    if (target.classList.contains('create-detail-btn') || target.classList.contains('title')) toggle(target);
-  };
-
-  $mainWork.onkeyup = function (_ref6) {
-    var target = _ref6.target,
-        keyCode = _ref6.keyCode;
-    console.log(target.value);
-    add(target, keyCode);
-  };
-});
-
-/***/ }),
-
 /***/ "./src/assets/js/dragdrop.js":
 /*!***********************************!*\
   !*** ./src/assets/js/dragdrop.js ***!
@@ -10372,16 +10307,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _add__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add */ "./src/assets/js/add.js");
-/* harmony import */ var _popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./popup */ "./src/assets/js/popup.js");
-/* harmony import */ var _dragdrop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dragdrop */ "./src/assets/js/dragdrop.js");
-
+/* harmony import */ var _popup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./popup */ "./src/assets/js/popup.js");
+/* harmony import */ var _dragdrop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dragdrop */ "./src/assets/js/dragdrop.js");
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui */ "./src/assets/js/ui.js");
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ui__WEBPACK_IMPORTED_MODULE_2__);
+// import add from './add';
 
  // import works from './works';
 
-Object(_popup__WEBPACK_IMPORTED_MODULE_1__["default"])();
-Object(_dragdrop__WEBPACK_IMPORTED_MODULE_2__["default"])();
-Object(_add__WEBPACK_IMPORTED_MODULE_0__["default"])(); // works();
+
+Object(_popup__WEBPACK_IMPORTED_MODULE_0__["default"])();
+Object(_dragdrop__WEBPACK_IMPORTED_MODULE_1__["default"])(); // add();
+// works();
+
+_ui__WEBPACK_IMPORTED_MODULE_2___default()();
 
 (function () {
   var $timer = document.querySelector('.digital-time');
@@ -10490,6 +10429,20 @@ __webpack_require__.r(__webpack_exports__);
     openPopup();
   });
 });
+
+/***/ }),
+
+/***/ "./src/assets/js/ui.js":
+/*!*****************************!*\
+  !*** ./src/assets/js/ui.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function () {
+  var menuBtn = document.querySelector('.menu-close');
+  console.log(menuBtn);
+})();
 
 /***/ }),
 

@@ -1,14 +1,16 @@
-import add from './add';
+// import add from './add';
 import popup from './popup';
 import dragdrop from './dragdrop';
 // import works from './works';
+import ui from './ui';
 
 popup();
 dragdrop();
-add();
+// add();
 // works();
+ui();
 
-(function () {
+(() => {
   const $timer = document.querySelector('.digital-time');
   const date = new Date();
   let hour = date.getHours();
@@ -40,4 +42,4 @@ add();
   setInterval(() => {
     timer();
   }, 1000);
-}());
+})();
