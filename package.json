@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js -w",
+    "start": "nodemon app.js -w && json-server --watch db.json",
     "build": "webpack"
   },
   "dependencies": {

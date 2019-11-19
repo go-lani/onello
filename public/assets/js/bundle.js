@@ -10247,71 +10247,6 @@ try {
 
 /***/ }),
 
-/***/ "./src/assets/js/add.js":
-/*!******************************!*\
-  !*** ./src/assets/js/add.js ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var $mainWork = document.querySelector('.main-work');
-  var $addCategory = document.querySelector('.create-main-work');
-  var $mainCreateInput = document.querySelector('.main-create-input');
-
-  var toggle = function toggle(target) {
-    target.classList.toggle('on', !target.classList.contains('on'));
-    target.nextElementSibling.focus();
-  };
-
-  var add = function add(target, keyCode) {
-    var value = target.value.trim();
-    if (keyCode !== 13 || value === '') return;
-    target.previousElementSibling.classList.remove('on');
-    target.value = '';
-  }; // Events
-
-
-  $addCategory.onclick = function (_ref) {
-    var target = _ref.target;
-    toggle(target);
-  };
-
-  $mainWork.onfocusout = function (_ref2) {
-    var target = _ref2.target;
-    console.log(target);
-  };
-
-  $mainCreateInput.onkeyup = function (_ref3) {
-    var target = _ref3.target,
-        keyCode = _ref3.keyCode;
-    add(target, keyCode);
-  };
-
-  $mainCreateInput.onblur = function (_ref4) {
-    var target = _ref4.target;
-    var value = target.value.trim();
-    if (value !== '') return;
-    target.previousElementSibling.classList.remove('on');
-  };
-
-  $mainWork.onclick = function (_ref5) {
-    var target = _ref5.target;
-    if (target.classList.contains('create-detail-btn') || target.classList.contains('title')) toggle(target);
-  };
-
-  $mainWork.onkeyup = function (_ref6) {
-    var target = _ref6.target,
-        keyCode = _ref6.keyCode;
-    console.log(target.value);
-    add(target, keyCode);
-  };
-});
-
-/***/ }),
-
 /***/ "./src/assets/js/dragdrop.js":
 /*!***********************************!*\
   !*** ./src/assets/js/dragdrop.js ***!
@@ -10372,52 +10307,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _add__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add */ "./src/assets/js/add.js");
-/* harmony import */ var _popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./popup */ "./src/assets/js/popup.js");
-/* harmony import */ var _dragdrop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dragdrop */ "./src/assets/js/dragdrop.js");
-
+/* harmony import */ var _popup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./popup */ "./src/assets/js/popup.js");
+/* harmony import */ var _dragdrop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dragdrop */ "./src/assets/js/dragdrop.js");
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui */ "./src/assets/js/ui.js");
+// import add from './add';
 
  // import works from './works';
 
-Object(_popup__WEBPACK_IMPORTED_MODULE_1__["default"])();
-Object(_dragdrop__WEBPACK_IMPORTED_MODULE_2__["default"])();
-Object(_add__WEBPACK_IMPORTED_MODULE_0__["default"])(); // works();
 
-(function () {
-  var $timer = document.querySelector('.digital-time');
-  var date = new Date();
-  var hour = date.getHours();
-  var minute = date.getMinutes();
-  var second = date.getSeconds();
+Object(_popup__WEBPACK_IMPORTED_MODULE_0__["default"])();
+Object(_dragdrop__WEBPACK_IMPORTED_MODULE_1__["default"])(); // add();
+// works();
 
-  var currentTime = function currentTime() {
-    $timer.textContent = "".concat(hour < 10 ? '0' + hour : hour, ":").concat(minute < 10 ? '0' + minute : minute, ":").concat(second < 10 ? '0' + second : second);
-  };
-
-  var timer = function timer() {
-    second += 1;
-
-    if (second > 59) {
-      second = 0;
-      minute += 1;
-
-      if (minute > 59) {
-        minute = 0;
-        hour += 1;
-
-        if (hour > 23) {
-          hour = 0;
-        }
-      }
-    }
-
-    currentTime();
-  };
-
-  setInterval(function () {
-    timer();
-  }, 1000);
-})();
+Object(_ui__WEBPACK_IMPORTED_MODULE_2__["default"])();
 
 /***/ }),
 
@@ -10489,6 +10391,60 @@ __webpack_require__.r(__webpack_exports__);
     if (!e.target.parentNode.classList.contains('detail-inner')) return;
     openPopup();
   });
+});
+
+/***/ }),
+
+/***/ "./src/assets/js/ui.js":
+/*!*****************************!*\
+  !*** ./src/assets/js/ui.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var $wrap = document.querySelector('#wrap');
+  var $menuBtn = document.querySelector('.menu-close');
+
+  $menuBtn.onclick = function () {
+    $wrap.classList.toggle('gnb-close', !$wrap.classList.contains('gnb-close'));
+  };
+
+  var $timer = document.querySelector('.digital-time');
+  var date = new Date();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+
+  var currentTime = function currentTime() {
+    $timer.textContent = "".concat(hour < 10 ? '0' + hour : hour, ":").concat(minute < 10 ? '0' + minute : minute, ":").concat(second < 10 ? '0' + second : second);
+  };
+
+  var timer = function timer() {
+    second += 1;
+
+    if (second > 59) {
+      second = 0;
+      minute += 1;
+
+      if (minute > 59) {
+        minute = 0;
+        hour += 1;
+
+        if (hour > 23) {
+          hour = 0;
+        }
+      }
+    }
+
+    currentTime();
+  };
+
+  setInterval(function () {
+    timer();
+  }, 1000);
 });
 
 /***/ }),
