@@ -11,7 +11,7 @@ const yRail = () => {
   $('.detail-work-box').mCustomScrollbar({
     axis: 'y',
     theme: 'light-3',
-    autoHideScrollbar: true
+    autoExpandScrollbar: true,
   });
 };
 

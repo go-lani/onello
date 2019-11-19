@@ -38,13 +38,17 @@ const ajax = (() => {
 })();
 
 const state = labels => {
-  if (labels === undefined) return;
+  if (labels === undefined) return '';
+
   let html = '';
+
   labels = labels.filter(label => label.check);
+
   labels.forEach(label => {
     html += `
       <span class="${label.state}">${label.state}</span>`;
   });
+
   return html;
 };
 
@@ -92,6 +96,7 @@ const render = works => {
   });
 
   $mainWork.innerHTML = html;
+  yRail();
 };
 
 const getWork = () => {
@@ -143,23 +148,19 @@ const createSubwork = (workId, value) => {
   ajax.get(`http://localhost:3000/works/${workId}`)
     .then(res => JSON.parse(res))
     .then(work => {
+      if (work.list === undefined) work['list'] = [];
+
       maxId = work.list.length ? Math.max(...[...work.list].map(subwork => subwork.id)) + 1 : 1;
 
       return [...work.list, { id: maxId, title: value, date: currentTime() }];
     })
     .then(subwork => {
       ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: subwork })
-        .then(getWork);
-    })
-    // .then(res => res.list)
-    // .then(work => work.length ? Math.max(...work.map(list => list.id)) + 1 : 1)
-    // .then(res => {
-    //   ajax.get(`http://localhost:3000/works/${workId}`)
-    //     .then(res => JSON.parse(res))
-    //     .then(work => [...work.list, {id: res, title: value, date: currentTime() }])
-    //     .then(res => ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: res}))
-    //     .then(getWork);
-    // });
+        .then(works => {
+          $('.detail-work-box').mCustomScrollbar('destroy');
+          getWork(works);
+        });
+    });
 };
 
 const workTitle = (workId, value) => {
@@ -194,13 +195,10 @@ const add = (target, keyCode) => {
 };
 
 const deletework = (titleId, subTitleId) => {
-  let data = [];
-
   ajax.get(`http://localhost:3000/works/${titleId}`)
     .then(res => JSON.parse(res).list)
     .then(subTitle => subTitle.filter(item => item.id !== +subTitleId))
-    .then(res => data = res)
-    .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, { id: titleId, list: res }))
+    .then(subWork => ajax.patch(`http://localhost:3000/works/${titleId}`, { id: titleId, list: subWork }))
     .then(getWork);
 };
 
