@@ -2,13 +2,15 @@ let works = [];
 
 const $mainWork = document.querySelector('.main-work');
 const $mainWorkinput = document.querySelector('.main-create-input');
+// const $=document.querySelector('.delete-detail-btn');
 
 const subworkRender = (workId, subWork) => {
   let html = '';
 
   subWork.forEach(({ id, title, date }) => {
-    html += `
-      <li id="${workId}-${id}" class="work-item" draggable="true">
+    html += 
+       `
+       <li id="${workId}-${id}" class="work-item" draggable="true">
         <a href="#self" class="detail-inner">
           <div class="importance">
             <span class="high">높음</span>
@@ -16,8 +18,8 @@ const subworkRender = (workId, subWork) => {
           <div class="title">${title}</div>
           <div class="date">${date}</div>
         </a>
-        <button type="button" class="delete-detail-btn"><img src="./assets/images/common/delete-btn.png" alt=""></button>
-      </li>`;
+        <button type="button" class="delete-detail-btn"><img class="delete-detail-btn button-img" src="./assets/images/common/delete-btn.png" alt=""></button>
+       </li>`;
   });
   return html;
 };
@@ -28,7 +30,8 @@ const render = works => {
   let html = '';
 
   works.forEach(work => {
-    html += `
+    html += 
+    `
     <li id="${work.id}">
       <div class="title-box">
           <div class="title">${work.title}</div>
@@ -36,7 +39,7 @@ const render = works => {
       </div>
       <div class="detail-work-box">
         <ul class="detail-work" droppable="true">
-          ${subworkRender(work.id, work.list)}
+        ${work.list ? subworkRender(work.id, work.list) : false}
         </ul>
       </div>
       <div class="create-detail-work">
@@ -49,6 +52,7 @@ const render = works => {
 
   $mainWork.innerHTML = html;
 };
+
 
 const ajax = (() => {
   const req = (method, url, payload) => {
@@ -74,16 +78,54 @@ const ajax = (() => {
     },
     post(url, payload) {
       return req('POST', url, payload);
+    },
+    patch(url,payload){
+      return req('PATCH',url,payload);
+    },
+    delete(url){
+      return req('DELETE',url);
     }
   };
 })();
 
 const getTodo = () => {
-  ajax.get('http://localhost:5000/works/')
+  ajax.get('http://localhost:3000/works/')
     .then(res => JSON.parse(res))
     .then(render)
 };
+let data = [];
 
+const deleteItem = (titleId, subTitleId) => {
+  ajax.get(`http://localhost:3000/works/${titleId}`)
+  .then(res=> JSON.parse(res).list)
+  .then(subTitle => subTitle.filter(item=>item.id !== +subTitleId))
+  .then(res => data = res)
+  .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, 
+  {
+    "id" : titleId,
+    "list" : res
+  })
+  )
+  .then(getTodo)
+  
+// .then(res => JSON.parse(res))
+  // .then(console.log)
+  // .then(res => JSON.parse(res))
+  // .then(subworkRender);
+};
 window.onload = () => {
   getTodo();
 };
+$mainWork.onclick=( e )=>{
+  if(!e.target.classList.contains('button-img')) return; 
+  // if(!target.classList.contains('delete-detail-btn'))return;
+  const { id } = e.target.parentNode.parentNode;
+  console.log(id, e.target.parentNode.parentNode);
+  console.log(`${id}`.split('-'));
+  let titleId = `${id}`.split('-')[0]
+  let subTitleId = `${id}`.split('-')[1]
+
+  deleteItem(titleId, subTitleId);
+}
+
+
