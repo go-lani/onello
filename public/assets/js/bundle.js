@@ -10321,42 +10321,6 @@ Object(_dragdrop__WEBPACK_IMPORTED_MODULE_1__["default"])(); // add();
 
 Object(_ui__WEBPACK_IMPORTED_MODULE_2__["default"])();
 
-(function () {
-  var $timer = document.querySelector('.digital-time');
-  var date = new Date();
-  var hour = date.getHours();
-  var minute = date.getMinutes();
-  var second = date.getSeconds();
-
-  var currentTime = function currentTime() {
-    $timer.textContent = "".concat(hour < 10 ? '0' + hour : hour, ":").concat(minute < 10 ? '0' + minute : minute, ":").concat(second < 10 ? '0' + second : second);
-  };
-
-  var timer = function timer() {
-    second += 1;
-
-    if (second > 59) {
-      second = 0;
-      minute += 1;
-
-      if (minute > 59) {
-        minute = 0;
-        hour += 1;
-
-        if (hour > 23) {
-          hour = 0;
-        }
-      }
-    }
-
-    currentTime();
-  };
-
-  setInterval(function () {
-    timer();
-  }, 1000);
-})();
-
 /***/ }),
 
 /***/ "./src/assets/js/popup.js":
@@ -10447,6 +10411,40 @@ __webpack_require__.r(__webpack_exports__);
   $menuBtn.onclick = function () {
     $wrap.classList.toggle('gnb-close', !$wrap.classList.contains('gnb-close'));
   };
+
+  var $timer = document.querySelector('.digital-time');
+  var date = new Date();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+
+  var currentTime = function currentTime() {
+    $timer.textContent = "".concat(hour < 10 ? '0' + hour : hour, ":").concat(minute < 10 ? '0' + minute : minute, ":").concat(second < 10 ? '0' + second : second);
+  };
+
+  var timer = function timer() {
+    second += 1;
+
+    if (second > 59) {
+      second = 0;
+      minute += 1;
+
+      if (minute > 59) {
+        minute = 0;
+        hour += 1;
+
+        if (hour > 23) {
+          hour = 0;
+        }
+      }
+    }
+
+    currentTime();
+  };
+
+  setInterval(function () {
+    timer();
+  }, 1000);
 });
 
 /***/ }),
