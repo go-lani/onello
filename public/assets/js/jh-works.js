@@ -8,8 +8,8 @@ const subworkRender = (workId, subWork) => {
   let html = '';
 
   subWork.forEach(({ id, title, date }) => {
-    html += 
-       `
+    html +=
+      `
        <li id="${workId}-${id}" class="work-item" draggable="true">
         <a href="#self" class="detail-inner">
           <div class="importance">
@@ -30,8 +30,8 @@ const render = works => {
   let html = '';
 
   works.forEach(work => {
-    html += 
-    `
+    html +=
+      `
     <li id="${work.id}">
       <div class="title-box">
           <div class="title">${work.title}</div>
@@ -52,8 +52,6 @@ const render = works => {
 
   $mainWork.innerHTML = html;
 };
-
-
 const ajax = (() => {
   const req = (method, url, payload) => {
     return new Promise((resolve, reject) => {
@@ -79,11 +77,11 @@ const ajax = (() => {
     post(url, payload) {
       return req('POST', url, payload);
     },
-    patch(url,payload){
-      return req('PATCH',url,payload);
+    patch(url, payload) {
+      return req('PATCH', url, payload);
     },
-    delete(url){
-      return req('DELETE',url);
+    delete(url) {
+      return req('DELETE', url);
     }
   };
 })();
@@ -91,24 +89,23 @@ const ajax = (() => {
 const getTodo = () => {
   ajax.get('http://localhost:3000/works/')
     .then(res => JSON.parse(res))
-    .then(render)
+    .then(render);
 };
-let data = [];
 
 const deleteItem = (titleId, subTitleId) => {
+  let data = [];
   ajax.get(`http://localhost:3000/works/${titleId}`)
-  .then(res=> JSON.parse(res).list)
-  .then(subTitle => subTitle.filter(item=>item.id !== +subTitleId))
-  .then(res => data = res)
-  .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, 
-  {
-    "id" : titleId,
-    "list" : res
-  })
-  )
-  .then(getTodo)
-  
-// .then(res => JSON.parse(res))
+    .then(res => JSON.parse(res).list)
+    .then(subTitle => subTitle.filter(item => item.id !== +subTitleId))
+    .then(res => data = res)
+    .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`,
+      {
+        "id": titleId,
+        "list": res
+      })
+    )
+    .then(getTodo);
+  // .then(res => JSON.parse(res))
   // .then(console.log)
   // .then(res => JSON.parse(res))
   // .then(subworkRender);
@@ -116,16 +113,14 @@ const deleteItem = (titleId, subTitleId) => {
 window.onload = () => {
   getTodo();
 };
-$mainWork.onclick=( e )=>{
-  if(!e.target.classList.contains('button-img')) return; 
+$mainWork.onclick = (e) => {
+  if (!e.target.classList.contains('button-img')) return;
   // if(!target.classList.contains('delete-detail-btn'))return;
   const { id } = e.target.parentNode.parentNode;
   console.log(id, e.target.parentNode.parentNode);
   console.log(`${id}`.split('-'));
-  let titleId = `${id}`.split('-')[0]
-  let subTitleId = `${id}`.split('-')[1]
+  let titleId = `${id}`.split('-')[0];
+  let subTitleId = `${id}`.split('-')[1];
 
   deleteItem(titleId, subTitleId);
 }
-
-
