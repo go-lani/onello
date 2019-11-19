@@ -1,4 +1,4 @@
-let works = [];
+let _works = [];
 
 const $mainWork = document.querySelector('.main-work');
 const $addCategory = document.querySelector('.create-main-work');
@@ -39,11 +39,11 @@ const subworkRender = (workId, subWork) => {
 };
 
 const render = works => {
-  works = works;
+  _works = works;
 
   let html = '';
 
-  works.forEach(work => {
+  _works.forEach(work => {
     html += `
     <li id="${work.id}">
       <div class="title-box">
@@ -102,14 +102,14 @@ const ajax = (() => {
 })();
 
 const getWork = () => {
-  ajax.get('http://localhost:5000/works/')
+  ajax.get('http://localhost:3000/works/')
     .then(res => JSON.parse(res))
     .then(render);
 };
 
 const getMaxId = () => {
   let maxId = 0;
-  ajax.get('http://localhost:5000/works')
+  ajax.get('http://localhost:3000/works')
     .then(res => JSON.parse(res))
     .then(works => Math.max(0, ...works.map(work => work.id)) + 1)
     .then(id => maxId = id);
@@ -118,8 +118,8 @@ const getMaxId = () => {
 };
 
 const createWork = title => {
-  ajax.post('http://localhost:5000/works/', { id: getMaxId(), title })
-    .then(ajax.get('http://localhost:5000/works/').then(res => JSON.parse(res)).then(res => {
+  ajax.post('http://localhost:3000/works/', { id: getMaxId(), title })
+    .then(ajax.get('http://localhost:3000/works/').then(res => JSON.parse(res)).then(res => {
       $('#co-work-container').mCustomScrollbar('destroy');
       render(res);
       xRail();
@@ -146,14 +146,14 @@ const currentTime = () => {
 };
 
 const createSubwork = (workId, value) => {
-  return ajax.get(`http://localhost:5000/works/${workId}`)
+  return ajax.get(`http://localhost:3000/works/${workId}`)
     .then(res => JSON.parse(res).list)
     .then(work => work.length ? Math.max(...work.map(list => list.id)) + 1 : 1)
     .then(res => {
-      ajax.get(`http://localhost:5000/works/${workId}`)
+      ajax.get(`http://localhost:3000/works/${workId}`)
         .then(res => JSON.parse(res))
         .then(work => [...work.list, {id: res, title: value, date: currentTime() }])
-        .then(res => ajax.patch(`http://localhost:5000/works/${workId}`, { id: workId, list: res}))
+        .then(res => ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: res}))
         .then(getWork);
     });
 };
@@ -179,11 +179,11 @@ const add = (target, keyCode) => {
 const deletework = (titleId, subTitleId) => {
   let data = [];
 
-  ajax.get(`http://localhost:5000/works/${titleId}`)
+  ajax.get(`http://localhost:3000/works/${titleId}`)
     .then(res => JSON.parse(res).list)
     .then(subTitle => subTitle.filter(item => item.id !== +subTitleId))
     .then(res => data = res)
-    .then(res => ajax.patch(`http://localhost:5000/works/${titleId}`, { id : titleId, list : res }))
+    .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, { id : titleId, list : res }))
     .then(getWork);
 };
 
