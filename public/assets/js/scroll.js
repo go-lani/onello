@@ -8,7 +8,6 @@ const xRail = () => {
 };
 
 const yRail = () => {
-  console.log(111);
   $('.detail-work-box').mCustomScrollbar({
     axis: 'y',
     theme: 'light-3',
@@ -16,5 +15,4 @@ const yRail = () => {
   });
 };
 
-yRail();
 xRail();
