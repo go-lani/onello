@@ -30,8 +30,8 @@ const subworkRender = (workId, subWork) => {
           <div class="title">${title}</div>
           <div class="date">${date}</div>
         </a>
-        <button type="button" class="delete-detail-btn"><img src="./assets/images/common/delete-btn.png" alt=""></button>
-      </li>`;
+        <button type="button" class="delete-detail-btn"><img class="delete-detail-btn button-img" src="./assets/images/common/delete-btn.png" alt=""></button>
+       </li>`;
   });
   return html;
 };
@@ -42,7 +42,8 @@ const render = works => {
   let html = '';
 
   works.forEach(work => {
-    html += `
+    html +=
+    `
     <li id="${work.id}">
       <div class="title-box">
           <div class="title">${work.title}</div>
@@ -50,7 +51,7 @@ const render = works => {
       </div>
       <div class="detail-work-box">
         <ul class="detail-work" droppable="true">
-          ${work.list ? subworkRender(work.id, work.list) : false}
+        ${work.list ? subworkRender(work.id, work.list) : false}
         </ul>
       </div>
       <div class="create-detail-work">
@@ -63,6 +64,7 @@ const render = works => {
 
   $mainWork.innerHTML = html;
 };
+
 
 const ajax = (() => {
   const req = (method, url, payload) => {
@@ -88,6 +90,12 @@ const ajax = (() => {
     },
     post(url, payload) {
       return req('POST', url, payload);
+    },
+    patch (url, payload) {
+      return req('PATCH', url, payload);
+    },
+    delete(url) {
+      return req('DELETE', url);
     }
   };
 })();
@@ -108,13 +116,15 @@ const getWork = () => {
     .then(render)
 };
 
+let data = [];
+
 const createWork = title => {
   ajax.post('http://localhost:5000/works/', { id: getMaxId(), title })
     .then(ajax.get('http://localhost:5000/works/').then(res => JSON.parse(res)).then(res => {
       $('#co-work-container').mCustomScrollbar("destroy");
       render(res);
       xRail();
-    }))
+    }));
 };
 
 const toggle = (target) => {
@@ -160,6 +170,29 @@ $mainWork.onclick = ({ target }) => {
 };
 
 $mainWork.onkeyup = ({ target, keyCode }) => {
-  console.log(target.value);
   add(target, keyCode);
 };
+
+const deleteItem = (titleId, subTitleId) => {
+  ajax.get(`http://localhost:3000/works/${titleId}`)
+    .then(res => JSON.parse(res).list)
+    .then(subTitle => subTitle.filter(item => item.id !== +subTitleId))
+    .then(res => data = res)
+    .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, { id : titleId, list : res }))
+    .then(getTodo);
+};
+
+window.onload = () => {
+  getTodo();
+};
+
+$mainWork.onclick = e => {
+  if (!e.target.classList.contains('button-img')) return;
+
+  const { id } = e.target.parentNode.parentNode;
+
+  let titleId = `${id}`.split('-')[0]
+  let subTitleId = `${id}`.split('-')[1]
+
+  deleteItem(titleId, subTitleId);
+}
