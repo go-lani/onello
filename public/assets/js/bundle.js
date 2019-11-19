@@ -10310,7 +10310,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _popup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./popup */ "./src/assets/js/popup.js");
 /* harmony import */ var _dragdrop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dragdrop */ "./src/assets/js/dragdrop.js");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui */ "./src/assets/js/ui.js");
-/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ui__WEBPACK_IMPORTED_MODULE_2__);
 // import add from './add';
 
  // import works from './works';
@@ -10320,7 +10319,7 @@ Object(_popup__WEBPACK_IMPORTED_MODULE_0__["default"])();
 Object(_dragdrop__WEBPACK_IMPORTED_MODULE_1__["default"])(); // add();
 // works();
 
-_ui__WEBPACK_IMPORTED_MODULE_2___default()();
+Object(_ui__WEBPACK_IMPORTED_MODULE_2__["default"])();
 
 (function () {
   var $timer = document.querySelector('.digital-time');
@@ -10436,13 +10435,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************!*\
   !*** ./src/assets/js/ui.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-(function () {
-  var menuBtn = document.querySelector('.menu-close');
-  console.log(menuBtn);
-})();
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var $wrap = document.querySelector('#wrap');
+  var $menuBtn = document.querySelector('.menu-close');
+
+  $menuBtn.onclick = function () {
+    $wrap.classList.toggle('gnb-open', !$wrap.classList.contains('gnb-open'));
+  };
+});
 
 /***/ }),
 

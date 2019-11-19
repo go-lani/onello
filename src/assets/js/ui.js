@@ -1,5 +1,8 @@
-(() => {
-  const menuBtn = document.querySelector('.menu-close');
+export default () => {
+  const $wrap = document.querySelector('#wrap');
+  const $menuBtn = document.querySelector('.menu-close');
 
-  console.log(menuBtn);
-})();
+  $menuBtn.onclick = () => {
+    $wrap.classList.toggle('gnb-open', !$wrap.classList.contains('gnb-open'));
+  };
+};
