@@ -13,9 +13,12 @@
   min-height: 100vh;
   margin: 0 0 0 350px;
   padding: 10px 30px;
+  transition: all .3s;
 }
 
-#co-work-container {
+.gnb-close #main {
+  width: 100%;
+  margin: 0;
 }
 
 .main-work-contents {
@@ -30,6 +33,11 @@
   width: 350px;
   padding: 50px 25px 10px;
   background: #242939;
+  transition: all .3s;
+}
+
+.gnb-close .info-banner {
+  margin: 0 0 0 -350px;
 }
 
 .logo,
@@ -404,7 +412,6 @@
 .create-detail-btn.on + input {
   display: block;
 }
-
 
 /* 대제목 삭제 버튼 */
 .delete-main-work {

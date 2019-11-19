@@ -10445,7 +10445,7 @@ __webpack_require__.r(__webpack_exports__);
   var $menuBtn = document.querySelector('.menu-close');
 
   $menuBtn.onclick = function () {
-    $wrap.classList.toggle('gnb-open', !$wrap.classList.contains('gnb-open'));
+    $wrap.classList.toggle('gnb-close', !$wrap.classList.contains('gnb-close'));
   };
 });
 
