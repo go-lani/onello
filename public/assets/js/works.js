@@ -1,4 +1,4 @@
-let works = [];
+let _works = [];
 
 const $mainWork = document.querySelector('.main-work');
 const $addCategory = document.querySelector('.create-main-work');
@@ -67,9 +67,11 @@ const subworkRender = (workId, subWork) => {
 };
 
 const render = works => {
-  works = works;
+  _works = works;
+
   let html = '';
-  works.forEach(work => {
+
+  _works.forEach(work => {
     html += `
     <li id="${work.id}">
       <div class="title-box">
@@ -88,6 +90,7 @@ const render = works => {
       <button type="button" class="delete-main-work">삭제</button>
     </li>`;
   });
+
   $mainWork.innerHTML = html;
 };
 
@@ -103,6 +106,7 @@ const getMaxId = () => {
     .then(res => JSON.parse(res))
     .then(works => Math.max(0, ...works.map(work => work.id)) + 1)
     .then(id => maxId = id);
+
   return maxId;
 };
 
@@ -129,6 +133,7 @@ const currentTime = () => {
   const minute = getDate.getMinutes();
   const second = getDate.getSeconds();
   const subWorkDate = `${year}/${month}/${day} ${hour}:${minute}:${second}`;
+
   return subWorkDate;
 };
 
@@ -140,7 +145,7 @@ const createSubwork = (workId, value) => {
     .then(work => {
       maxId = work.list.length ? Math.max(...[...work.list].map(subwork => subwork.id)) + 1 : 1;
 
-      return [...work.list, { id: maxId, title: value }]
+      return [...work.list, { id: maxId, title: value, date: currentTime() }];
     })
     .then(subwork => {
       ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: subwork })
@@ -155,6 +160,13 @@ const createSubwork = (workId, value) => {
     //     .then(res => ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: res}))
     //     .then(getWork);
     // });
+};
+
+const workTitle = (workId, value) => {
+  ajax.get(`http://localhost:3000/works/${workId}`)
+    .then(res => JSON.parse(res).title)
+    .then(ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, title: value }))
+    .then(getWork);
 };
 
 const add = (target, keyCode) => {
@@ -173,6 +185,11 @@ const add = (target, keyCode) => {
     createSubwork(workId, value);
   }
 
+  if (target.classList.contains('modify-input')) {
+    const workId = target.parentNode.parentNode.id;
+    workTitle(workId, value);
+  }
+
   target.value = '';
 };
 
@@ -183,7 +200,13 @@ const deletework = (titleId, subTitleId) => {
     .then(res => JSON.parse(res).list)
     .then(subTitle => subTitle.filter(item => item.id !== +subTitleId))
     .then(res => data = res)
-    .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, { id : titleId, list : res }))
+    .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, { id: titleId, list: res }))
+    .then(getWork);
+};
+
+const deleteMain = id => {
+  ajax.delete(`http://localhost:3000/works/${id}`)
+    .then(res => JSON.parse(res))
     .then(getWork);
 };
 
@@ -214,10 +237,17 @@ $mainCreateInput.onblur = ({ target }) => {
 $mainWork.onclick = ({ target }) => {
   if (target.classList.contains('create-detail-btn') || target.classList.contains('title')) toggle(target);
 
+  if (target.classList.contains('delete-main-work')) {
+    const id = target.parentNode.id;
+
+    deleteMain(id);
+  }
+
   if (target.classList.contains('delete-btn-img')) {
     const { id } = target.parentNode.parentNode;
     let titleId = `${id}`.split('-')[0];
     let subTitleId = `${id}`.split('-')[1];
+
     deletework(titleId, subTitleId);
   }
 };
