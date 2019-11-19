@@ -2,8 +2,11 @@ let works = [];
 const $mainWork = document.querySelector('.main-work');
 const $addCategory = document.querySelector('.create-main-work');
 const $mainCreateInput = document.querySelector('.main-create-input');
+
 const state = labels => {
+  console.log(labels);
   if (labels === undefined) return;
+
   let html = '';
   labels = labels.filter(label => label.check);
   labels.forEach(label => {
@@ -12,6 +15,7 @@ const state = labels => {
   });
   return html;
 };
+
 const subworkRender = (workId, subWork) => {
   let html = '';
   subWork.forEach(({ id, title, date, labels }) => {
@@ -133,6 +137,13 @@ const createSubwork = (workId, value) => {
         .then(getWork);
     });
 };
+const WorkTitle = (workId, value) => {
+  ajax.get(`http://localhost:3000/works/${workId}`)
+    .then(res => JSON.parse(res).title)
+    .then(ajax.patch(`http://localhost:3000/works/${workId}`, {id: workId, title: value}))
+    .then(getWork)
+}
+
 const add = (target, keyCode) => {
   let value = target.value.trim();
   if (keyCode !== 13 || value === '') return;
@@ -144,6 +155,11 @@ const add = (target, keyCode) => {
     const workId = target.parentNode.parentNode.id;
     createSubwork(workId, value);
   }
+  if (target.classList.contains('modify-input')) {
+    const workId = target.parentNode.parentNode.id;
+    WorkTitle(workId, value);
+  }
+
   target.value = '';
 };
 const deletework = (titleId, subTitleId) => {
@@ -155,6 +171,13 @@ const deletework = (titleId, subTitleId) => {
     .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, { id : titleId, list : res }))
     .then(getWork);
 };
+
+const deleteMain = (id) => {
+  ajax.delete(`http://localhost:3000/works/${id}`)
+    .then(res => JSON.parse(res).list)
+    .then(getWork);
+}
+
 // Events
 window.onload = () => {
   getWork();
@@ -180,6 +203,10 @@ $mainWork.onclick = ({ target }) => {
     let titleId = `${id}`.split('-')[0];
     let subTitleId = `${id}`.split('-')[1];
     deletework(titleId, subTitleId);
+  }
+  if (target.classList.contains('delete-main-work')) {
+    const id = target.parentNode.id;
+    deleteMain(id);
   }
 };
 $mainWork.onkeyup = ({ target, keyCode }) => {
