@@ -76,6 +76,7 @@ const ajax = (() => {
 
       xhr.onload = () => {
         if (xhr.status === 200 || xhr.status === 201) {
+          console.log(resolve(xhr.response));
           resolve(xhr.response);
         }
       };
