@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js -w",
+    "start": "nodemon app.js -w",
     "build": "webpack"
   },
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "json-server": "^0.15.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",
