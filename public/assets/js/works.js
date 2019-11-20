@@ -60,6 +60,7 @@ const subworkRender = subWork => {
           <div class="title">${title}</div>
           <div class="date">${date}</div>
         </a>
+        <button type="button" class="delete-detail-btn"><img src="./assets/images/common/delete-btn.png" class="delete-btn-img" alt=""></button>
        </li>`;
   });
   return html;
@@ -94,7 +95,7 @@ const render = works => {
 
 const labelState = labels => {
   let html = '';
-  
+
   labels.forEach(label => {
     html += `
       <li id="${label.state}">
@@ -189,6 +190,7 @@ const currentTime = () => {
   const minute = getDate.getMinutes();
   const second = getDate.getSeconds();
   const subWorkDate = `${year}/${month}/${day}`;
+
   return subWorkDate;
 };
 
@@ -223,19 +225,25 @@ const add = (target, keyCode) => {
   if (target.value === undefined) return;
 
   let value = target.value.trim();
+
   if (keyCode !== 13 || value === '') return;
+
   target.previousElementSibling.classList.remove('on');
+
   if (target.classList.contains('main-create-input')) {
     createWork(value);
   }
+
   if (target.classList.contains('detail-create-input')) {
     const workId = target.parentNode.parentNode.id;
     createSubwork(workId, value);
   }
+
   if (target.classList.contains('modify-input')) {
     const workId = target.parentNode.parentNode.id;
     workTitle(workId, value);
   }
+
   target.value = '';
 };
 
@@ -307,10 +315,6 @@ const openPopup = (titleId, subTitleId) => {
 
       $labels.onchange = ({ target }) => {
         const stateId = target.parentNode.parentNode.id;
-        // const sub = subwork[0].labels.map(label => console.log(label));
-        const sub = subwork[0].labels.map((label) => label.state === stateId ? {...label ,  check: label.check = !label.check } : label );
-        console.log('sub', sub);
-
         const data = workList.map(item => item.id === +subTitleId ? item = { ...item, id: +subTitleId, labels: subwork[0].labels } : item);
 
         ajax.patch(`http://localhost:3000/works/${titleId}`, {
@@ -332,26 +336,33 @@ const openPopup = (titleId, subTitleId) => {
 window.onload = () => {
   getWork();
 };
+
 $addCategory.onclick = ({ target }) => {
   toggle(target);
 };
+
 $mainWork.onfocusout = ({ target }) => {
   console.log(target);
 };
+
 $mainCreateInput.onkeyup = ({ target, keyCode }) => {
   add(target, keyCode);
 };
+
 $mainCreateInput.onblur = ({ target }) => {
   const value = target.value.trim();
   if (value !== '') return;
   target.previousElementSibling.classList.remove('on');
 };
+
 $mainWork.onclick = ({ target }) => {
   if (target.classList.contains('create-detail-btn') || target.classList.contains('title')) toggle(target);
+
   if (target.classList.contains('delete-main-work')) {
     const id = target.parentNode.id;
     deleteWork(id);
   }
+
   if (target.classList.contains('delete-btn-img')) {
     const titleId = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
     const subTitleId = target.parentNode.parentNode.id;
@@ -359,14 +370,15 @@ $mainWork.onclick = ({ target }) => {
 
     deleteSubwork(titleId, subTitleId);
   }
+
   if (target.parentNode.classList.contains('detail-inner')) {
     const titleId = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
     const subTitleId = target.parentNode.parentNode.id;
 
     openPopup(titleId, subTitleId);
   }
-
 };
+
 $mainWork.onkeyup = ({ target, keyCode }) => {
   add(target, keyCode);
 };
