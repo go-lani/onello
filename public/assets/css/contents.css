@@ -116,6 +116,14 @@
   resize: none;
 }
 
+.description-textbox {
+  height: 150px;
+  border-radius: 10px;
+  font-size: 1.8rem;
+  background: #dedede;
+  padding: 10px;
+}
+
 .area-title {
   position: relative;
   background-position: left center;
