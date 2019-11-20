@@ -275,22 +275,22 @@
   display: block;
 }
 
-.yellow span {
+#low span {
   background: #fed600;
   color: #fed600;
 }
 
-.orange span {
+#medium span {
   background: #ff9f1a;
   color: #ff9f1a;
 }
 
-.red span {
+#high span {
   background: #eb5a46;
   color: #eb5a46;
 }
 
-.blue span {
+#veryhigh span {
   background: #5578eb;
   color: #5578eb;
 }
