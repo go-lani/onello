@@ -143,31 +143,16 @@ const currentTime = () => {
 };
 
 const createSubwork = (workId, value) => {
-  let maxId = 0;
-
-  ajax.get(`http://localhost:3000/works/${workId}`)
-    .then(res => JSON.parse(res))
-    .then(work => {
-      if (work.list === undefined) work['list'] = [];
-
-      maxId = work.list.length ? Math.max(...[...work.list].map(subwork => subwork.id)) + 1 : 1;
-
-      return [...work.list, { id: maxId, title: value, date: currentTime() }];
-    })
-    .then(subwork => {
-      ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: subwork })
-        .then(works => {
-          $('.detail-work-box').mCustomScrollbar('destroy');
-          getWork(works);
-        });
+  return ajax.get(`http://localhost:3000/works/${workId}`)
+    .then(res => JSON.parse(res).list)
+    .then(work => work.length ? Math.max(...work.map(list => list.id)) + 1 : 1)
+    .then(res => {
+      ajax.get(`http://localhost:3000/works/${workId}`)
+        .then(res => JSON.parse(res))
+        .then(work => [...work.list, {id: res, title: value, date: currentTime() }])
+        .then(res => ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: res}))
+        .then(getWork);
     });
-};
-
-const workTitle = (workId, value) => {
-  ajax.get(`http://localhost:3000/works/${workId}`)
-    .then(res => JSON.parse(res).title)
-    .then(ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, title: value }))
-    .then(getWork);
 };
 
 const add = (target, keyCode) => {
@@ -186,11 +171,6 @@ const add = (target, keyCode) => {
     createSubwork(workId, value);
   }
 
-  if (target.classList.contains('modify-input')) {
-    const workId = target.parentNode.parentNode.id;
-    workTitle(workId, value);
-  }
-
   target.value = '';
 };
 
@@ -198,13 +178,8 @@ const deletework = (titleId, subTitleId) => {
   ajax.get(`http://localhost:3000/works/${titleId}`)
     .then(res => JSON.parse(res).list)
     .then(subTitle => subTitle.filter(item => item.id !== +subTitleId))
-    .then(subWork => ajax.patch(`http://localhost:3000/works/${titleId}`, { id: titleId, list: subWork }))
-    .then(getWork);
-};
-
-const deleteMain = id => {
-  ajax.delete(`http://localhost:3000/works/${id}`)
-    .then(res => JSON.parse(res))
+    .then(res => data = res)
+    .then(res => ajax.patch(`http://localhost:3000/works/${titleId}`, { id : titleId, list : res }))
     .then(getWork);
 };
 
@@ -234,12 +209,6 @@ $mainCreateInput.onblur = ({ target }) => {
 
 $mainWork.onclick = ({ target }) => {
   if (target.classList.contains('create-detail-btn') || target.classList.contains('title')) toggle(target);
-
-  if (target.classList.contains('delete-main-work')) {
-    const id = target.parentNode.id;
-
-    deleteMain(id);
-  }
 
   if (target.classList.contains('delete-btn-img')) {
     const { id } = target.parentNode.parentNode;
