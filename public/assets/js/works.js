@@ -302,7 +302,6 @@ const openPopup = (titleId, subTitleId) => {
 
       $btnSave.onclick = () => {
         if ($description.value.trim() !== '') {}
-
       };
 
       const $closeBtn = document.querySelector('.btn-close-popup');
@@ -315,6 +314,8 @@ const openPopup = (titleId, subTitleId) => {
 
       $labels.onchange = ({ target }) => {
         const stateId = target.parentNode.parentNode.id;
+
+        subwork[0].labels.map(label => label.state === stateId ? label.check = !label.check : label);
         const data = workList.map(item => item.id === +subTitleId ? item = { ...item, id: +subTitleId, labels: subwork[0].labels } : item);
 
         ajax.patch(`http://localhost:3000/works/${titleId}`, {
