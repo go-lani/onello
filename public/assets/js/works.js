@@ -137,7 +137,7 @@ const currentTime = () => {
   const hour = getDate.getHours();
   const minute = getDate.getMinutes();
   const second = getDate.getSeconds();
-  const subWorkDate = `${year}/${month}/${day} ${hour}:${minute}:${second}`;
+  const subWorkDate = `${year}/${month}/${day}`;
 
   return subWorkDate;
 };
