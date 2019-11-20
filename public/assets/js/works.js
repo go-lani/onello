@@ -39,16 +39,12 @@ const ajax = (() => {
 
 const state = labels => {
   if (labels === undefined) return '';
-
   let html = '';
-
   labels = labels.filter(label => label.check);
-
   labels.forEach(label => {
     html += `
       <span class="${label.state}">${label.state}</span>`;
   });
-
   return html;
 };
 
@@ -64,7 +60,6 @@ const subworkRender = subWork => {
           <div class="title">${title}</div>
           <div class="date">${date}</div>
         </a>
-        <button type="button" class="delete-detail-btn"><img src="./assets/images/common/delete-btn.png" class="delete-btn-img" alt=""></button>
        </li>`;
   });
   return html;
@@ -93,14 +88,13 @@ const render = works => {
       <button type="button" class="delete-main-work">삭제</button>
     </li>`;
   });
-
   $mainWork.innerHTML = html;
   yRail();
 };
 
 const labelState = labels => {
   let html = '';
-
+  
   labels.forEach(label => {
     html += `
       <li id="${label.state}">
@@ -113,9 +107,7 @@ const labelState = labels => {
 
 const renderPopup = (workTitle, subWorkTitle, writeDate, labels) => {
   const $node = document.createElement('div');
-
   $node.classList.add('popup-wrap');
-
   $node.innerHTML += `
     <div class="register-popup">
       <div class="popup-header">
@@ -123,9 +115,7 @@ const renderPopup = (workTitle, subWorkTitle, writeDate, labels) => {
         <div class="popup-subtitle">in list <a href="#self">${workTitle}</a></div>
         <div class="popup-created-time">${writeDate}</div>
       </div>
-
       <button type="button" class="btn-close-popup layer-close">X</button>
-
       <div class="popup-main-content clear-fix">
         <div class="content-area">
           <div class="description-area">
@@ -133,8 +123,7 @@ const renderPopup = (workTitle, subWorkTitle, writeDate, labels) => {
             <textarea class="description-content" placeholder="Add a more detailed Description.."></textarea>
             <button type="button" class="btn-save btn40 c5 mt10" style="width: 80px;">Save</button>
           </div>
-
-          <div class="checklist-area">
+          <div class="checklist-area hide">
             <div class="area-title">checklist</div>
             <div class="progress-contents">
               <span class="complete-percent">98%</span>
@@ -147,10 +136,8 @@ const renderPopup = (workTitle, subWorkTitle, writeDate, labels) => {
               <li><label class="chk" for="check2"><input id="check2" type="checkbox"><span>ddasda</span></label></li>
             </ul>
             <button type="button" class="btn-check-add btn40 c5 mt20" style="width: 120px;">add an item</button>
-            <button type="button" class="btn-delete btn30 c6" style="width: 100px;">delete</button>
           </div>
         </div>
-
         <div class="popup-add-ons">
           <div class="labels">
             <div class="title">LABELS</div>
@@ -159,11 +146,10 @@ const renderPopup = (workTitle, subWorkTitle, writeDate, labels) => {
             </ul>
           </div>
           <div class="add-check">
-            <button type="button" class="btn-checklist btn40 c2" style="width: 100%;">CHECKLIST</button>
+            <button type="button" class="btn-checklist btn40 c2" style="width: 100%;">CHECKLIST SHOW</button>
           </div>
         </div>
       </div>`;
-
   $wrap.appendChild($node);
 };
 
@@ -203,13 +189,11 @@ const currentTime = () => {
   const minute = getDate.getMinutes();
   const second = getDate.getSeconds();
   const subWorkDate = `${year}/${month}/${day}`;
-
   return subWorkDate;
 };
 
 const createSubwork = (workId, value) => {
   let maxId = 0;
-
   ajax.get(`http://localhost:3000/works/${workId}`)
     .then(res => JSON.parse(res))
     .then(work => {
@@ -239,25 +223,19 @@ const add = (target, keyCode) => {
   if (target.value === undefined) return;
 
   let value = target.value.trim();
-
   if (keyCode !== 13 || value === '') return;
-
   target.previousElementSibling.classList.remove('on');
-
   if (target.classList.contains('main-create-input')) {
     createWork(value);
   }
-
   if (target.classList.contains('detail-create-input')) {
     const workId = target.parentNode.parentNode.id;
     createSubwork(workId, value);
   }
-
   if (target.classList.contains('modify-input')) {
     const workId = target.parentNode.parentNode.id;
     workTitle(workId, value);
   }
-
   target.value = '';
 };
 
@@ -278,7 +256,6 @@ const deleteSubwork = (titleId, subTitleId) => {
 
 const closePopup = target => {
   const $popup = target.parentNode.parentNode;
-
   $popup.remove();
 };
 
@@ -305,6 +282,21 @@ const openPopup = (titleId, subTitleId) => {
 
       renderPopup(workTitle, subWorkTitle, writeDate, labels);
 
+      const $btnChecklist = document.querySelector('.btn-checklist');
+      const $checklistArea = document.querySelector('.checklist-area');
+      const $description = document.querySelector('.description-content');
+      const $btnSave = document.querySelector('.btn-save');
+
+      $btnChecklist.onclick = () => {
+        $btnChecklist.innerHTML === 'CHECKLIST HIDE' ? $btnChecklist.innerHTML = 'CHECKLIST SHOW' : $btnChecklist.innerHTML = 'CHECKLIST HIDE';
+        $checklistArea.classList.toggle('hide');
+      };
+
+      $btnSave.onclick = () => {
+        if ($description.value.trim() !== '') {}
+
+      };
+
       const $closeBtn = document.querySelector('.btn-close-popup');
 
       $closeBtn.onclick = ({ target }) => {
@@ -315,8 +307,9 @@ const openPopup = (titleId, subTitleId) => {
 
       $labels.onchange = ({ target }) => {
         const stateId = target.parentNode.parentNode.id;
-
-        subwork[0].labels.map(label => label.state === stateId ? label.check = !label.check : label);
+        // const sub = subwork[0].labels.map(label => console.log(label));
+        const sub = subwork[0].labels.map((label) => label.state === stateId ? {...label ,  check: label.check = !label.check } : label );
+        console.log('sub', sub);
 
         const data = workList.map(item => item.id === +subTitleId ? item = { ...item, id: +subTitleId, labels: subwork[0].labels } : item);
 
@@ -335,40 +328,30 @@ const openPopup = (titleId, subTitleId) => {
     });
 };
 
-
 // Events
 window.onload = () => {
   getWork();
 };
-
 $addCategory.onclick = ({ target }) => {
   toggle(target);
 };
-
 $mainWork.onfocusout = ({ target }) => {
   console.log(target);
 };
-
 $mainCreateInput.onkeyup = ({ target, keyCode }) => {
   add(target, keyCode);
 };
-
 $mainCreateInput.onblur = ({ target }) => {
   const value = target.value.trim();
-
   if (value !== '') return;
   target.previousElementSibling.classList.remove('on');
 };
-
 $mainWork.onclick = ({ target }) => {
   if (target.classList.contains('create-detail-btn') || target.classList.contains('title')) toggle(target);
-
   if (target.classList.contains('delete-main-work')) {
     const id = target.parentNode.id;
-
     deleteWork(id);
   }
-
   if (target.classList.contains('delete-btn-img')) {
     const titleId = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
     const subTitleId = target.parentNode.parentNode.id;
@@ -376,15 +359,14 @@ $mainWork.onclick = ({ target }) => {
 
     deleteSubwork(titleId, subTitleId);
   }
-
   if (target.parentNode.classList.contains('detail-inner')) {
     const titleId = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
     const subTitleId = target.parentNode.parentNode.id;
 
     openPopup(titleId, subTitleId);
   }
-};
 
+};
 $mainWork.onkeyup = ({ target, keyCode }) => {
   add(target, keyCode);
 };

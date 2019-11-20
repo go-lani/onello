@@ -307,3 +307,7 @@
 .add-check {
   margin: 20px 0 0;
 }
+
+.hide {
+  display: none;
+}
