@@ -3,6 +3,7 @@ const $wrap = document.querySelector('#wrap');
 const $mainWork = document.querySelector('.main-work');
 const $addCategory = document.querySelector('.create-main-work');
 const $mainCreateInput = document.querySelector('.main-create-input');
+
 const ajax = (() => {
   const req = (method, url, payload) => {
     return new Promise((resolve, reject) => {
@@ -35,6 +36,7 @@ const ajax = (() => {
     }
   };
 })();
+
 const state = labels => {
   if (labels === undefined) return '';
   let html = '';
@@ -45,6 +47,7 @@ const state = labels => {
   });
   return html;
 };
+
 const subworkRender = (workId, subWork) => {
   let html = '';
   subWork.forEach(({ id, title, date, labels }) => {
@@ -62,6 +65,7 @@ const subworkRender = (workId, subWork) => {
   });
   return html;
 };
+
 const render = works => {
   _works = works;
   let html = '';
@@ -87,6 +91,7 @@ const render = works => {
   $mainWork.innerHTML = html;
   yRail();
 };
+
 const renderPopup = () => {
   const $node = document.createElement('div');
   $node.classList.add('popup-wrap');
@@ -146,11 +151,13 @@ const renderPopup = () => {
       </div>`;
   $wrap.appendChild($node);
 };
+
 const getWork = () => {
   ajax.get('http://localhost:3000/works/')
     .then(res => JSON.parse(res))
     .then(render);
 };
+
 const getMaxId = () => {
   let maxId = 0;
   ajax.get('http://localhost:3000/works')
@@ -159,6 +166,7 @@ const getMaxId = () => {
     .then(id => maxId = id);
   return maxId;
 };
+
 const createWork = title => {
   ajax.post('http://localhost:3000/works/', { id: getMaxId(), title })
     .then(ajax.get('http://localhost:3000/works/').then(res => JSON.parse(res)).then(res => {
@@ -167,10 +175,12 @@ const createWork = title => {
       xRail();
     }));
 };
+
 const toggle = target => {
   target.classList.toggle('on', !target.classList.contains('on'));
   target.nextElementSibling.focus();
 };
+
 const currentTime = () => {
   const getDate = new Date();
   const year = ('' + getDate.getFullYear()).substring(2, 4);
@@ -182,6 +192,7 @@ const currentTime = () => {
   const subWorkDate = `${year}/${month}/${day}`;
   return subWorkDate;
 };
+
 const createSubwork = (workId, value) => {
   let maxId = 0;
   ajax.get(`http://localhost:3000/works/${workId}`)
@@ -199,12 +210,14 @@ const createSubwork = (workId, value) => {
         });
     });
 };
+
 const workTitle = (workId, value) => {
   ajax.get(`http://localhost:3000/works/${workId}`)
     .then(res => JSON.parse(res).title)
     .then(ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, title: value }))
     .then(getWork);
 };
+
 const add = (target, keyCode) => {
   let value = target.value.trim();
   if (keyCode !== 13 || value === '') return;
@@ -222,11 +235,13 @@ const add = (target, keyCode) => {
   }
   target.value = '';
 };
+
 const deleteWork = id => {
   ajax.delete(`http://localhost:3000/works/${id}`)
     .then(res => JSON.parse(res))
     .then(getWork);
 };
+
 const deleteSubwork = (titleId, subTitleId) => {
   ajax.get(`http://localhost:3000/works/${titleId}`)
     .then(res => JSON.parse(res).list)
@@ -234,17 +249,21 @@ const deleteSubwork = (titleId, subTitleId) => {
     .then(subWork => ajax.patch(`http://localhost:3000/works/${titleId}`, { id: titleId, list: subWork }))
     .then(getWork);
 };
+
 const closePopup = (target) => {
+  console.log('closePopup', target);
   const $popup = target.parentNode.parentNode;
   $popup.remove();
 };
-const openPopup = () => {
+
+const openPopup = (target) => {
   renderPopup();
   const $closeBtn = document.querySelector('.btn-close-popup');
-  $closeBtn.onclick = ({ target }) => {
-    closePopup(target);
+  $closeBtn.onclick = (e) => {
+    closePopup(e.target);
   };
 };
+
 // Events
 window.onload = () => {
   getWork();
@@ -276,7 +295,7 @@ $mainWork.onclick = ({ target }) => {
     deleteSubwork(titleId, subTitleId);
   }
   if (target.parentNode.classList.contains('detail-inner')) {
-    openPopup();
+    openPopup(target);
   }
 };
 $mainWork.onkeyup = ({ target, keyCode }) => {
