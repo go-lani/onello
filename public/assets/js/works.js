@@ -122,6 +122,7 @@ const renderPopup = (workTitle, subWorkTitle, writeDate, labels) => {
           <div class="description-area">
             <div class="area-title">Description</div>
             <textarea class="description-content" placeholder="Add a more detailed Description.."></textarea>
+            <div class="description-textbox hide"></div>
             <button type="button" class="btn-save btn40 c5 mt10" style="width: 80px;">Save</button>
           </div>
           <div class="checklist-area hide">
@@ -294,6 +295,7 @@ const openPopup = (titleId, subTitleId) => {
       const $checklistArea = document.querySelector('.checklist-area');
       const $description = document.querySelector('.description-content');
       const $btnSave = document.querySelector('.btn-save');
+      const $descriptionTextbox = document.querySelector('.description-textbox');
 
       $btnChecklist.onclick = () => {
         $btnChecklist.innerHTML === 'CHECKLIST HIDE' ? $btnChecklist.innerHTML = 'CHECKLIST SHOW' : $btnChecklist.innerHTML = 'CHECKLIST HIDE';
@@ -301,7 +303,20 @@ const openPopup = (titleId, subTitleId) => {
       };
 
       $btnSave.onclick = () => {
-        if ($description.value.trim() !== '') {}
+        if ($description.value.trim() !== '') {
+          $description.classList.add('hide');
+          $btnSave.classList.add('hide');
+          $descriptionTextbox.classList.remove('hide');
+          $descriptionTextbox.innerHTML = $description.value;
+
+          ajax.get(`http://localhost:3000/works/${titleId}`)
+            .then(res => JSON.parse(res).list)
+            .then(subTitle => subTitle.filter(item => item.id === +subTitleId))
+            .then(res => {
+              if (res.description === undefined) res['description'] = `${$description.value}`;
+              console.log(res.description);
+            })
+        }
       };
 
       const $closeBtn = document.querySelector('.btn-close-popup');
@@ -314,10 +329,8 @@ const openPopup = (titleId, subTitleId) => {
 
       $labels.onchange = ({ target }) => {
         const stateId = target.parentNode.parentNode.id;
-
         subwork[0].labels.map(label => label.state === stateId ? label.check = !label.check : label);
         const data = workList.map(item => item.id === +subTitleId ? item = { ...item, id: +subTitleId, labels: subwork[0].labels } : item);
-
         ajax.patch(`http://localhost:3000/works/${titleId}`, {
           id: +titleId,
           title: workTitle,
