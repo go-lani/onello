@@ -13,7 +13,7 @@
   min-height: 100vh;
   margin: 0 0 0 350px;
   padding: 10px 30px;
-  transition: all .3s;
+  transition: all .4s;
 }
 
 .gnb-close #main {
@@ -33,7 +33,7 @@
   width: 350px;
   padding: 50px 25px 10px;
   background: #242939;
-  transition: all .3s;
+  transition: all .4s;
 }
 
 .gnb-close .info-banner {
@@ -169,6 +169,7 @@
   margin: -7px 0 0 -10px;
   background: #fff;
   transform: rotate(-45deg);
+  transition: all .4s;
 }
 
 .menu-close:after {
@@ -181,8 +182,16 @@
   margin: 5px 0 0 -10px;
   transform: rotate(-130deg);
   background: #fff;
+  transition: all .4s;
 }
 
+.gnb-close .menu-close:before {
+  transform: rotate(-135deg);
+}
+
+.gnb-close .menu-close:after {
+  transform: rotate(-40deg);
+}
 /* 수지 : main - coworker 시작 */
 /* digital-clock 영역 */
 .utils-area {
@@ -325,7 +334,7 @@
 .detail-work li a {
   display: block;
   padding: 10px 38px 10px 10px;
-  transition: all .3s;
+  transition: all .4s;
 }
 
 .detail-work li:hover a {
@@ -340,7 +349,7 @@
   height: 18px;
   z-index: 2;
   opacity: 0;
-  transition: all .3s;
+  transition: all .4s;
 }
 
 .detail-work li:hover .delete-detail-btn {
@@ -422,7 +431,7 @@
   height: 30px;
   border-radius: 50%;
   background: #f0f3ff;
-  transition: all .3s;
+  transition: all .4s;
 }
 
 .delete-main-work:before {
@@ -435,7 +444,7 @@
   margin: -1px 0 0 -7px;
   background: #93a2dd;
   transform: rotate(-45deg);
-  transition: all .3s;
+  transition: all .4s;
 }
 
 .delete-main-work:after {
@@ -448,7 +457,7 @@
   margin: -1px 0 0 -7px;
   background: #93a2dd;
   transform: rotate(45deg);
-  transition: all .3s;
+  transition: all .4s;
 }
 
 .delete-main-work:hover {

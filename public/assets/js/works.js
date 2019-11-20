@@ -1,5 +1,3 @@
-let _works = [];
-
 // DOMs
 const $wrap = document.querySelector('#wrap');
 const $mainWork = document.querySelector('.main-work');
@@ -50,11 +48,11 @@ const state = labels => {
   return html;
 };
 
-const subworkRender = (workId, subWork) => {
+const subworkRender = subWork => {
   let html = '';
   subWork.forEach(({ id, title, date, labels }) => {
     html += `
-      <li id="${workId}-${id}" class="work-item" draggable="true">
+      <li id="${id}" class="work-item" draggable="true">
         <a href="#self" class="detail-inner">
           <div class="importance">
             ${state(labels)}
@@ -68,9 +66,10 @@ const subworkRender = (workId, subWork) => {
 };
 
 const render = works => {
-  _works = works;
+
   let html = '';
-  _works.forEach(work => {
+
+  works.forEach(work => {
     html += `
     <li id="${work.id}">
       <div class="title-box">
@@ -79,7 +78,7 @@ const render = works => {
       </div>
       <div class="detail-work-box">
         <ul class="detail-work" droppable="true">
-        ${work.list ? subworkRender(work.id, work.list) : ''}
+        ${work.list ? subworkRender(work.list) : ''}
         </ul>
       </div>
       <div class="create-detail-work">
@@ -106,7 +105,7 @@ const labelState = labels => {
   return html;
 };
 
-const renderPopup = (workTitle, subWorkTitle, wrtieDate, labels) => {
+const renderPopup = (workTitle, subWorkTitle, writeDate, labels) => {
   const $node = document.createElement('div');
   $node.classList.add('popup-wrap');
   $node.innerHTML += `
@@ -114,7 +113,7 @@ const renderPopup = (workTitle, subWorkTitle, wrtieDate, labels) => {
       <div class="popup-header">
         <div class="popup-title"><span class="a11y-hidden">주제:</span>${subWorkTitle}</div>
         <div class="popup-subtitle">in list <a href="#self">${workTitle}</a></div>
-        <div class="popup-created-time">${wrtieDate}</div>
+        <div class="popup-created-time">${writeDate}</div>
       </div>
       <button type="button" class="btn-close-popup layer-close">X</button>
       <div class="popup-main-content clear-fix">
@@ -161,12 +160,10 @@ const getWork = () => {
 };
 
 const getMaxId = () => {
-  let maxId = 0;
   ajax.get('http://localhost:3000/works')
     .then(res => JSON.parse(res))
     .then(works => Math.max(0, ...works.map(work => work.id)) + 1)
     .then(id => maxId = id);
-  return maxId;
 };
 
 const createWork = title => {
@@ -201,9 +198,10 @@ const createSubwork = (workId, value) => {
     .then(res => JSON.parse(res))
     .then(work => {
       if (work.list === undefined) work['list'] = [];
-      maxId = work.list.length ? Math.max(...[...work.list].map(subwork => subwork.id)) + 1 : 1;
 
-      return [...work.list, { id: maxId, title: value, date: currentTime(), Description: '', labels: [{ state: 'low', check: false }, { state: 'medium', check: false }, { state: 'high', check: false }, { state: 'veryhigh', check: false }] }];
+      maxId = work.list.length ? work.list.length + 1 : 1;
+
+      return [...work.list, { id: +`${workId}0${maxId}`, title: value, date: currentTime(), labels: [{ state: 'low', check: false }, { state: 'medium', check: false }, { state: 'high', check: false }, { state: 'veryhigh', check: false }] }];
     })
     .then(subwork => {
       ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: subwork })
@@ -222,6 +220,8 @@ const workTitle = (workId, value) => {
 };
 
 const add = (target, keyCode) => {
+  if (target.value === undefined) return;
+
   let value = target.value.trim();
   if (keyCode !== 13 || value === '') return;
   target.previousElementSibling.classList.remove('on');
@@ -261,23 +261,26 @@ const closePopup = target => {
 
 const openPopup = (titleId, subTitleId) => {
   let workTitle = '';
+  let workList = '';
   let subWorkTitle = '';
-  let wrtieDate = '';
+  let writeDate = '';
   let labels = '';
 
   ajax.get(`http://localhost:3000/works/${titleId}`)
     .then(work => JSON.parse(work))
     .then(work => {
       workTitle = work.title;
-      return work.list;
+      workList = work.list;
+
+      return workList;
     })
     .then(subworks => subworks.filter(subwork => subwork.id === +subTitleId))
     .then(subwork => {
       subWorkTitle = subwork[0].title;
-      wrtieDate = subwork[0].date;
+      writeDate = subwork[0].date;
       labels = subwork[0].labels;
 
-      renderPopup(workTitle, subWorkTitle, wrtieDate, labels);
+      renderPopup(workTitle, subWorkTitle, writeDate, labels);
 
       const $btnChecklist = document.querySelector('.btn-checklist');
       const $checklistArea = document.querySelector('.checklist-area');
@@ -308,19 +311,19 @@ const openPopup = (titleId, subTitleId) => {
         const sub = subwork[0].labels.map((label) => label.state === stateId ? {...label ,  check: label.check = !label.check } : label );
         console.log('sub', sub);
 
-        ajax.get(`http://localhost:3000/works/${titleId}`)
-          .then(work => JSON.parse(work))
-          .then(work => work.list[0].labels)
-          .then(console.log)
-          // .then(work => {
-          //   ajax.patch(`http://localhost:3000/works/${titleId}`, {
-          //     id: titleId, title: workTitle, date: wrtieDate, labels: {  , {check: sub} }
-          //   })
-          //     .then(getWork)
-          //     .then(console.log)
-          // })
-          // .then(res => console.log('res', res))
-          // .then(subWorkList => subworkRender(titleId, subWorkList))
+        const data = workList.map(item => item.id === +subTitleId ? item = { ...item, id: +subTitleId, labels: subwork[0].labels } : item);
+
+        ajax.patch(`http://localhost:3000/works/${titleId}`, {
+          id: +titleId,
+          title: workTitle,
+          list: data
+        })
+          .then(newWorks => JSON.parse(newWorks))
+          .then(newWorks => {
+            ajax.get('http://localhost:3000/works/')
+              .then(works => JSON.parse(works))
+              .then(render);
+          });
       };
     });
 };
@@ -350,15 +353,15 @@ $mainWork.onclick = ({ target }) => {
     deleteWork(id);
   }
   if (target.classList.contains('delete-btn-img')) {
-    const { id } = target.parentNode.parentNode;
-    let titleId = `${id}`.split('-')[0];
-    let subTitleId = `${id}`.split('-')[1];
+    const titleId = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+    const subTitleId = target.parentNode.parentNode.id;
+    console.log(titleId, subTitleId);
+
     deleteSubwork(titleId, subTitleId);
   }
   if (target.parentNode.classList.contains('detail-inner')) {
-    const { id } = target.parentNode.parentNode;
-    let titleId = `${id}`.split('-')[0];
-    let subTitleId = `${id}`.split('-')[1];
+    const titleId = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+    const subTitleId = target.parentNode.parentNode.id;
 
     openPopup(titleId, subTitleId);
   }
