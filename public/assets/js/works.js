@@ -60,6 +60,7 @@ const subworkRender = subWork => {
           <div class="title">${title}</div>
           <div class="date">${date}</div>
         </a>
+        <button type="button" class="delete-detail-btn"><img src="./assets/images/common/delete-btn.png" class="delete-btn-img" alt=""></button>
        </li>`;
   });
   return html;
@@ -308,8 +309,7 @@ const openPopup = (titleId, subTitleId) => {
       $labels.onchange = ({ target }) => {
         const stateId = target.parentNode.parentNode.id;
         // const sub = subwork[0].labels.map(label => console.log(label));
-        const sub = subwork[0].labels.map((label) => label.state === stateId ? {...label ,  check: label.check = !label.check } : label );
-        console.log('sub', sub);
+        subwork[0].labels.map((label) => label.state === stateId ? {...label ,  check: label.check = !label.check } : label );
 
         const data = workList.map(item => item.id === +subTitleId ? item = { ...item, id: +subTitleId, labels: subwork[0].labels } : item);
 
