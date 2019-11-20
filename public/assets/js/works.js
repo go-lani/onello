@@ -1,4 +1,6 @@
 let _works = [];
+
+// DOMs
 const $wrap = document.querySelector('#wrap');
 const $mainWork = document.querySelector('.main-work');
 const $addCategory = document.querySelector('.create-main-work');
@@ -60,7 +62,6 @@ const subworkRender = (workId, subWork) => {
           <div class="title">${title}</div>
           <div class="date">${date}</div>
         </a>
-        <button type="button" class="delete-detail-btn"><img src="./assets/images/common/delete-btn.png" class="delete-btn-img" alt=""></button>
        </li>`;
   });
   return html;
@@ -92,15 +93,28 @@ const render = works => {
   yRail();
 };
 
-const renderPopup = () => {
+const labelState = labels => {
+  let html = '';
+  
+  labels.forEach(label => {
+    html += `
+      <li id="${label.state}">
+        <label><input type="checkbox" class="state-check" ${label.check ? 'checked' : ''}><span>low</span></span></label>
+      </li>`;
+  });
+
+  return html;
+};
+
+const renderPopup = (workTitle, subWorkTitle, wrtieDate, labels) => {
   const $node = document.createElement('div');
   $node.classList.add('popup-wrap');
   $node.innerHTML += `
     <div class="register-popup">
       <div class="popup-header">
-        <div class="popup-title"><span class="a11y-hidden">주제:</span>11/08 프로젝트 주제 회의</div>
-        <div class="popup-subtitle">in list <a href="#self">회의 내용</a></div>
-        <div class="popup-created-time">19/01/01 12:12:12</div>
+        <div class="popup-title"><span class="a11y-hidden">주제:</span>${subWorkTitle}</div>
+        <div class="popup-subtitle">in list <a href="#self">${workTitle}</a></div>
+        <div class="popup-created-time">${wrtieDate}</div>
       </div>
       <button type="button" class="btn-close-popup layer-close">X</button>
       <div class="popup-main-content clear-fix">
@@ -110,7 +124,7 @@ const renderPopup = () => {
             <textarea class="description-content" placeholder="Add a more detailed Description.."></textarea>
             <button type="button" class="btn-save btn40 c5 mt10" style="width: 80px;">Save</button>
           </div>
-          <div class="checklist-area">
+          <div class="checklist-area hide">
             <div class="area-title">checklist</div>
             <div class="progress-contents">
               <span class="complete-percent">98%</span>
@@ -123,29 +137,17 @@ const renderPopup = () => {
               <li><label class="chk" for="check2"><input id="check2" type="checkbox"><span>ddasda</span></label></li>
             </ul>
             <button type="button" class="btn-check-add btn40 c5 mt20" style="width: 120px;">add an item</button>
-            <button type="button" class="btn-delete btn30 c6" style="width: 100px;">delete</button>
           </div>
         </div>
         <div class="popup-add-ons">
           <div class="labels">
             <div class="title">LABELS</div>
             <ul class="colors-list">
-              <li class="yellow">
-                <label><input type="checkbox" class="state-check"><span>노랑색</span></span></label>
-              </li>
-              <li class="orange">
-                <label><input type="checkbox" class="state-check"><span>주황색</span></span></label>
-              </li>
-              <li class="red">
-                <label><input type="checkbox" class="state-check"><span>빨강색</span></span></label>
-              </li>
-              <li class="blue">
-                <label><input type="checkbox" class="state-check"><span>파랑색</span></span></label>
-              </li>
+              ${labelState(labels)}
             </ul>
           </div>
           <div class="add-check">
-            <button type="button" class="btn-checklist btn40 c2" style="width: 100%;">CHECKLIST</button>
+            <button type="button" class="btn-checklist btn40 c2" style="width: 100%;">CHECKLIST SHOW</button>
           </div>
         </div>
       </div>`;
@@ -200,7 +202,8 @@ const createSubwork = (workId, value) => {
     .then(work => {
       if (work.list === undefined) work['list'] = [];
       maxId = work.list.length ? Math.max(...[...work.list].map(subwork => subwork.id)) + 1 : 1;
-      return [...work.list, { id: maxId, title: value, date: currentTime() }];
+
+      return [...work.list, { id: maxId, title: value, date: currentTime(), Description: '', labels: [{ state: 'low', check: false }, { state: 'medium', check: false }, { state: 'high', check: false }, { state: 'veryhigh', check: false }] }];
     })
     .then(subwork => {
       ajax.patch(`http://localhost:3000/works/${workId}`, { id: workId, list: subwork })
@@ -250,18 +253,76 @@ const deleteSubwork = (titleId, subTitleId) => {
     .then(getWork);
 };
 
-const closePopup = (target) => {
-  console.log('closePopup', target);
+
+const closePopup = target => {
   const $popup = target.parentNode.parentNode;
   $popup.remove();
 };
 
-const openPopup = (target) => {
-  renderPopup();
-  const $closeBtn = document.querySelector('.btn-close-popup');
-  $closeBtn.onclick = (e) => {
-    closePopup(e.target);
-  };
+const openPopup = (titleId, subTitleId) => {
+  let workTitle = '';
+  let subWorkTitle = '';
+  let wrtieDate = '';
+  let labels = '';
+
+  ajax.get(`http://localhost:3000/works/${titleId}`)
+    .then(work => JSON.parse(work))
+    .then(work => {
+      workTitle = work.title;
+      return work.list;
+    })
+    .then(subworks => subworks.filter(subwork => subwork.id === +subTitleId))
+    .then(subwork => {
+      subWorkTitle = subwork[0].title;
+      wrtieDate = subwork[0].date;
+      labels = subwork[0].labels;
+
+      renderPopup(workTitle, subWorkTitle, wrtieDate, labels);
+
+      const $btnChecklist = document.querySelector('.btn-checklist');
+      const $checklistArea = document.querySelector('.checklist-area');
+      const $description = document.querySelector('.description-content');
+      const $btnSave = document.querySelector('.btn-save');
+
+      $btnChecklist.onclick = () => {
+        $btnChecklist.innerHTML === 'CHECKLIST HIDE' ? $btnChecklist.innerHTML = 'CHECKLIST SHOW' : $btnChecklist.innerHTML = 'CHECKLIST HIDE';
+        $checklistArea.classList.toggle('hide');
+      };
+
+      $btnSave.onclick = () => {
+        if ($description.value.trim() !== '') {}
+
+      };
+
+      const $closeBtn = document.querySelector('.btn-close-popup');
+
+      $closeBtn.onclick = ({ target }) => {
+        closePopup(target);
+      };
+
+      const $labels = document.querySelector('.labels');
+
+      $labels.onchange = ({ target }) => {
+        const stateId = target.parentNode.parentNode.id;
+        // const sub = subwork[0].labels.map(label => console.log(label));
+        const sub = subwork[0].labels.map((label) => label.state === stateId ? {...label ,  check: label.check = !label.check } : label );
+        console.log('sub', sub);
+
+        ajax.get(`http://localhost:3000/works/${titleId}`)
+          .then(work => JSON.parse(work))
+          .then(work => work.list[0].labels)
+          .then(console.log)
+          // .then(work => {
+          //   ajax.patch(`http://localhost:3000/works/${titleId}`, {
+          //     id: titleId, title: workTitle, date: wrtieDate, labels: {  , {check: sub} }
+          //   })
+          //     .then(getWork)
+          //     .then(console.log)
+          // })
+          // .then(res => console.log('res', res))
+          // .then(subWorkList => subworkRender(titleId, subWorkList))
+      };
+    });
 };
 
 // Events
@@ -295,8 +356,13 @@ $mainWork.onclick = ({ target }) => {
     deleteSubwork(titleId, subTitleId);
   }
   if (target.parentNode.classList.contains('detail-inner')) {
-    openPopup(target);
+    const { id } = target.parentNode.parentNode;
+    let titleId = `${id}`.split('-')[0];
+    let subTitleId = `${id}`.split('-')[1];
+
+    openPopup(titleId, subTitleId);
   }
+
 };
 $mainWork.onkeyup = ({ target, keyCode }) => {
   add(target, keyCode);
