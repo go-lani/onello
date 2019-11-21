@@ -42,6 +42,7 @@ export default () => {
     if (labels === undefined) return '';
     let html = '';
     labels = labels.filter(label => label.check);
+
     labels.forEach(label => {
       html += `
         <span class="${label.state}">${label.state}</span>`;
