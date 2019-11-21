@@ -354,7 +354,6 @@ const openPopup = (titleId, subTitleId) => {
           $descriptionBtn.classList.add('save');
           $descriptionBtn.textContent = 'Save';
           $descriptionTextbox.classList.add('hide');
-          console.log(111);
 
           ajax.get(`http://localhost:3000/works/${titleId}`)
             .then(res => JSON.parse(res).list)
@@ -377,10 +376,11 @@ const openPopup = (titleId, subTitleId) => {
       };
 
       $popup.onclick = e => {
-        if (e.target.classList.contains('btn-close-popup') || e.target.classList.contains('dim')) console.log(111);
+        if (e.target.classList.contains('btn-close-popup') || e.target.classList.contains('dim')) {
+          $popup.remove();
 
-        $popup.remove();
-        e.stopPropagation();
+          e.stopPropagation();
+        }
       };
 
       $labels.onchange = ({ target }) => {
