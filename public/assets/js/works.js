@@ -106,10 +106,29 @@ const labelState = labels => {
   return html;
 };
 
-const renderPopup = (workTitle, subWorkTitle, writeDate, labels) => {
+const descriptionDisplay = description => {
+  let html = '';
+
+  if (description === undefined) {
+    html += `
+    <textarea class="description-content" placeholder="Add a more detailed Description.."></textarea>
+    <div class="description-textbox hide"></div>
+    <button type="button" class="btn-save btn40 c5 mt10" style="width: 80px;">Save</button>`;
+  } else {
+    html += `
+    <textarea class="description-content hide" placeholder="Add a more detailed Description.."></textarea>
+    <div class="description-textbox">${description}</div>
+    <button type="button" class="btn-save btn40 c7 mt10" style="width: 80px;">Modify</button>`;
+  }
+
+  return html;
+};
+
+const renderPopup = (workTitle, subWorkTitle, writeDate, labels, description) => {
   const $node = document.createElement('div');
   $node.classList.add('popup-wrap');
   $node.innerHTML += `
+    <div class="dim"></div>
     <div class="register-popup">
       <div class="popup-header">
         <div class="popup-title"><span class="a11y-hidden">주제:</span>${subWorkTitle}</div>
@@ -121,9 +140,7 @@ const renderPopup = (workTitle, subWorkTitle, writeDate, labels) => {
         <div class="content-area">
           <div class="description-area">
             <div class="area-title">Description</div>
-            <textarea class="description-content" placeholder="Add a more detailed Description.."></textarea>
-            <div class="description-textbox hide"></div>
-            <button type="button" class="btn-save btn40 c5 mt10" style="width: 80px;">Save</button>
+            ${descriptionDisplay(description)}
           </div>
           <div class="checklist-area hide">
             <div class="area-title">checklist</div>
@@ -289,7 +306,12 @@ const openPopup = (titleId, subTitleId) => {
       writeDate = subwork[0].date;
       labels = subwork[0].labels;
 
-      renderPopup(workTitle, subWorkTitle, writeDate, labels);
+      if (subwork[0].description) {
+        renderPopup(workTitle, subWorkTitle, writeDate, labels, subwork[0].description)
+      } else {
+        renderPopup(workTitle, subWorkTitle, writeDate, labels)
+      }
+
 
       const $btnChecklist = document.querySelector('.btn-checklist');
       const $checklistArea = document.querySelector('.checklist-area');
@@ -312,9 +334,19 @@ const openPopup = (titleId, subTitleId) => {
           ajax.get(`http://localhost:3000/works/${titleId}`)
             .then(res => JSON.parse(res).list)
             .then(subTitle => subTitle.filter(item => item.id === +subTitleId))
-            .then(res => {
-              if (res.description === undefined) res['description'] = `${$description.value}`;
-              console.log(res.description);
+            .then(subWorks => {
+              if (subWorks[0].description === undefined) subWorks[0]['description'] = `${$description.value}`;
+
+              return subWorks[0]['description'];
+            })
+            .then(description => {
+              const data = workList.map(item => item.id === +subTitleId ? item = { ...item, id: +subTitleId, description  } : item);
+
+              ajax.patch(`http://localhost:3000/works/${titleId}`, {
+                id: +titleId,
+                title: workTitle,
+                list: data
+              })
             })
         }
       };

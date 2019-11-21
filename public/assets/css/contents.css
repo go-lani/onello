@@ -10,7 +10,7 @@
   z-index: 100;
 }
 
-.popup-wrap:before {
+.popup-wrap .dim {
   content: '';
   position: absolute;
   top: -9999px;
@@ -27,6 +27,19 @@
   background: #eee;
   padding: 30px 40px;
   border-radius: 10px;
+  transform: translateY(30px);
+  animation: fade-in .6s cubic-bezier(.17,.67,.44,.85) forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .popup-title {
@@ -120,7 +133,7 @@
   height: 150px;
   border-radius: 10px;
   font-size: 1.8rem;
-  background: #dedede;
+  background: #e8e8e8;
   padding: 10px;
 }
 
