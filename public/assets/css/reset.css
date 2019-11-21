@@ -54,7 +54,7 @@ a:active	{text-decoration: none; color: inherit;}
 a:focus		{text-decoration: none; color: inherit;}
 
 
-.hide	{visibility: hidden; overflow: hidden; position: absolute; left: -9999em; top: -9999em; width: 0px; height: 0px; border: none; background: none; font-size: 0px; line-height: 0px; opacity: 0;}
+/* .hide	{visibility: hidden; overflow: hidden; position: absolute; left: -9999em; top: -9999em; width: 0px; height: 0px; border: none; background: none; font-size: 0px; line-height: 0px; opacity: 0;} */
 
 .fl_l {float: left !important;}
 .fl_c {display: inline-block; float: none !important;}
