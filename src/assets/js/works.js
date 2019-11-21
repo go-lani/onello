@@ -131,7 +131,7 @@ const checklistDisplay = checklist => {
 
   checklist.forEach(list => {
     html += `
-      <li>
+      <li class="${list.completed ? 'check' : ''}">
         <label class="chk" for="${list.id}">
           <input id="${list.id}" type="checkbox" ${list.completed ? 'checked': ''}><span>${list.content}</span>
         </label>
@@ -345,6 +345,8 @@ const openPopup = (titleId, subTitleId) => {
       const $checkListInput = document.querySelector('.add-checklist-input');
       const $checkListAddBtn = document.querySelector('.btn-check-add');
       const $checklist = document.querySelector('.check-list');
+      const $completePer = document.querySelector('.complete-percent');
+      const $successBar = document.querySelector('.success-bar');
 
       $btnChecklist.onclick = () => {
         $btnChecklist.textContent === 'CHECKLIST HIDE' ? $btnChecklist.innerHTML = 'CHECKLIST SHOW' : $btnChecklist.textContent = 'CHECKLIST HIDE';
@@ -430,56 +432,57 @@ const openPopup = (titleId, subTitleId) => {
       $checkListAddBtn.onclick = () => {
         if ($checkListInput.value.trim() === '' && $checklist.children.length < 4) return alert('값을 입력해주세요');
         if ($checklist.children.length >= 4) return alert('최대 4개까지 입력할 수 있습니다');
-
         const content = $checkListInput.value;
-
         ajax.get(`http://localhost:3000/works/${titleId}`)
           .then(res => JSON.parse(res))
           .then(work => work.list)
           .then(subwork => {
-            if (subwork[0].checklist === undefined) subwork[0]['checklist'] = [];
-
-            const maxId = subwork[0].checklist.length ? subwork[0].checklist.length + 1 : 1;
-
-            const checklistValue = [...subwork[0].checklist, { id: `check${titleId}0${maxId}`, content, completed: false }];
-
+            const thisSub = subwork.filter(sub => sub.id === +subTitleId);
+            if (thisSub[0].checklist === undefined) thisSub[0].checklist = [];
+            const maxId = thisSub[0].checklist.length ? thisSub[0].checklist.length + 1 : 1;
+            const checklistValue = [...thisSub[0].checklist, { id: `check${titleId}0${maxId}`, content, completed: false }];
             const data = workList.map(item => item.id === +subTitleId ? { ...item, id: +subTitleId, checklist: checklistValue } : item);
-
             ajax.patch(`http://localhost:3000/works/${titleId}`, {
               id: +titleId,
               title: workTitle,
               list: data
             })
               .then(res => {
-                $checklist.innerHTML += `
-                  <li>
+                const $li = document.createElement('li');
+
+                $li.innerHTML = `<li>
                     <label class="chk" for="check${titleId}0${maxId}">
                       <input id="check${titleId}0${maxId}" type="checkbox"><span>${content}</span>
                     </label>
                   </li>`;
-                  $checkListInput.value = '';
+                $checklist.appendChild($li);
+
+                $checkListInput.value = '';
               });
           });
       };
 
       $checklist.onchange = ({ target }) => {
-
         ajax.get(`http://localhost:3000/works/${titleId}`)
-          .then(res => JSON.parse(res))
+        .then(res => JSON.parse(res))
           .then(work => work.list)
           .then(subwork => {
             const subWork = subwork.filter(sub => sub.id === +subTitleId);
             const checklist = subWork[0].checklist.map(check => check.id === target.id ? { ...check, completed: !check.completed } : check );
 
-            const data = workList.map(item => item.id === +subTitleId ? { ...item, id: +subTitleId, checklist } : item);
+            const trueLength = checklist.filter(check => check.completed === true).length;
+            const currentPer = `${`${Math.floor((100 / checklist.length) * trueLength)}%`}`;
 
+            $completePer.textContent = `${currentPer}`;
+            $successBar.setAttribute("style", `width:${currentPer}`);
+
+            const data = workList.map(item => item.id === +subTitleId ? { ...item, id: +subTitleId, checklist } : item);
             ajax.patch(`http://localhost:3000/works/${titleId}`, {
               id: +titleId,
               title: workTitle,
               list: data
             })
-              .then(console.log)
-          });
+          })
       };
 
       $popup.onclick = e => {
