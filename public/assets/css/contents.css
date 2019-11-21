@@ -45,6 +45,7 @@
 .popup-title {
   font-size: 2.4rem;
   color: #48465b;
+  word-break: break-all;
 }
 
 .popup-subtitle {
@@ -124,17 +125,20 @@
 
 .description-content {
   height: 150px;
+  padding: 15px;
   border-radius: 10px;
   border: none;
+  font-size: 1.8rem;
   resize: none;
 }
 
 .description-textbox {
   height: 150px;
+  padding: 15px;
   border-radius: 10px;
   font-size: 1.8rem;
+  word-break: break-all;
   background: #e8e8e8;
-  padding: 10px;
 }
 
 .description-btn.save {

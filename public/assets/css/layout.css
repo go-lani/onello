@@ -310,10 +310,6 @@
   max-height: 410px;
 }
 
-.detail-work {
-  min-height: 50px;
-}
-
 .detail-work li {
   overflow: hidden;
   width: 100%;
@@ -333,7 +329,7 @@
 
 .detail-work li a {
   display: block;
-  padding: 10px 38px 10px 10px;
+  padding: 15px 38px 15px 15px;
   transition: all .4s;
 }
 
@@ -368,14 +364,14 @@
   display: inline-block;
   width: 50px;
   height: 8px;
-  margin: 0 0 0 5px;
+  margin: 0 0 15px 5px;
   border-radius: 5px;
   background: blue;
   color: transparent;
 }
 
 .detail-work li .importance span:first-child {
-  margin: 0;
+  margin: 0 0 15px;
 }
 
 .detail-work li .importance span.high {
@@ -391,7 +387,10 @@
 }
 
 .detail-work li .title {
-  padding: 15px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0 0 15px;
   color: #222;
 }
 

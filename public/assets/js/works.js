@@ -116,7 +116,7 @@ const descriptionDisplay = description => {
     <button type="button" class="description-btn save btn40 mt10" style="width: 80px;">Save</button>`;
   } else {
     html += `
-    <textarea class="description-content hide" placeholder="Add a more detailed Description.."></textarea>
+    <textarea class="description-content hide" placeholder="Add a more detailed Description..">${description}</textarea>
     <div class="description-textbox">${description}</div>
     <button type="button" class="description-btn modify btn40 mt10" style="width: 80px;">Modify</button>`;
   }
@@ -135,7 +135,7 @@ const renderPopup = (workTitle, subWorkTitle, writeDate, labels, description) =>
         <div class="popup-subtitle">in list <a href="#self">${workTitle}</a></div>
         <div class="popup-created-time">${writeDate}</div>
       </div>
-      <button type="button" class="btn-close-popup layer-close">X</button>
+      <button type="button" class="btn-close-popup">X</button>
       <div class="popup-main-content clear-fix">
         <div class="content-area">
           <div class="description-area">
@@ -279,12 +279,6 @@ const deleteSubwork = (titleId, subTitleId) => {
     .then(getWork);
 };
 
-
-const closePopup = target => {
-  const $popup = target.parentNode.parentNode;
-  $popup.remove();
-};
-
 const openPopup = (titleId, subTitleId) => {
   let workTitle = '';
   let workList = '';
@@ -312,13 +306,12 @@ const openPopup = (titleId, subTitleId) => {
         renderPopup(workTitle, subWorkTitle, writeDate, labels)
       }
 
-
+      const $popup = document.querySelector('.popup-wrap');
+      const $labels = document.querySelector('.labels');
       const $btnChecklist = document.querySelector('.btn-checklist');
       const $checklistArea = document.querySelector('.checklist-area');
-      const $description = document.querySelector('.description-content');
+      const $descriptionTextarea = document.querySelector('.description-content');
       const $descriptionBtn = document.querySelector('.description-btn');
-      // const $btnSave = document.querySelector('.btn-save');
-      // const $btnModify = document.querySelector('.btn-modify');
       const $descriptionTextbox = document.querySelector('.description-textbox');
 
       $btnChecklist.onclick = () => {
@@ -329,19 +322,19 @@ const openPopup = (titleId, subTitleId) => {
 
       $descriptionBtn.onclick = () => {
         if ($descriptionBtn.classList.contains('save')) {
-          if ($description.value.trim() !== '') {
-            $description.classList.add('hide');
+          if ($descriptionTextarea.value.trim() !== '') {
+            $descriptionTextarea.classList.add('hide');
             $descriptionBtn.classList.remove('save');
             $descriptionBtn.classList.add('modify');
             $descriptionBtn.textContent = 'Modify';
             $descriptionTextbox.classList.remove('hide');
-            $descriptionTextbox.textContent = $description.value;
+            $descriptionTextbox.textContent = $descriptionTextarea.value;
 
             ajax.get(`http://localhost:3000/works/${titleId}`)
               .then(res => JSON.parse(res).list)
               .then(subTitle => subTitle.filter(item => item.id === +subTitleId))
               .then(subWorks => {
-                if (subWorks[0].description === undefined) subWorks[0]['description'] = `${$description.value}`;
+                subWorks[0]['description'] = `${$descriptionTextarea.value}`;
 
                 return subWorks[0]['description'];
               })
@@ -355,16 +348,39 @@ const openPopup = (titleId, subTitleId) => {
                 });
               });
           }
+        } else {
+          $descriptionTextarea.classList.remove('hide');
+          $descriptionBtn.classList.remove('modify');
+          $descriptionBtn.classList.add('save');
+          $descriptionBtn.textContent = 'Save';
+          $descriptionTextbox.classList.add('hide');
+
+          ajax.get(`http://localhost:3000/works/${titleId}`)
+            .then(res => JSON.parse(res).list)
+            .then(subTitle => subTitle.filter(item => item.id === +subTitleId))
+            .then(subWorks => {
+              if (subWorks[0].description === undefined) subWorks[0]['description'] = `${$descriptionTextarea.value}`;
+
+              return subWorks[0]['description'];
+            })
+            .then(description => {
+              const data = workList.map(item => item.id === +subTitleId ? item = { ...item, id: +subTitleId, description } : item);
+
+              ajax.patch(`http://localhost:3000/works/${titleId}`, {
+                id: +titleId,
+                title: workTitle,
+                list: data
+              });
+            });
         }
       };
 
-      const $closeBtn = document.querySelector('.btn-close-popup');
+      $popup.onclick = e => {
+        if (e.target.classList.contains('btn-close-popup') || e.target.classList.contains('dim')) console.log(111);
 
-      $closeBtn.onclick = ({ target }) => {
-        closePopup(target);
+        $popup.remove();
+        e.stopPropagation();
       };
-
-      const $labels = document.querySelector('.labels');
 
       $labels.onchange = ({ target }) => {
         const stateId = target.parentNode.parentNode.id;
@@ -372,7 +388,6 @@ const openPopup = (titleId, subTitleId) => {
         subwork[0].labels.map(label => label.state === stateId ? label.check = !label.check : label);
 
         const data = workList.map(item => item.id === +subTitleId ? item = { ...item, id: +subTitleId, labels: subwork[0].labels } : item);
-
 
         ajax.patch(`http://localhost:3000/works/${titleId}`, {
           id: +titleId,
