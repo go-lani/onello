@@ -10309,13 +10309,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dragdrop__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dragdrop */ "./src/assets/js/dragdrop.js");
 /* harmony import */ var _works__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./works */ "./src/assets/js/works.js");
-/* harmony import */ var _works__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_works__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui */ "./src/assets/js/ui.js");
 
 
 
 Object(_dragdrop__WEBPACK_IMPORTED_MODULE_0__["default"])();
-_works__WEBPACK_IMPORTED_MODULE_1___default()();
+Object(_works__WEBPACK_IMPORTED_MODULE_1__["default"])();
 Object(_ui__WEBPACK_IMPORTED_MODULE_2__["default"])();
 
 /***/ }),
@@ -10378,9 +10377,11 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************!*\
   !*** ./src/assets/js/works.js ***!
   \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -10395,316 +10396,347 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-// DOMs
-var $wrap = document.querySelector('#wrap');
-var $mainWork = document.querySelector('.main-work');
-var $addCategory = document.querySelector('.create-main-work');
-var $mainCreateInput = document.querySelector('.main-create-input');
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  // DOMs
+  var $wrap = document.querySelector('#wrap');
+  var $mainWork = document.querySelector('.main-work');
+  var $addCategory = document.querySelector('.create-main-work');
+  var $mainCreateInput = document.querySelector('.main-create-input');
 
-var ajax = function () {
-  var req = function req(method, url, payload) {
-    return new Promise(function (resolve, reject) {
-      var xhr = new XMLHttpRequest();
-      xhr.open(method, url);
-      xhr.setRequestHeader('content-type', 'application/json');
-      xhr.send(JSON.stringify(payload));
+  var ajax = function () {
+    var req = function req(method, url, payload) {
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.setRequestHeader('content-type', 'application/json');
+        xhr.send(JSON.stringify(payload));
 
-      xhr.onload = function () {
-        if (xhr.status === 200 || xhr.status === 201) {
-          resolve(xhr.response);
-        }
-      };
+        xhr.onload = function () {
+          if (xhr.status === 200 || xhr.status === 201) {
+            resolve(xhr.response);
+          }
+        };
 
-      xhr.onerror = function () {
-        reject(new Error(xhr.status));
-      };
-    });
-  };
-
-  return {
-    get: function get(url) {
-      return req('GET', url);
-    },
-    post: function post(url, payload) {
-      return req('POST', url, payload);
-    },
-    patch: function patch(url, payload) {
-      return req('PATCH', url, payload);
-    },
-    "delete": function _delete(url) {
-      return req('DELETE', url);
-    }
-  };
-}();
-
-var state = function state(labels) {
-  if (labels === undefined) return '';
-  var html = '';
-  labels = labels.filter(function (label) {
-    return label.check;
-  });
-  labels.forEach(function (label) {
-    html += "\n      <span class=\"".concat(label.state, "\">").concat(label.state, "</span>");
-  });
-  return html;
-};
-
-var subworkRender = function subworkRender(subWork) {
-  var html = '';
-  subWork.forEach(function (_ref) {
-    var id = _ref.id,
-        title = _ref.title,
-        date = _ref.date,
-        labels = _ref.labels;
-    html += "\n      <li id=\"".concat(id, "\" class=\"work-item\" draggable=\"true\">\n        <a href=\"#self\" class=\"detail-inner\">\n          <div class=\"importance\">\n            ").concat(state(labels), "\n          </div>\n          <div class=\"title\">").concat(title, "</div>\n          <div class=\"date\">").concat(date, "</div>\n        </a>\n        <button type=\"button\" class=\"delete-detail-btn\"><img src=\"./assets/images/common/delete-btn.png\" class=\"delete-btn-img\" alt=\"\"></button>\n       </li>");
-  });
-  return html;
-};
-
-var render = function render(works) {
-  var html = '';
-  works.forEach(function (work) {
-    html += "\n    <li id=\"".concat(work.id, "\">\n      <div class=\"title-box\">\n          <div class=\"title\">").concat(work.title, "</div>\n          <input type=\"text\" class=\"modify-input\" placeholder=\"\uC8FC\uC81C\uB97C \uC785\uB825\uD574\uC8FC\uC138\uC694\">\n      </div>\n      <div class=\"detail-work-box\">\n        <ul class=\"detail-work\" droppable=\"true\">\n        ").concat(work.list ? subworkRender(work.list) : '', "\n        </ul>\n      </div>\n      <div class=\"create-detail-work\">\n        <button type=\"button\" class=\"btn40 c3 create-detail-btn\">\uD574\uC57C\uD560\uC77C \uCD94\uAC00</button>\n        <input type=\"text\" class=\"detail-create-input\" placeholder=\"\uCD94\uAC00\uD560 \uBAA9\uB85D\uC744 \uC785\uB825\uD558\uC138\uC694\">\n      </div>\n      <button type=\"button\" class=\"delete-main-work\">\uC0AD\uC81C</button>\n    </li>");
-  });
-  $mainWork.innerHTML = html;
-  yRail();
-};
-
-var labelState = function labelState(labels) {
-  var html = '';
-  labels.forEach(function (label) {
-    html += "\n      <li id=\"".concat(label.state, "\">\n        <label><input type=\"checkbox\" class=\"state-check\" ").concat(label.check ? 'checked' : '', "><span>low</span></span></label>\n      </li>");
-  });
-  return html;
-};
-
-var descriptionDisplay = function descriptionDisplay(description) {
-  var html = '';
-
-  if (description === undefined) {
-    html += "\n    <textarea class=\"description-content\" placeholder=\"Add a more detailed Description..\"></textarea>\n    <div class=\"description-textbox hide\"></div>\n    <button type=\"button\" class=\"description-btn save btn40 mt10\" style=\"width: 80px;\">Save</button>";
-  } else {
-    html += "\n    <textarea class=\"description-content hide\" placeholder=\"Add a more detailed Description..\">".concat(description, "</textarea>\n    <div class=\"description-textbox\">").concat(description, "</div>\n    <button type=\"button\" class=\"description-btn modify btn40 mt10\" style=\"width: 80px;\">Modify</button>");
-  }
-
-  return html;
-};
-
-var checklistDisplay = function checklistDisplay(checklist) {
-  if (checklist === undefined) return '';
-  var html = '';
-  checklist.forEach(function (list) {
-    html += "\n      <li class=\"".concat(list.completed ? 'check' : '', "\">\n        <label class=\"chk\" for=\"").concat(list.id, "\">\n          <input id=\"").concat(list.id, "\" type=\"checkbox\" ").concat(list.completed ? 'checked' : '', "><span>").concat(list.content, "</span>\n        </label>\n      </li>");
-  });
-  return html;
-};
-
-var checkProgress = function checkProgress(checklist) {
-  if (checklist === undefined) return '0%';
-  var allCount = +checklist.length;
-  var checkCount = +checklist.filter(function (list) {
-    return list.completed;
-  }).length;
-  var currentPer = "".concat("".concat(100 / allCount * checkCount, "%"));
-  return currentPer;
-};
-
-var renderPopup = function renderPopup(workTitle, subWorkTitle, writeDate, labels, description, checklist) {
-  var $node = document.createElement('div');
-  $node.classList.add('popup-wrap');
-  $node.innerHTML += "\n    <div class=\"dim\"></div>\n    <div class=\"register-popup\">\n      <div class=\"popup-header\">\n        <div class=\"popup-title\"><span class=\"a11y-hidden\">\uC8FC\uC81C:</span>".concat(subWorkTitle, "</div>\n        <div class=\"popup-subtitle\">in list <a href=\"#self\">").concat(workTitle, "</a></div>\n        <div class=\"popup-created-time\">").concat(writeDate, "</div>\n      </div>\n      <button type=\"button\" class=\"btn-close-popup\">X</button>\n      <div class=\"popup-main-content clear-fix\">\n        <div class=\"content-area\">\n          <div class=\"description-area\">\n            <div class=\"area-title\">Description</div>\n            ").concat(descriptionDisplay(description), "\n          </div>\n          <div class=\"checklist-area hide\">\n            <div class=\"area-title\">checklist</div>\n            <div class=\"progress-contents\">\n              <span class=\"complete-percent\">").concat(checkProgress(checklist), "</span>\n              <div class=\"progress-bar\">\n                <span class=\"success-bar\" style=\"width: ").concat(checkProgress(checklist), "\"></span>\n              </div>\n            </div>\n            <ul class=\"check-list\">\n              ").concat(checklistDisplay(checklist), "\n            </ul>\n            <div class=\"add-checklist-box\">\n              <input type=\"text\" class=\"add-checklist-input\" placeholder=\"Add a more Checklist..\" />\n              <button type=\"button\" class=\"btn-check-add btn40 c5\" style=\"width: 120px;\">add an item</button>\n            </div>\n          </div>\n        </div>\n        <div class=\"popup-add-ons\">\n          <div class=\"labels\">\n            <div class=\"title\">LABELS</div>\n            <ul class=\"colors-list\">\n              ").concat(labelState(labels), "\n            </ul>\n          </div>\n          <div class=\"add-check\">\n            <button type=\"button\" class=\"btn-checklist btn40 c2\" style=\"width: 100%;\">CHECKLIST SHOW</button>\n          </div>\n        </div>\n      </div>");
-  $wrap.appendChild($node);
-};
-
-var getWork = function getWork() {
-  ajax.get('http://localhost:3000/works/').then(function (res) {
-    return JSON.parse(res);
-  }).then(render);
-};
-
-var getMaxId = function getMaxId() {
-  ajax.get('http://localhost:3000/works').then(function (res) {
-    return JSON.parse(res);
-  }).then(function (works) {
-    return Math.max.apply(Math, [0].concat(_toConsumableArray(works.map(function (work) {
-      return work.id;
-    })))) + 1;
-  }).then(function (id) {
-    return maxId = id;
-  });
-};
-
-var createWork = function createWork(title) {
-  ajax.post('http://localhost:3000/works/', {
-    id: getMaxId(),
-    title: title
-  }).then(ajax.get('http://localhost:3000/works/').then(function (res) {
-    return JSON.parse(res);
-  }).then(function (res) {
-    $('#co-work-container').mCustomScrollbar('destroy');
-    render(res);
-    xRail();
-  }));
-};
-
-var toggle = function toggle(target) {
-  target.classList.toggle('on', !target.classList.contains('on'));
-  target.nextElementSibling.focus();
-};
-
-var currentTime = function currentTime() {
-  var getDate = new Date();
-  var year = ('' + getDate.getFullYear()).substring(2, 4);
-  var month = getDate.getMonth() + 1;
-  var day = getDate.getDate();
-  var hour = getDate.getHours();
-  var minute = getDate.getMinutes();
-  var second = getDate.getSeconds();
-  var subWorkDate = "".concat(year, "/").concat(month, "/").concat(day);
-  return subWorkDate;
-};
-
-var createSubwork = function createSubwork(workId, value) {
-  var maxId = 0;
-  ajax.get("http://localhost:3000/works/".concat(workId)).then(function (res) {
-    return JSON.parse(res);
-  }).then(function (work) {
-    if (work.list === undefined) work['list'] = [];
-    maxId = work.list.length ? work.list.length + 1 : 1;
-    return [].concat(_toConsumableArray(work.list), [{
-      id: +"".concat(workId, "0").concat(maxId),
-      title: value,
-      date: currentTime(),
-      labels: [{
-        state: 'low',
-        check: false
-      }, {
-        state: 'medium',
-        check: false
-      }, {
-        state: 'high',
-        check: false
-      }, {
-        state: 'veryhigh',
-        check: false
-      }]
-    }]);
-  }).then(function (subwork) {
-    ajax.patch("http://localhost:3000/works/".concat(workId), {
-      id: workId,
-      list: subwork
-    }).then(function (works) {
-      $('.detail-work-box').mCustomScrollbar('destroy');
-      getWork(works);
-    });
-  });
-};
-
-var workTitle = function workTitle(workId, value) {
-  ajax.get("http://localhost:3000/works/".concat(workId)).then(function (res) {
-    return JSON.parse(res).title;
-  }).then(ajax.patch("http://localhost:3000/works/".concat(workId), {
-    id: workId,
-    title: value
-  })).then(getWork);
-};
-
-var add = function add(target, keyCode) {
-  if (target.value === undefined) return;
-  var value = target.value.trim();
-  if (keyCode !== 13 || value === '') return;
-  target.previousElementSibling.classList.remove('on');
-
-  if (target.classList.contains('main-create-input')) {
-    createWork(value);
-  }
-
-  if (target.classList.contains('detail-create-input')) {
-    var workId = target.parentNode.parentNode.id;
-    createSubwork(workId, value);
-  }
-
-  if (target.classList.contains('modify-input')) {
-    var _workId = target.parentNode.parentNode.id;
-    workTitle(_workId, value);
-  }
-
-  target.value = '';
-};
-
-var deleteWork = function deleteWork(id) {
-  ajax["delete"]("http://localhost:3000/works/".concat(id)).then(function (res) {
-    return JSON.parse(res);
-  }).then(getWork);
-};
-
-var deleteSubwork = function deleteSubwork(titleId, subTitleId) {
-  ajax.get("http://localhost:3000/works/".concat(titleId)).then(function (res) {
-    return JSON.parse(res).list;
-  }).then(function (subTitle) {
-    return subTitle.filter(function (item) {
-      return item.id !== +subTitleId;
-    });
-  }).then(function (subWork) {
-    return ajax.patch("http://localhost:3000/works/".concat(titleId), {
-      id: titleId,
-      list: subWork
-    });
-  }).then(getWork);
-};
-
-var openPopup = function openPopup(titleId, subTitleId) {
-  var workTitle = null;
-  var workList = null;
-  var subWorkTitle = null;
-  var writeDate = null;
-  var labels = null;
-  var description = null;
-  var checklist = null;
-  ajax.get("http://localhost:3000/works/".concat(titleId)).then(function (work) {
-    return JSON.parse(work);
-  }).then(function (work) {
-    workTitle = work.title;
-    workList = work.list;
-    return workList;
-  }).then(function (subworks) {
-    return subworks.filter(function (subwork) {
-      return subwork.id === +subTitleId;
-    });
-  }).then(function (subwork) {
-    subWorkTitle = subwork[0].title;
-    writeDate = subwork[0].date;
-    labels = subwork[0].labels;
-    description = subwork[0].description;
-    checklist = subwork[0].checklist;
-    renderPopup(workTitle, subWorkTitle, writeDate, labels, description, checklist);
-    var $popup = document.querySelector('.popup-wrap');
-    var $labels = document.querySelector('.labels');
-    var $btnChecklist = document.querySelector('.btn-checklist');
-    var $checklistArea = document.querySelector('.checklist-area');
-    var $descriptionTextarea = document.querySelector('.description-content');
-    var $descriptionBtn = document.querySelector('.description-btn');
-    var $descriptionTextbox = document.querySelector('.description-textbox');
-    var $checkListInput = document.querySelector('.add-checklist-input');
-    var $checkListAddBtn = document.querySelector('.btn-check-add');
-    var $checklist = document.querySelector('.check-list');
-    var $completePer = document.querySelector('.complete-percent');
-    var $successBar = document.querySelector('.success-bar');
-
-    $btnChecklist.onclick = function () {
-      $btnChecklist.textContent === 'CHECKLIST HIDE' ? $btnChecklist.innerHTML = 'CHECKLIST SHOW' : $btnChecklist.textContent = 'CHECKLIST HIDE';
-      $checklistArea.classList.toggle('hide');
+        xhr.onerror = function () {
+          reject(new Error(xhr.status));
+        };
+      });
     };
 
-    $descriptionBtn.onclick = function () {
-      if ($descriptionBtn.classList.contains('save')) {
-        if ($descriptionTextarea.value.trim() !== '') {
-          $descriptionTextarea.classList.add('hide');
-          $descriptionBtn.classList.remove('save');
-          $descriptionBtn.classList.add('modify');
-          $descriptionBtn.textContent = 'Modify';
-          $descriptionTextbox.classList.remove('hide');
-          $descriptionTextbox.textContent = $descriptionTextarea.value;
+    return {
+      get: function get(url) {
+        return req('GET', url);
+      },
+      post: function post(url, payload) {
+        return req('POST', url, payload);
+      },
+      patch: function patch(url, payload) {
+        return req('PATCH', url, payload);
+      },
+      "delete": function _delete(url) {
+        return req('DELETE', url);
+      }
+    };
+  }();
+
+  var state = function state(labels) {
+    if (labels === undefined) return '';
+    var html = '';
+    labels = labels.filter(function (label) {
+      return label.check;
+    });
+    labels.forEach(function (label) {
+      html += "\n        <span class=\"".concat(label.state, "\">").concat(label.state, "</span>");
+    });
+    return html;
+  };
+
+  var subworkRender = function subworkRender(subWork) {
+    var html = '';
+    subWork.forEach(function (_ref) {
+      var id = _ref.id,
+          title = _ref.title,
+          date = _ref.date,
+          labels = _ref.labels;
+      html += "\n        <li id=\"".concat(id, "\" class=\"work-item\" draggable=\"true\">\n          <a href=\"#self\" class=\"detail-inner\">\n            <div class=\"importance\">\n              ").concat(state(labels), "\n            </div>\n            <div class=\"title\">").concat(title, "</div>\n            <div class=\"date\">").concat(date, "</div>\n          </a>\n          <button type=\"button\" class=\"delete-detail-btn\"><img src=\"./assets/images/common/delete-btn.png\" class=\"delete-btn-img\" alt=\"\"></button>\n        </li>");
+    });
+    return html;
+  };
+
+  var render = function render(works) {
+    var html = '';
+    works.forEach(function (work) {
+      html += "\n      <li id=\"".concat(work.id, "\">\n        <div class=\"title-box\">\n            <div class=\"title\">").concat(work.title, "</div>\n            <input type=\"text\" class=\"modify-input\" placeholder=\"\uC8FC\uC81C\uB97C \uC785\uB825\uD574\uC8FC\uC138\uC694\">\n        </div>\n        <div class=\"detail-work-box\">\n          <ul class=\"detail-work\" droppable=\"true\">\n          ").concat(work.list ? subworkRender(work.list) : '', "\n          </ul>\n        </div>\n        <div class=\"create-detail-work\">\n          <button type=\"button\" class=\"btn40 c3 create-detail-btn\">\uD574\uC57C\uD560\uC77C \uCD94\uAC00</button>\n          <input type=\"text\" class=\"detail-create-input\" placeholder=\"\uCD94\uAC00\uD560 \uBAA9\uB85D\uC744 \uC785\uB825\uD558\uC138\uC694\">\n        </div>\n        <button type=\"button\" class=\"delete-main-work\">\uC0AD\uC81C</button>\n      </li>");
+    });
+    $mainWork.innerHTML = html;
+    yRail();
+  };
+
+  var labelState = function labelState(labels) {
+    var html = '';
+    labels.forEach(function (label) {
+      html += "\n        <li id=\"".concat(label.state, "\">\n          <label><input type=\"checkbox\" class=\"state-check\" ").concat(label.check ? 'checked' : '', "><span>low</span></span></label>\n        </li>");
+    });
+    return html;
+  };
+
+  var descriptionDisplay = function descriptionDisplay(description) {
+    var html = '';
+
+    if (description === undefined) {
+      html += "\n      <textarea class=\"description-content\" placeholder=\"Add a more detailed Description..\"></textarea>\n      <div class=\"description-textbox hide\"></div>\n      <button type=\"button\" class=\"description-btn save btn40 mt10\" style=\"width: 80px;\">Save</button>";
+    } else {
+      html += "\n      <textarea class=\"description-content hide\" placeholder=\"Add a more detailed Description..\">".concat(description, "</textarea>\n      <div class=\"description-textbox\">").concat(description, "</div>\n      <button type=\"button\" class=\"description-btn modify btn40 mt10\" style=\"width: 80px;\">Modify</button>");
+    }
+
+    return html;
+  };
+
+  var checklistDisplay = function checklistDisplay(checklist) {
+    if (checklist === undefined) return '';
+    var html = '';
+    checklist.forEach(function (list) {
+      html += "\n        <li class=\"".concat(list.completed ? 'check' : '', "\">\n          <label class=\"chk\" for=\"").concat(list.id, "\">\n            <input id=\"").concat(list.id, "\" type=\"checkbox\" ").concat(list.completed ? 'checked' : '', "><span>").concat(list.content, "</span>\n          </label>\n        </li>");
+    });
+    return html;
+  };
+
+  var checkProgress = function checkProgress(checklist) {
+    if (checklist === undefined) return '0%';
+    var allCount = +checklist.length;
+    var checkCount = +checklist.filter(function (list) {
+      return list.completed;
+    }).length;
+    var currentPer = "".concat("".concat(100 / allCount * checkCount, "%"));
+    return currentPer;
+  };
+
+  var renderPopup = function renderPopup(workTitle, subWorkTitle, writeDate, labels, description, checklist) {
+    var $node = document.createElement('div');
+    $node.classList.add('popup-wrap');
+    $node.innerHTML += "\n      <div class=\"dim\"></div>\n      <div class=\"register-popup\">\n        <div class=\"popup-header\">\n          <div class=\"popup-title\"><span class=\"a11y-hidden\">\uC8FC\uC81C:</span>".concat(subWorkTitle, "</div>\n          <div class=\"popup-subtitle\">in list <a href=\"#self\">").concat(workTitle, "</a></div>\n          <div class=\"popup-created-time\">").concat(writeDate, "</div>\n        </div>\n        <button type=\"button\" class=\"btn-close-popup\">X</button>\n        <div class=\"popup-main-content clear-fix\">\n          <div class=\"content-area\">\n            <div class=\"description-area\">\n              <div class=\"area-title\">Description</div>\n              ").concat(descriptionDisplay(description), "\n            </div>\n            <div class=\"checklist-area hide\">\n              <div class=\"area-title\">checklist</div>\n              <div class=\"progress-contents\">\n                <span class=\"complete-percent\">").concat(checkProgress(checklist), "</span>\n                <div class=\"progress-bar\">\n                  <span class=\"success-bar\" style=\"width: ").concat(checkProgress(checklist), "\"></span>\n                </div>\n              </div>\n              <ul class=\"check-list\">\n                ").concat(checklistDisplay(checklist), "\n              </ul>\n              <div class=\"add-checklist-box\">\n                <input type=\"text\" class=\"add-checklist-input\" placeholder=\"Add a more Checklist..\" />\n                <button type=\"button\" class=\"btn-check-add btn40 c5\" style=\"width: 120px;\">add an item</button>\n              </div>\n            </div>\n          </div>\n          <div class=\"popup-add-ons\">\n            <div class=\"labels\">\n              <div class=\"title\">LABELS</div>\n              <ul class=\"colors-list\">\n                ").concat(labelState(labels), "\n              </ul>\n            </div>\n            <div class=\"add-check\">\n              <button type=\"button\" class=\"btn-checklist btn40 c2\" style=\"width: 100%;\">CHECKLIST SHOW</button>\n            </div>\n          </div>\n        </div>");
+    $wrap.appendChild($node);
+  };
+
+  var getWork = function getWork() {
+    ajax.get('http://localhost:3000/works/').then(function (res) {
+      return JSON.parse(res);
+    }).then(render);
+  };
+
+  var getMaxId = function getMaxId() {
+    var maxId = null;
+    ajax.get('http://localhost:3000/works').then(function (res) {
+      return JSON.parse(res);
+    }).then(function (works) {
+      return Math.max.apply(Math, [0].concat(_toConsumableArray(works.map(function (work) {
+        return work.id;
+      })))) + 1;
+    }).then(function (id) {
+      return maxId = id;
+    });
+  };
+
+  var createWork = function createWork(title) {
+    ajax.post('http://localhost:3000/works/', {
+      id: getMaxId(),
+      title: title
+    }).then(ajax.get('http://localhost:3000/works/').then(function (res) {
+      return JSON.parse(res);
+    }).then(function (res) {
+      $('#co-work-container').mCustomScrollbar('destroy');
+      render(res);
+      xRail();
+    }));
+  };
+
+  var toggle = function toggle(target) {
+    target.classList.toggle('on', !target.classList.contains('on'));
+    target.nextElementSibling.focus();
+  };
+
+  var currentTime = function currentTime() {
+    var getDate = new Date();
+    var year = ('' + getDate.getFullYear()).substring(2, 4);
+    var month = getDate.getMonth() + 1;
+    var day = getDate.getDate();
+    var hour = getDate.getHours();
+    var minute = getDate.getMinutes();
+    var second = getDate.getSeconds();
+    var subWorkDate = "".concat(year, "/").concat(month, "/").concat(day);
+    return subWorkDate;
+  };
+
+  var createSubwork = function createSubwork(workId, value) {
+    var maxId = 0;
+    ajax.get("http://localhost:3000/works/".concat(workId)).then(function (res) {
+      return JSON.parse(res);
+    }).then(function (work) {
+      if (work.list === undefined) work['list'] = [];
+      maxId = work.list.length ? work.list.length + 1 : 1;
+      return [].concat(_toConsumableArray(work.list), [{
+        id: +"".concat(workId, "0").concat(maxId),
+        title: value,
+        date: currentTime(),
+        labels: [{
+          state: 'low',
+          check: false
+        }, {
+          state: 'medium',
+          check: false
+        }, {
+          state: 'high',
+          check: false
+        }, {
+          state: 'veryhigh',
+          check: false
+        }]
+      }]);
+    }).then(function (subwork) {
+      ajax.patch("http://localhost:3000/works/".concat(workId), {
+        id: workId,
+        list: subwork
+      }).then(function (works) {
+        $('.detail-work-box').mCustomScrollbar('destroy');
+        getWork(works);
+      });
+    });
+  };
+
+  var workTitle = function workTitle(workId, value) {
+    ajax.get("http://localhost:3000/works/".concat(workId)).then(function (res) {
+      return JSON.parse(res).title;
+    }).then(ajax.patch("http://localhost:3000/works/".concat(workId), {
+      id: workId,
+      title: value
+    })).then(getWork);
+  };
+
+  var add = function add(target, keyCode) {
+    if (target.value === undefined) return;
+    var value = target.value.trim();
+    if (keyCode !== 13 || value === '') return;
+    target.previousElementSibling.classList.remove('on');
+
+    if (target.classList.contains('main-create-input')) {
+      createWork(value);
+    }
+
+    if (target.classList.contains('detail-create-input')) {
+      var workId = target.parentNode.parentNode.id;
+      createSubwork(workId, value);
+    }
+
+    if (target.classList.contains('modify-input')) {
+      var _workId = target.parentNode.parentNode.id;
+      workTitle(_workId, value);
+    }
+
+    target.value = '';
+  };
+
+  var deleteWork = function deleteWork(id) {
+    ajax["delete"]("http://localhost:3000/works/".concat(id)).then(function (res) {
+      return JSON.parse(res);
+    }).then(getWork);
+  };
+
+  var deleteSubwork = function deleteSubwork(titleId, subTitleId) {
+    ajax.get("http://localhost:3000/works/".concat(titleId)).then(function (res) {
+      return JSON.parse(res).list;
+    }).then(function (subTitle) {
+      return subTitle.filter(function (item) {
+        return item.id !== +subTitleId;
+      });
+    }).then(function (subWork) {
+      return ajax.patch("http://localhost:3000/works/".concat(titleId), {
+        id: titleId,
+        list: subWork
+      });
+    }).then(getWork);
+  };
+
+  var openPopup = function openPopup(titleId, subTitleId) {
+    var workTitle = null;
+    var workList = null;
+    var subWorkTitle = null;
+    var writeDate = null;
+    var labels = null;
+    var description = null;
+    var checklist = null;
+    ajax.get("http://localhost:3000/works/".concat(titleId)).then(function (work) {
+      return JSON.parse(work);
+    }).then(function (work) {
+      workTitle = work.title;
+      workList = work.list;
+      return workList;
+    }).then(function (subworks) {
+      return subworks.filter(function (subwork) {
+        return subwork.id === +subTitleId;
+      });
+    }).then(function (subwork) {
+      subWorkTitle = subwork[0].title;
+      writeDate = subwork[0].date;
+      labels = subwork[0].labels;
+      description = subwork[0].description;
+      checklist = subwork[0].checklist;
+      renderPopup(workTitle, subWorkTitle, writeDate, labels, description, checklist);
+      var $popup = document.querySelector('.popup-wrap');
+      var $labels = document.querySelector('.labels');
+      var $btnChecklist = document.querySelector('.btn-checklist');
+      var $checklistArea = document.querySelector('.checklist-area');
+      var $descriptionTextarea = document.querySelector('.description-content');
+      var $descriptionBtn = document.querySelector('.description-btn');
+      var $descriptionTextbox = document.querySelector('.description-textbox');
+      var $checkListInput = document.querySelector('.add-checklist-input');
+      var $checkListAddBtn = document.querySelector('.btn-check-add');
+      var $checklist = document.querySelector('.check-list');
+      var $completePer = document.querySelector('.complete-percent');
+      var $successBar = document.querySelector('.success-bar');
+
+      $btnChecklist.onclick = function () {
+        $btnChecklist.textContent === 'CHECKLIST HIDE' ? $btnChecklist.innerHTML = 'CHECKLIST SHOW' : $btnChecklist.textContent = 'CHECKLIST HIDE';
+        $checklistArea.classList.toggle('hide');
+      };
+
+      $descriptionBtn.onclick = function () {
+        if ($descriptionBtn.classList.contains('save')) {
+          if ($descriptionTextarea.value.trim() !== '') {
+            $descriptionTextarea.classList.add('hide');
+            $descriptionBtn.classList.remove('save');
+            $descriptionBtn.classList.add('modify');
+            $descriptionBtn.textContent = 'Modify';
+            $descriptionTextbox.classList.remove('hide');
+            $descriptionTextbox.textContent = $descriptionTextarea.value;
+            ajax.get("http://localhost:3000/works/".concat(titleId)).then(function (res) {
+              return JSON.parse(res).list;
+            }).then(function (subTitle) {
+              return subTitle.filter(function (item) {
+                return item.id === +subTitleId;
+              });
+            }).then(function (subWorks) {
+              subWorks[0]['description'] = "".concat($descriptionTextarea.value);
+              return subWorks[0]['description'];
+            }).then(function (description) {
+              var data = workList.map(function (subwork) {
+                return subwork.id === +subTitleId ? subwork = _objectSpread({}, subwork, {
+                  id: +subTitleId,
+                  description: description
+                }) : subwork;
+              });
+              ajax.patch("http://localhost:3000/works/".concat(titleId), {
+                id: +titleId,
+                title: workTitle,
+                list: data
+              });
+            });
+          }
+        } else {
+          $descriptionTextarea.classList.remove('hide');
+          $descriptionBtn.classList.remove('modify');
+          $descriptionBtn.classList.add('save');
+          $descriptionBtn.textContent = 'Save';
+          $descriptionTextbox.classList.add('hide');
           ajax.get("http://localhost:3000/works/".concat(titleId)).then(function (res) {
             return JSON.parse(res).list;
           }).then(function (subTitle) {
@@ -10712,7 +10744,7 @@ var openPopup = function openPopup(titleId, subTitleId) {
               return item.id === +subTitleId;
             });
           }).then(function (subWorks) {
-            subWorks[0]['description'] = "".concat($descriptionTextarea.value);
+            if (subWorks[0].description === undefined) subWorks[0]['description'] = "".concat($descriptionTextarea.value);
             return subWorks[0]['description'];
           }).then(function (description) {
             var data = workList.map(function (subwork) {
@@ -10728,27 +10760,97 @@ var openPopup = function openPopup(titleId, subTitleId) {
             });
           });
         }
-      } else {
-        $descriptionTextarea.classList.remove('hide');
-        $descriptionBtn.classList.remove('modify');
-        $descriptionBtn.classList.add('save');
-        $descriptionBtn.textContent = 'Save';
-        $descriptionTextbox.classList.add('hide');
+      };
+
+      $labels.onchange = function (_ref2) {
+        var target = _ref2.target;
+        var stateId = target.parentNode.parentNode.id;
+        subwork[0].labels.map(function (label) {
+          return label.state === stateId ? label.check = !label.check : label;
+        });
+        var data = workList.map(function (item) {
+          return item.id === +subTitleId ? item = _objectSpread({}, item, {
+            id: +subTitleId,
+            labels: subwork[0].labels
+          }) : item;
+        });
+        ajax.patch("http://localhost:3000/works/".concat(titleId), {
+          id: +titleId,
+          title: workTitle,
+          list: data
+        }).then(function (newWorks) {
+          return JSON.parse(newWorks);
+        }).then(function (newWorks) {
+          ajax.get('http://localhost:3000/works/').then(function (works) {
+            return JSON.parse(works);
+          }).then(render);
+        });
+      };
+
+      $checkListAddBtn.onclick = function () {
+        if ($checkListInput.value.trim() === '' && $checklist.children.length < 4) return alert('값을 입력해주세요');
+        if ($checklist.children.length >= 4) return alert('최대 4개까지 입력할 수 있습니다');
+        var content = $checkListInput.value;
         ajax.get("http://localhost:3000/works/".concat(titleId)).then(function (res) {
-          return JSON.parse(res).list;
-        }).then(function (subTitle) {
-          return subTitle.filter(function (item) {
-            return item.id === +subTitleId;
+          return JSON.parse(res);
+        }).then(function (work) {
+          return work.list;
+        }).then(function (subwork) {
+          var thisSub = subwork.filter(function (sub) {
+            return sub.id === +subTitleId;
           });
-        }).then(function (subWorks) {
-          if (subWorks[0].description === undefined) subWorks[0]['description'] = "".concat($descriptionTextarea.value);
-          return subWorks[0]['description'];
-        }).then(function (description) {
-          var data = workList.map(function (subwork) {
-            return subwork.id === +subTitleId ? subwork = _objectSpread({}, subwork, {
+          if (thisSub[0].checklist === undefined) thisSub[0].checklist = [];
+          var maxId = thisSub[0].checklist.length ? thisSub[0].checklist.length + 1 : 1;
+          var checklistValue = [].concat(_toConsumableArray(thisSub[0].checklist), [{
+            id: "check".concat(titleId, "0").concat(maxId),
+            content: content,
+            completed: false
+          }]);
+          var data = workList.map(function (item) {
+            return item.id === +subTitleId ? _objectSpread({}, item, {
               id: +subTitleId,
-              description: description
-            }) : subwork;
+              checklist: checklistValue
+            }) : item;
+          });
+          ajax.patch("http://localhost:3000/works/".concat(titleId), {
+            id: +titleId,
+            title: workTitle,
+            list: data
+          }).then(function (res) {
+            var $li = document.createElement('li');
+            $li.innerHTML = "<li>\n                      <label class=\"chk\" for=\"check".concat(titleId, "0").concat(maxId, "\">\n                        <input id=\"check").concat(titleId, "0").concat(maxId, "\" type=\"checkbox\"><span>").concat(content, "</span>\n                      </label>\n                    </li>");
+            $checklist.appendChild($li);
+            $checkListInput.value = '';
+          });
+        });
+      };
+
+      $checklist.onchange = function (_ref3) {
+        var target = _ref3.target;
+        ajax.get("http://localhost:3000/works/".concat(titleId)).then(function (res) {
+          return JSON.parse(res);
+        }).then(function (work) {
+          return work.list;
+        }).then(function (subwork) {
+          var subWork = subwork.filter(function (sub) {
+            return sub.id === +subTitleId;
+          });
+          var checklist = subWork[0].checklist.map(function (check) {
+            return check.id === target.id ? _objectSpread({}, check, {
+              completed: !check.completed
+            }) : check;
+          });
+          var trueLength = checklist.filter(function (check) {
+            return check.completed === true;
+          }).length;
+          var currentPer = "".concat("".concat(Math.floor(100 / checklist.length * trueLength), "%"));
+          $completePer.textContent = "".concat(currentPer);
+          $successBar.setAttribute("style", "width:".concat(currentPer));
+          var data = workList.map(function (item) {
+            return item.id === +subTitleId ? _objectSpread({}, item, {
+              id: +subTitleId,
+              checklist: checklist
+            }) : item;
           });
           ajax.patch("http://localhost:3000/works/".concat(titleId), {
             id: +titleId,
@@ -10756,172 +10858,73 @@ var openPopup = function openPopup(titleId, subTitleId) {
             list: data
           });
         });
-      }
-    };
+      };
 
-    $labels.onchange = function (_ref2) {
-      var target = _ref2.target;
-      var stateId = target.parentNode.parentNode.id;
-      subwork[0].labels.map(function (label) {
-        return label.state === stateId ? label.check = !label.check : label;
-      });
-      var data = workList.map(function (item) {
-        return item.id === +subTitleId ? item = _objectSpread({}, item, {
-          id: +subTitleId,
-          labels: subwork[0].labels
-        }) : item;
-      });
-      ajax.patch("http://localhost:3000/works/".concat(titleId), {
-        id: +titleId,
-        title: workTitle,
-        list: data
-      }).then(function (newWorks) {
-        return JSON.parse(newWorks);
-      }).then(function (newWorks) {
-        ajax.get('http://localhost:3000/works/').then(function (works) {
-          return JSON.parse(works);
-        }).then(render);
-      });
-    };
-
-    $checkListAddBtn.onclick = function () {
-      if ($checkListInput.value.trim() === '' && $checklist.children.length < 4) return alert('값을 입력해주세요');
-      if ($checklist.children.length >= 4) return alert('최대 4개까지 입력할 수 있습니다');
-      var content = $checkListInput.value;
-      ajax.get("http://localhost:3000/works/".concat(titleId)).then(function (res) {
-        return JSON.parse(res);
-      }).then(function (work) {
-        return work.list;
-      }).then(function (subwork) {
-        var thisSub = subwork.filter(function (sub) {
-          return sub.id === +subTitleId;
-        });
-        if (thisSub[0].checklist === undefined) thisSub[0].checklist = [];
-        var maxId = thisSub[0].checklist.length ? thisSub[0].checklist.length + 1 : 1;
-        var checklistValue = [].concat(_toConsumableArray(thisSub[0].checklist), [{
-          id: "check".concat(titleId, "0").concat(maxId),
-          content: content,
-          completed: false
-        }]);
-        var data = workList.map(function (item) {
-          return item.id === +subTitleId ? _objectSpread({}, item, {
-            id: +subTitleId,
-            checklist: checklistValue
-          }) : item;
-        });
-        ajax.patch("http://localhost:3000/works/".concat(titleId), {
-          id: +titleId,
-          title: workTitle,
-          list: data
-        }).then(function (res) {
-          var $li = document.createElement('li');
-          $li.innerHTML = "<li>\n                    <label class=\"chk\" for=\"check".concat(titleId, "0").concat(maxId, "\">\n                      <input id=\"check").concat(titleId, "0").concat(maxId, "\" type=\"checkbox\"><span>").concat(content, "</span>\n                    </label>\n                  </li>");
-          $checklist.appendChild($li);
-          $checkListInput.value = '';
-        });
-      });
-    };
-
-    $checklist.onchange = function (_ref3) {
-      var target = _ref3.target;
-      ajax.get("http://localhost:3000/works/".concat(titleId)).then(function (res) {
-        return JSON.parse(res);
-      }).then(function (work) {
-        return work.list;
-      }).then(function (subwork) {
-        var subWork = subwork.filter(function (sub) {
-          return sub.id === +subTitleId;
-        });
-        var checklist = subWork[0].checklist.map(function (check) {
-          return check.id === target.id ? _objectSpread({}, check, {
-            completed: !check.completed
-          }) : check;
-        });
-        var trueLength = checklist.filter(function (check) {
-          return check.completed === true;
-        }).length;
-        var currentPer = "".concat("".concat(Math.floor(100 / checklist.length * trueLength), "%"));
-        $completePer.textContent = "".concat(currentPer);
-        $successBar.setAttribute("style", "width:".concat(currentPer));
-        var data = workList.map(function (item) {
-          return item.id === +subTitleId ? _objectSpread({}, item, {
-            id: +subTitleId,
-            checklist: checklist
-          }) : item;
-        });
-        ajax.patch("http://localhost:3000/works/".concat(titleId), {
-          id: +titleId,
-          title: workTitle,
-          list: data
-        });
-      });
-    };
-
-    $popup.onclick = function (e) {
-      if (e.target.classList.contains('btn-close-popup') || e.target.classList.contains('dim')) {
-        $popup.remove();
-        e.stopPropagation();
-      }
-    };
-  });
-}; // Events
+      $popup.onclick = function (e) {
+        if (e.target.classList.contains('btn-close-popup') || e.target.classList.contains('dim')) {
+          $popup.remove();
+          e.stopPropagation();
+        }
+      };
+    });
+  }; // Events
 
 
-window.onload = function () {
-  getWork();
-};
+  window.onload = function () {
+    getWork();
+  };
 
-$addCategory.onclick = function (_ref4) {
-  var target = _ref4.target;
-  toggle(target);
-};
+  $addCategory.onclick = function (_ref4) {
+    var target = _ref4.target;
+    toggle(target);
+  };
 
-$mainWork.onfocusout = function (_ref5) {
-  var target = _ref5.target;
-  console.log(target);
-};
+  $mainWork.onfocusout = function (_ref5) {
+    var target = _ref5.target;
+    console.log(target);
+  };
 
-$mainCreateInput.onkeyup = function (_ref6) {
-  var target = _ref6.target,
-      keyCode = _ref6.keyCode;
-  add(target, keyCode);
-};
+  $mainCreateInput.onkeyup = function (_ref6) {
+    var target = _ref6.target,
+        keyCode = _ref6.keyCode;
+    add(target, keyCode);
+  };
 
-$mainCreateInput.onblur = function (_ref7) {
-  var target = _ref7.target;
-  var value = target.value.trim();
-  if (value !== '') return;
-  target.previousElementSibling.classList.remove('on');
-};
+  $mainCreateInput.onblur = function (_ref7) {
+    var target = _ref7.target;
+    var value = target.value.trim();
+    if (value !== '') return;
+    target.previousElementSibling.classList.remove('on');
+  };
 
-$mainWork.onclick = function (_ref8) {
-  var target = _ref8.target;
-  if (target.classList.contains('create-detail-btn') || target.classList.contains('title')) toggle(target);
+  $mainWork.onclick = function (_ref8) {
+    var target = _ref8.target;
+    if (target.classList.contains('create-detail-btn') || target.classList.contains('title')) toggle(target);
 
-  if (target.classList.contains('delete-main-work')) {
-    var id = target.parentNode.id;
-    deleteWork(id);
-  }
+    if (target.classList.contains('delete-main-work')) {
+      var id = target.parentNode.id;
+      deleteWork(id);
+    }
 
-  if (target.classList.contains('delete-btn-img')) {
-    var titleId = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-    var subTitleId = target.parentNode.parentNode.id;
-    console.log(titleId, subTitleId);
-    deleteSubwork(titleId, subTitleId);
-  }
+    if (target.classList.contains('delete-btn-img')) {
+      var titleId = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+      var subTitleId = target.parentNode.parentNode.id;
+      deleteSubwork(titleId, subTitleId);
+    }
 
-  if (target.parentNode.classList.contains('detail-inner')) {
-    var _titleId = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-    var _subTitleId = target.parentNode.parentNode.id;
-    openPopup(_titleId, _subTitleId);
-  }
-};
+    if (target.parentNode.classList.contains('detail-inner')) {
+      var _titleId = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+      var _subTitleId = target.parentNode.parentNode.id;
+      openPopup(_titleId, _subTitleId);
+    }
+  };
 
-$mainWork.onkeyup = function (_ref9) {
-  var target = _ref9.target,
-      keyCode = _ref9.keyCode;
-  add(target, keyCode);
-};
+  $mainWork.onkeyup = function (_ref9) {
+    var target = _ref9.target,
+        keyCode = _ref9.keyCode;
+    add(target, keyCode);
+  };
+});
 
 /***/ }),
 
