@@ -354,6 +354,7 @@ const openPopup = (titleId, subTitleId) => {
           $descriptionBtn.classList.add('save');
           $descriptionBtn.textContent = 'Save';
           $descriptionTextbox.classList.add('hide');
+          console.log(111);
 
           ajax.get(`http://localhost:3000/works/${titleId}`)
             .then(res => JSON.parse(res).list)
