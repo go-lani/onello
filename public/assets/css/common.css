@@ -33,6 +33,8 @@ label.chk input:checked + span:before {background-position: 0 -16px;}
 .btn30.c5 {border: 1px solid #1dc9B7; background: #1dc9B7; color: #e2f6f3;} /* 청포도색 흰색글씨 */
 .btn30.c5:hover {border: 1px solid #18a899; background: #18a899; color: #fff;} /* 청포도색 흰색글씨 */
 .btn30.c6 {border: 1px solid #517fa4; background: #517fa4; color: #fff;}
+.btn30.c7 {border: 1px solid #fd397a; background: #fd397a; color: #fff;}
+.btn30.c7:hover {border: 1px solid #fd1361; background: #fd1361; color: #fff;}
 
 .btn40 {display: inline-block; box-sizing: border-box; height: 40px; border: none; border-radius: 6px; font-size: 1.4rem; line-height: 38px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none; transition: all .3s;}
 .btn40.c1 {border: 1px solid #000000; background: #000000; color: #ffffff;} /* 검은바탕 흰색글씨 */
@@ -44,6 +46,8 @@ label.chk input:checked + span:before {background-position: 0 -16px;}
 .btn40.c5 {border: 1px solid #1dc9B7; background: #1dc9B7; color: #e2f6f3;} /* 청포도색 흰색글씨 */
 .btn40.c5:hover {border: 1px solid #18a899; background: #18a899; color: #fff;} /* 청포도색 흰색글씨 */
 .btn40.c6 {border: 1px solid #517fa4; background: #517fa4; color: #fff;}
+.btn40.c7 {border: 1px solid #fd397a; background: #fd397a; color: #fff;}
+.btn40.c7:hover {border: 1px solid #fd1361; background: #fd1361; color: #fff;}
 
 .btn50 {display: inline-block; box-sizing: border-box; height: 50px; border: none; border-radius: 6px; font-size: 1.6rem; line-height: 48px; text-align: center; vertical-align: top; cursor: pointer; -webkit-appearance: none; appearance: none; transition: all .3s;}
 .btn50.c1 {border: 1px solid #000000; background: #000000; color: #ffffff;} /* 검은바탕 흰색글씨 */
@@ -55,6 +59,8 @@ label.chk input:checked + span:before {background-position: 0 -16px;}
 .btn50.c5 {border: 1px solid #1dc9B7; background: #1dc9B7; color: #e2f6f3;} /* 청포도색 흰색글씨 */
 .btn50.c5:hover {border: 1px solid #18a899; background: #18a899; color: #fff;} /* 청포도색 흰색글씨 */
 .btn50.c6 {border: 1px solid #517fa4; background: #517fa4; color: #fff;}
+.btn50.c7 {border: 1px solid #fd397a; background: #fd397a; color: #fff;}
+.btn50.c7:hover {border: 1px solid #fd1361; background: #fd1361; color: #fff;}
 
 /* main layer popup */
 .main_popup {position: relative; z-index: 1000; background: #ffffff;}
