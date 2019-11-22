@@ -1,3 +1,56 @@
 {
-  "works": []
+  "works": [
+    {
+      "title": "dwqdwqdqwd",
+      "id": 1,
+      "list": [
+        {
+          "id": 101,
+          "title": "dqwdwqdw",
+          "date": "19/11/22",
+          "labels": [
+            {
+              "state": "low",
+              "check": false
+            },
+            {
+              "state": "medium",
+              "check": false
+            },
+            {
+              "state": "high",
+              "check": false
+            },
+            {
+              "state": "veryhigh",
+              "check": false
+            }
+          ]
+        },
+        {
+          "id": 102,
+          "title": "dwdwqdq",
+          "date": "19/11/22",
+          "labels": [
+            {
+              "state": "low",
+              "check": false
+            },
+            {
+              "state": "medium",
+              "check": false
+            },
+            {
+              "state": "high",
+              "check": false
+            },
+            {
+              "state": "veryhigh",
+              "check": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
