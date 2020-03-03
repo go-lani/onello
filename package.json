@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js -w",
+    "start": "concurrently \"cd _server && npm start\" \"nodemon app.js -w\"",
     "build": "webpack"
   },
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
     "balanced-match": "^1.0.0",
+    "concurrently": "^5.1.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
