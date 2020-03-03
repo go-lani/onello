@@ -1,13 +1,13 @@
 {
   "works": [
     {
-      "title": "qwdqdqw",
+      "title": "ReactJS",
       "id": 1,
       "list": [
         {
           "id": 101,
-          "title": "dqwdwqdqw",
-          "date": "19/11/27",
+          "title": "Hooks 이해하기",
+          "date": "20/3/3",
           "labels": [
             {
               "state": "low",
@@ -19,18 +19,31 @@
             },
             {
               "state": "high",
-              "check": false
+              "check": true
             },
             {
               "state": "veryhigh",
               "check": false
             }
+          ],
+          "description": "블로그 작성하기",
+          "checklist": [
+            {
+              "id": "check101",
+              "content": "useEffect",
+              "completed": false
+            },
+            {
+              "id": "check102",
+              "content": "useState",
+              "completed": false
+            }
           ]
         },
         {
           "id": 102,
-          "title": "qwdqwdqw",
-          "date": "19/11/27",
+          "title": "라이프사이클 이해하기",
+          "date": "20/3/3",
           "labels": [
             {
               "state": "low",
@@ -42,7 +55,7 @@
             },
             {
               "state": "high",
-              "check": false
+              "check": true
             },
             {
               "state": "veryhigh",
@@ -53,13 +66,13 @@
       ]
     },
     {
-      "title": "dqwdqwdqw",
+      "title": "Javascript",
       "id": 2,
       "list": [
         {
           "id": 201,
-          "title": "dqwdqwdqw",
-          "date": "19/11/27",
+          "title": "비동기 통신 이해하기",
+          "date": "20/3/3",
           "labels": [
             {
               "state": "low",
@@ -71,34 +84,34 @@
             },
             {
               "state": "high",
-              "check": false
+              "check": true
             },
             {
               "state": "veryhigh",
-              "check": false
+              "check": true
             }
-          ]
-        },
-        {
-          "id": 202,
-          "title": "wqdqwdwq",
-          "date": "19/11/27",
-          "labels": [
+          ],
+          "description": "사용방법 및 이유를 이해하자",
+          "checklist": [
             {
-              "state": "low",
-              "check": false
+              "id": "check201",
+              "content": "XMLHttpRequest",
+              "completed": true
             },
             {
-              "state": "medium",
-              "check": false
+              "id": "check202",
+              "content": "Promise",
+              "completed": true
             },
             {
-              "state": "high",
-              "check": false
+              "id": "check203",
+              "content": "Ajax",
+              "completed": true
             },
             {
-              "state": "veryhigh",
-              "check": false
+              "id": "check204",
+              "content": "Fetch",
+              "completed": false
             }
           ]
         }
